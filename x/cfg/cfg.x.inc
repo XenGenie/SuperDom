@@ -12,7 +12,7 @@
 			/*You can add more bots here*/
 		), 
 		'dir'	=> array(
-			'backdoor' => 'x',		// Virtual Directory Where the Location you want to access the admin panel.	
+			'backdoor' => 'x',			// Virtual Directory Where the Location you want to access the admin panel.	
 			'frontdoor'=> '',
 			'sidedoor' => 'html',		// used by the site and other sister sites to just the html of a page.
 			'Xtra'     => 'x/xtra',		// Locations of the Modules
@@ -25,7 +25,7 @@
 		),
 		'db'    => 'MySql',
 		'debug' => array(
-			'on' => true,
+			'on' => false,
 			'runtime' => microtime(true)
 		),
 		'html' => array(
