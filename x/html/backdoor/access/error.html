@@ -1,0 +1,1 @@
+{include file="{$LAYOUTS.public}/{$Xtra}/{$method}.html"}

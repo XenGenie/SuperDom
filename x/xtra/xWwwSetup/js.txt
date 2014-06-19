@@ -1,0 +1,9 @@
+http://code.jquery.com/jquery-latest.pack.js
+http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js
+http://bin.xtiv.net/js/jQuery.frameReady.js
+http://extjs.cachefly.net/ext-3.2.1/adapter/ext/ext-base.js
+http://extjs.cachefly.net/ext-3.2.1/ext-all-debug.js
+http://bin.xtiv.net/js/ext-3.2.1/examples/ux/fileuploadfield/FileUploadField.js
+http://bin.xtiv.net/js/ext/examples/ux/Spinner.js
+http://bin.xtiv.net/js/ext/examples/ux/SpinnerField.js
+http://bin.xtiv.net/js/dynamicdrive/dropdowntabs/dropdowntabfiles/dropdowntabs.js

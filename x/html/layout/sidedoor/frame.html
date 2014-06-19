@@ -1,0 +1,5 @@
+{if $TPL_EXISTS && $Xtra != '' AND ($Xtra != 'index')}
+	{include file="$Door/$Xtra/$method.html"}
+{else}
+	{include file="$Door/portal.html"}
+{/if}

@@ -1,0 +1,33 @@
+<pre>Array
+(
+    [config] => Array
+        (
+            [name] => Array
+                (
+                    [site_logo] => sdx.png
+                )
+
+            [type] => Array
+                (
+                    [site_logo] => image/png
+                )
+
+            [tmp_name] => Array
+                (
+                    [site_logo] => /tmp/phpEqngTd
+                )
+
+            [error] => Array
+                (
+                    [site_logo] => 0
+                )
+
+            [size] => Array
+                (
+                    [site_logo] => 28569
+                )
+
+        )
+
+)
+</pre>

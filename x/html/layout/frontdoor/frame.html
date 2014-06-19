@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	{if $Xtra != '' AND $method  != '' AND ($Xtra != 'index')}
+		{include file="$Door/$Xtra/$method.html" assign=XTRA_METHOD}	
+		{$HTML.BODY.HTML = $XTRA_METHOD}
+	{else if $HTML.BODY.HTML == ''}
+		{include file="$Door/portal.html" assign=PORTAL}
+		{$HTML.BODY.HTML = $PORTAL}
+	{/if}
+		<title>{$HTML.HEAD.TITLE}</title>
+		<link rel="stylesheet" type="text/css" href="{$HTML.HEAD.CSS}">
+		<SCRIPT src="{$HTML.HEAD.JS}"></SCRIPT>
+	</head>
+	<body>
+		{$HTML.BODY.HTML}
+		{if $HTML.BODY.CSS}
+		<link rel="stylesheet" type="text/css" href="{$HTML.BODY.CSS}">
+		{/if}
+		{if $HTML.BODY.JS}
+		<script src="{$HTML.BODY.JS}"></script>
+		{/if}
+	</body>
+</html>

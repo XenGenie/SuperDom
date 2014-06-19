@@ -1,0 +1,17 @@
+/* Links */
+a, a:visited { color: #000; font-weight: 400; text-decoration: none; }
+a:hover { color: #999; }
+
+.og-grid li a { color: #FFFFFF; }
+
+.button { border: 1px solid #FFCC00; }
+.button:hover { border: 1px solid #FFFFFF; }
+
+.desktop.navigation .nav-content a:hover, .desktop.navigation .nav-content a.active, .post-title a:hover
+{ color: #FFCC00!important; }
+
+.tabs ul li.active a {border-top: 2px solid #FFCC00;}
+
+/* Content */
+.parallax.colored { background-color: #FFCC00; }
+.list-dot { background: #FFCC00; }

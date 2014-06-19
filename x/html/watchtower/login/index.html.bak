@@ -1,0 +1,466 @@
+<script type="text/javascript" src="{$REPO}/js/jq/jquery.validate.js"></script>
+	<style><!--
+		
+		/* punch
+*******************************************************************************/
+		button.punch {
+		  background: #4162a8;
+		  border-top: 1px solid #38538c;
+		  border-right: 1px solid #1f2d4d;
+		  border-bottom: 1px solid #151e33;
+		  border-left: 1px solid #1f2d4d;
+		  -moz-border-radius: 4px;
+		  -webkit-border-radius: 4px;
+		  border-radius: 100px;
+		  -moz-box-shadow: inset 0 1px 10px 1px #5c8bee, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111;
+		  -webkit-box-shadow: inset 0 1px 10px 1px #5c8bee, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111;
+		  box-shadow: inset 0 1px 10px 1px #5c8bee, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111;
+		  color: #fff;
+		  font-family: "helvetica neue", helvetica, arial, sans-serif;
+		  font-size: 20px;
+		  font-weight: bold;
+		  line-height: 1;
+		  margin-bottom: 10px;
+		  padding: 10px 10px 12px 10px;
+		  text-align: center;
+		  text-shadow: 0px -1px 1px #1e2d4d;
+		  width: 75px;
+		  height: 75px;
+		  -webkit-background-clip: padding-box;
+		}
+
+button.punch:hover {
+  -moz-box-shadow: inset 0 0px 20px 1px #87adff, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111;
+  -webkit-box-shadow: inset 0 0px 20px 1px #87adff, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111;
+  box-shadow: inset 0 0px 20px 1px #87adff, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111;
+  cursor: pointer;
+}
+
+button.punch:active {
+  -moz-box-shadow: inset 0 1px 10px 1px #5c8bee, 0 1px 0 #1d2c4d, 0 2px 0 #1f3053, 0 4px 3px 0 #111;
+  -webkit-box-shadow: inset 0 1px 10px 1px #5c8bee, 0 1px 0 #1d2c4d, 0 2px 0 #1f3053, 0 4px 3px 0 #111;
+  box-shadow: inset 0 1px 10px 1px #5c8bee, 0 1px 0 #1d2c4d, 0 2px 0 #1f3053, 0 4px 3px 0 #111;
+  margin-top: 11px;
+}
+		
+	  
+		
+		 .login { 
+		 display	: {if $EXT_OFF}block{else}none{/if};
+		 }
+		  
+		header h1{
+			text-shadow: 5px 1px 0 #b4f794;
+		}
+		.database {
+			display: inline-block;
+			width: 100%;  
+			vertical-align: middle; 
+		}
+		.database input{
+			text-align: center;
+			border: 0;
+			box-shadow: inset 1px 1px 3px rgba(50,50,50,0.5);
+			border-radius: 3px;
+		}
+		.database label{
+			text-align: center;
+			border: 1px outset  rgba(150,150,150,0.8) ;
+			width: 100%; 
+			margin: 0; 
+			display: block;
+			vertical-align: middle; 
+			color: #222; 
+			box-shadow: 0px 5px 15px rgba(0,0,0,0.5);
+			background: rgb(116,116,116); /* Old browsers */
+			background: -moz-linear-gradient(left, rgb(116,116,116) 0%, rgb(148,148,148) 3%, rgb(222,222,222) 15%, rgb(201,201,201) 25%, rgb(222,222,222) 33%, rgb(248,248,248) 43%, rgb(255,255,255) 51%, rgb(248,248,248) 58%, rgb(255,255,255) 64%, rgb(222,222,222) 74%, rgb(222,222,222) 88%, rgb(137,137,137) 95%, rgb(116,116,116) 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgb(116,116,116)), color-stop(3%,rgb(148,148,148)), color-stop(15%,rgb(222,222,222)), color-stop(25%,rgb(201,201,201)), color-stop(33%,rgb(222,222,222)), color-stop(43%,rgb(248,248,248)), color-stop(51%,rgb(255,255,255)), color-stop(58%,rgb(248,248,248)), color-stop(64%,rgb(255,255,255)), color-stop(74%,rgb(222,222,222)), color-stop(88%,rgb(222,222,222)), color-stop(95%,rgb(137,137,137)), color-stop(100%,rgb(116,116,116))); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(left, rgb(116,116,116) 0%,rgb(148,148,148) 3%,rgb(222,222,222) 15%,rgb(201,201,201) 25%,rgb(222,222,222) 33%,rgb(248,248,248) 43%,rgb(255,255,255) 51%,rgb(248,248,248) 58%,rgb(255,255,255) 64%,rgb(222,222,222) 74%,rgb(222,222,222) 88%,rgb(137,137,137) 95%,rgb(116,116,116) 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(left, rgb(116,116,116) 0%,rgb(148,148,148) 3%,rgb(222,222,222) 15%,rgb(201,201,201) 25%,rgb(222,222,222) 33%,rgb(248,248,248) 43%,rgb(255,255,255) 51%,rgb(248,248,248) 58%,rgb(255,255,255) 64%,rgb(222,222,222) 74%,rgb(222,222,222) 88%,rgb(137,137,137) 95%,rgb(116,116,116) 100%); /* Opera11.10+ */
+			background: -ms-linear-gradient(left, rgb(116,116,116) 0%,rgb(148,148,148) 3%,rgb(222,222,222) 15%,rgb(201,201,201) 25%,rgb(222,222,222) 33%,rgb(248,248,248) 43%,rgb(255,255,255) 51%,rgb(248,248,248) 58%,rgb(255,255,255) 64%,rgb(222,222,222) 74%,rgb(222,222,222) 88%,rgb(137,137,137) 95%,rgb(116,116,116) 100%); /* IE10+ */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#747474', endColorstr='#747474',GradientType=1 ); /* IE6-9 */
+			background: linear-gradient(left, rgb(116,116,116) 0%,rgb(148,148,148) 3%,rgb(222,222,222) 15%,rgb(201,201,201) 25%,rgb(222,222,222) 33%,rgb(248,248,248) 43%,rgb(255,255,255) 51%,rgb(248,248,248) 58%,rgb(255,255,255) 64%,rgb(222,222,222) 74%,rgb(222,222,222) 88%,rgb(137,137,137) 95%,rgb(116,116,116) 100%); /* W3C */
+	}
+	</style>
+	{if $SUPER_ADMIN === false}
+<style>
+	.chat-bubble {
+		  background-color: rgba(255,255,255,0.75);
+		  border	: 1px solid rgba(255,255,255,0.75);
+		  border-bottom: 0;
+		  font-size	:35px;
+		  line-height:1.3em;
+		  padding	:10px; 
+		  text-align:center;  
+		   
+		  border-radius	: 300px 300px 0px 0px; 
+		   
+		  position:absolute;
+		  bottom	: 0px;
+			 right: 5px;
+		    
+		  margin-left: 0;
+		
+		  	background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+background: linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+		 
+		}
+		 
+	.chat-bubble-arrow-border {
+		  border-color: transparent transparent transparent rgba(255,255,255,0.75)  ;
+		  border-style: solid;
+		  border-width: 10px;
+		  height:0;
+		  width:0;
+		  position:absolute;
+		  right:-23px;
+		  top:65px;
+		}
+		.chat-bubble-arrow {
+		  border-color: transparent transparent transparent rgba(255,255,255,0.75) ;
+		  border-style: solid;
+		  border-width: 10px;
+		  height:0;
+		  width:0;
+		  position:absolute;
+		  right:-20px;
+		  top:65px;
+		}
+		
+		#setup-steps{
+			box-shadow	: -1px 1px 0px rgba(55,55,55,0.05);
+			border		: 1px solid #eee;
+			 border-top: 0;
+			font-size	: small;
+			font-family	: verdana;
+			border-radius	: 2px; 
+			color	: white;
+			position	: fixed;
+			top	: 45%;
+			text-shadow: 0px 0px 3px rgba(255,255,255,.25);
+			left: -5px; 
+			width	: 200px;
+			height	:150px;
+		 background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* IE10+ */
+background: linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.	gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+		  
+		}
+		#setup-steps legend{
+			font-weight: bold;
+		}
+		#setup-steps li{
+			padding	: 5px;
+			color	: rgba(255,255,255,.75);
+			font-size	: x-small; 
+		}
+		</style>
+ 
+	
+{/if}
+	
+<form action="{$SELF|replace:'@_@':''|replace:'?html':''}" method="post" onSubmit="return checkForm(this);" id="new-admin" style=" text-align: center;">
+	<table align="center" width="450px" class="login">
+		<tr>
+		<td  ><div class="chat-bubble" >
+					
+				  	
+					<header><h1>{$site_name}</h1><h1>{$login_title}</h1></header>
+					{if $error}
+					<span style="color: red; font-weight: bold; font-size: 12px;">{$error}</span>
+				  	<br/>
+				  	{/if}
+					<div class="chat-bubble-arrow-border"></div>
+					<div class="chat-bubble-arrow"></div>
+				</div></td>
+		</tr>
+		<tr>
+			<td align="center" valign="middle" style=" "> 
+				<div class="database" align="center">
+					<label style="border-radius:  00px   00px 0 0">
+						<img src="{$ICON.16}/user.png" align="right"/> <input type="textfield" name="username"  value="{if $username}{$username}{/if}" class="required" required/>
+						
+					</label>
+					<label style="border-radius: 0 0 500px  100px">
+						<img src="{$ICON.16}/lock.png" align="right"/>  <input type="password" name="password"   value="{if $password}{$password}{/if}" class="required" required/>
+					</label>  
+					 
+					{if $SUPER_ADMIN === false}
+						{* FRESH INSTALL *}
+						<label style="border-radius:  500px  500px 0 0 ">
+							Confirm Password:
+						 
+							<input type="password" name="confirm" id="confirm_password" class="required"  required/>
+							<input type="hidden" name="CREATE_ADMIN" value=true />
+						</label>
+						<label style="border-radius: 0 0 500px  500px">
+							Email: 
+							<input type="textfield" name="email" value="{$email}" class="required email"/>
+						</label>
+					{/if}  
+					<br/>
+				<button style="border: 0; margin: 0; display: inline; padding: 0; " class="punch" type="submit"   id="login-btn" title="{$login_message}">
+					  Login
+				</button> 
+				</div>
+				
+				</td>
+		</tr>
+	</table> 
+</form>
+<script>
+
+ $(document).ready(function(){
+
+	 Ext.onReady(function(){
+		 Ext.QuickTips.init();
+
+		 function login(){
+			//ume.msg(x4.lang.wait,'Logging In');
+			Ext.getCmp('login-form').getForm().submit({
+				waitMsg		: 'Please Wait...', 
+				waitTitle	: 'Authenticating...', 
+				failure		: function(fp,a){
+				 	Ext.Msg.show({
+					   title:'Login Failed!',
+					   msg: a.result.error,
+					   buttons: Ext.Msg.OK,  
+					   icon: Ext.MessageBox.ERROR
+					}); 
+				},
+				success	: function(fp,a){
+					var r = a.result;
+					if(r.IS_USER && r.IS_ADMIN){ 
+						location = "{$SELF|replace:'@_@':''|replace:'?html':''|replace:'/@':'/@'}"; 
+						Ext.Msg.wait(' ','Welcome '+ Ext.util.Cookies.get('user[username]')+'!',{
+							interval	: 50,
+							increment	: 1,
+							text		: 'Opening SuperDom ~ '+r.SUPERDOMX.version
+						});
+					}else{
+						location = "{$SELF|replace:'@_@':''|replace:'?html':''}"; 
+						Ext.Msg.wait(' ','Credentials Entered!',{
+							interval	: 50,
+							increment	: 1,
+							text		: 'Creating Super Admin'
+						});
+					}
+				}
+			});
+		}
+		 
+		 var form;
+		 form = new Ext.form.FormPanel({
+				layout      : 'form',
+				region      : 'center',
+				id          : 'login-form',
+				url         : "{$SELF|replace:'@_@':''|replace:'?html':''}?json",
+				defaultType : 'textfield',
+				labelWidth  : 85,
+				border      : 0,
+				frame       : true,
+				defaults    : {
+					labelSeparator  : ' ',
+					msgTarget       : 'side',
+					enableKeyEvents : true,
+					labelAlign      : 'right',
+					listeners       : {
+						keydown	: function(tf,e){
+							if(e.getKey() == e.ENTER){
+								login()
+							}
+						}
+					}
+				},
+					monitorValid : true,
+				items	: [{
+					//hideLabel	: true,
+					anchor		: '-20',
+					fieldLabel	: ' Username <img src="{$ICON.16}/vcard.png" align="right"/>',
+					blankValue	: 'Username',
+					allowBlank	: false,
+					minLength	: 4,
+					id			: 'username',
+					name		: 'username',
+					blankText	: 'Please Enter your Username'
+				},{
+					fieldLabel	: ' Password <img src="{$ICON.16}/key.png" align="right"/>',
+					//hideLabel	: true,
+					anchor		: '-20',
+					allowBlank	: false,
+					minLength	: 6,
+					inputType	: 'password',
+					blankValue	: 'password',
+					name		: 'password',
+					blankText	: 'Please Enter your Password'
+				}
+				{if $SUPER_ADMIN === false}
+				{* FRESH INSTALL *}
+				,{
+					fieldLabel	: ' Confirm <img src="{$ICON.16}/key_go.png" align="right"/>',
+					//hideLabel	: true,
+					anchor		: '-20',
+					allowBlank	: false,
+					minLength	: 6,
+					inputType	: 'password',
+					blankValue	: 'password',
+					name		: 'confirm',
+					blankText	: 'Please confirm your password'
+				},{
+					//fieldLabel	: '<img src="{$ICON.16}/key.png" align="right"/>',
+					hideLabel	: true, 
+					inputType	: 'hidden',
+					defaultValue	: true,
+					name		: 'CREATE_ADMIN'
+				},{
+					fieldLabel	: ' Email <img src="{$ICON.16}/mailbox.png" align="right"/>',
+					//hideLabel	: true,
+					anchor		: '-20',
+					allowBlank	: false,
+					minLength	: 6,
+					inputType	: 'textfield',
+					vtype		: 'email',
+					name		: 'email',
+					blankText	: 'Please Enter your Email Address'
+				}
+				{/if}
+				],
+				listeners	: {
+					clientvalidation	: function(fp,bool){
+						var pan = Ext.getCmp('login-btn-area');
+						if(bool){
+							pan.expand();
+						}else{
+							pan.collapse(); 
+						} 
+					}
+				}  
+			});
+
+			
+			var win = Ext.getCmp('login-win');
+			if(!win){
+				win = new Ext.Window({
+				{if $SUPER_ADMIN === false}
+				title	: 'The Super @dministrator',
+				iconCls	: 'x-icon-16x16-shield_chevrons',  
+				{else}
+				title	: '{$site_name} @dministrator Login',
+				iconCls	: 'x-icon-16x16-shield',  
+				{/if}
+				
+				id		: 'login-win',
+				closable	: false, 
+				modal	: true,
+				layout	: 'border', 
+				width	: {if $SUPER_ADMIN === false}400{else}300{/if},
+				border	: 0,
+				height	: {if $SUPER_ADMIN === false}150{else}95{/if},
+				defaults	: {
+					border	: 0,
+					
+				},
+				items	: [form,{
+					region	: 'east',
+					id		: 'login-btn-area',
+					split	: true,
+					frame	: true,
+					width	: 100, 
+					border	: 0,
+					collapseMode	: 'mini',
+					collapsed	: true,
+					layout: {
+            	        type:'vbox',
+        	            padding:'5',
+    	                align:'stretch'
+	                },
+					items	: [{
+						text	: 'Login',
+						iconAlign	: 'left',
+						scale	: 	'large',
+						iconCls	: 'x-icon-32x32-lock',
+						xtype	: 'button',
+						flex	: 1,
+						handler	: function(){
+							login();
+						}
+					} ]
+				}],
+				// bbar	: new Ext.ux.StatusBar({
+		  //           id: 'login-statusbar',
+
+		        
+		  //           // values to set initially:
+		  //           text: {if $SUPER_ADMIN === false}
+				// 		'The Super @dministrator has Access over'
+				// 	{else}
+				// 		'Please Enter Your Username & Password'
+				// 	{/if},
+		  //           //iconCls: 'x-icon-16x16-key',
+				// }),
+				listeners	:	{
+					afterlayout	: function(){
+						//document.getElementById('username').select();
+					}
+				}
+			});
+				
+			}
+			win.show(document.body,function(){
+				form.doLayout();
+				win.doLayout();
+			});
+		});
+ 
+	
+	 $(".required").focus(function() {
+		    $(this).select();
+		});
+	 $(".required").mouseup(function(e){
+	        e.preventDefault();
+	});
+	 
+	 $("#new-admin").validate();
+ });
+</script>
+<script type="text/javascript">
+	function checkForm(form){
+		var e = form.elements;
+		var user = e['username'].value; 
+		var pass = e['password'].value;
+		var msg = '';
+		
+		if(user == '' || user.length < 4){
+			msg = 'Please Enter A Valid Username';
+		}
+
+		if(pass != ''){
+			if(pass.length < 6){ 
+				msg = 'Password Must be 6 or More Characters';
+			}
+		}else{
+			msg = 'Blank password not allowed!!!!';
+		}
+		
+		if(e['confirm']){ 			
+			if(pass !== e['confirm'].value){
+				msg = 'Passwords Do Not Match!';
+			} 
+		}	
+
+		if(msg != ''){
+			alert(msg);
+			return false;
+		}
+		return $("#new-admin").validate();
+	}
+</script>
