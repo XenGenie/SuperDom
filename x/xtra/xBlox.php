@@ -2,11 +2,11 @@
 <?php
 /**
  * @name Blox
- * @desc Layout your website's body.
+ * @desc Building your Domain blox by blox
  * @version v1.0.11.10.21.18.02
  * @author i@xtiv.net
  * @icon blueprint4.png
- * @mini cube
+ * @mini cubes
  * @see construct
  * @link blox
  * @alpha true
@@ -277,6 +277,15 @@
 			die();
 		}
 
+		public function jumbotron($value='')
+		{
+			
+		}
+
+		public function topX($value='')
+		{
+			
+		}
 	}
 
 ?>

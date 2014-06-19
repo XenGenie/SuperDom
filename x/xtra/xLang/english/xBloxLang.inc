@@ -26,7 +26,17 @@ class xBloxLang {
 					'STEP' => []
 				)
 			]
-		)
+		),
+		'JUMBO' => array(
+			'HEAD' => 'Play in the Toy Blox',
+			'QUOTE' => 'Welcome to your Online Bazaar! Here is where you connect to the world to exchange your goods and services.',
+			'BTN'	=> array( 
+				'jumpin'	=> array(
+					'a' => 'Jump In <i class="fa fa-play"></i>  ',
+					'class' => 'alert-info'
+				)
+			)
+		),
 
 	);
 }
