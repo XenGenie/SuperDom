@@ -1,4 +1,4 @@
- <section class="widget {if $locked}locked{/if}" data-widgster-collapsed="{if $collapsed}true{/if}" id="default-widget" data-widgster-load="/{$toBackDoor}/html/{$Xtra}/{$method}" data-widgster-autoload="true">
+ <section class="widget {if $locked}locked{/if}" data-widgster-collapsed="{if $collapsed}true{/if}" id="default-widget" data-widgster-load="/{$toBackDoor}/html/{if $xPHP!=''}{$xPHP}{else}{$Xtra}{/if}/{$method}" data-widgster-autoload="true">
  {if !$header}
     <header>
         <h5>{$title}</h5>

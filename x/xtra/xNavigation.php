@@ -36,16 +36,24 @@
 					'left'        =>  array('Type'=>'int(4)')
 				),
 				'public_main_menu' =>array(
-					'text'		=>	'title',
-					'title'		=>	array('Type' => 'varchar(255)'),
-					'checked'		=>	array('Type' => 'boolean','Default'=>1),
+					'text'    =>	'title',
+					'title'   =>	array('Type' => 'varchar(255)'),
+					'checked' =>	array('Type' => 'boolean','Default'=>1),
 					
-					'iconCls'		=>	array('Type' => 'varchar(255)'),
-					'link'		=>	array('Type' => 'varchar(255)'),
-					'parent'	=>  array('Type' => 'int(5)'),
-					'href'		=>	array('Type' => 'varchar(255)'),
-					'weight'	=>	array('Type'=>'int(1)')
-				)
+					'iconCls' =>	array('Type' => 'varchar(255)'),
+					'link'    =>	array('Type' => 'varchar(255)'),
+					'parent'  =>  	array('Type' => 'int(5)'),
+					'href'    =>	array('Type' => 'varchar(255)'),
+					'weight'  =>	array('Type'=>'int(1)')
+				),
+				'navigation' => array( 
+					'title'		=>	array('Type' => 'varchar(255)'),
+					'parent'	=>	array('Type' => 'int(3)'), 
+					'icon'		=>	array('Type' => 'varchar(255)'),
+					'img'		=>	array('Type' => 'varchar(255)'),
+					'weight'	=>	array('Type' => 'int(2)'),
+					'active'	=>  array('Type' => 'int(1)')
+				),
 			);
 		}
 
@@ -248,6 +256,16 @@
 
 		function index($sub=null){
 			$this->menu($sub);
+
+			$navi = $this->heyNavi();
+			$this->set('navi',$navi);
+			return array(
+				'navi' => $navi
+			);
+		}
+
+		function heyNavi(){
+			return $this->q()->Select('*','navigation');
 		}
 
 		function load($id=null){
@@ -443,6 +461,40 @@
 			$this->set('success',true); 
 			$this->set('order',$nodes);
 		}
+
+		function newLink(){
+			$q = $this->q();
+
+			$t = $_POST['title'];
+
+			if( !empty($t) ){
+				$r = $q->Select('id','navigation',array(
+					'title' => $t,
+					'parent' => 0
+				));
+
+				if( !empty($r) ){
+					return array(
+						'success' 	=> false,
+						'error' 	=> 'That Page already exists at the Ground level.'
+					); 
+				}else{
+					$r = $q->Insert('navigation',$_POST);
+					return array(
+						'success' => true,
+						'row'=> $r,
+						'error'=> $q->error 
+					);
+				}
+			}
+
+
+
+			
+		}
+
 	}
+
+
 
 ?>
