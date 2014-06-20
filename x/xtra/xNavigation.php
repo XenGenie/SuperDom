@@ -52,7 +52,7 @@
 					'icon'		=>	array('Type' => 'varchar(255)'),
 					'img'		=>	array('Type' => 'varchar(255)'),
 					'weight'	=>	array('Type' => 'int(2)'),
-					'active'	=>  array('Type' => 'int(1)')
+					'active'	=>  array('Type' => 'int(1)','Default'=>'0')
 				),
 			);
 		}
@@ -257,15 +257,62 @@
 		function index($sub=null){
 			$this->menu($sub);
 
-			$navi = $this->heyNavi();
+			return $this->manaTree();
+		}
+
+		function manaTree(){
+			$navi = $this->heyNavi(true);
+			$deku = $this->heyNavi();
 			$this->set('navi',$navi);
 			return array(
-				'navi' => $navi
+				'navi' => $navi,
+				'deku' => $deku,
+				'sql'	=> $this->q()->mSql
 			);
 		}
 
-		function heyNavi(){
-			return $this->q()->Select('*','navigation');
+		function heyNavi($a=null){
+			$q = $this->q();
+			$q->mBy = 'ORDER BY weight ASC';
+
+			
+
+			return $q->Select('*','navigation',array(
+				'active' => $a
+			));
+		}
+
+		function growBranch($n,$p=0,$active=true){
+			$q = $this->q();
+			$w = 0;
+			foreach ($n as $k => $v) {
+				$q->Update('navigation',array(
+					'weight' => $w,
+					'parent' => $p,
+					'active' => $active
+				),array(
+					'id' => $v['id']
+				));
+				$w++;
+
+				if($v['children']){
+					$this->growBranch($v['children'],$v['id']);
+				}
+				# code...
+			}
+		}
+
+		function updateNest()
+		{
+			$on  =  $_POST['on']; 
+			$off = $_POST['off']; 
+
+			$this->growBranch($on);
+			$this->growBranch($off,0,false); 
+
+			return array(
+				'post' => $_POST
+			);
 		}
 
 		function load($id=null){
@@ -473,19 +520,21 @@
 					'parent' => 0
 				));
 
-				if( !empty($r) ){
-					return array(
-						'success' 	=> false,
-						'error' 	=> 'That Page already exists at the Ground level.'
-					); 
-				}else{
-					$r = $q->Insert('navigation',$_POST);
-					return array(
-						'success' => true,
-						'row'=> $r,
-						'error'=> $q->error 
-					);
-				}
+				// if( !empty($r) ){
+				// 	return array(
+				// 		'success' 	=> false,
+				// 		'error' 	=> 'That Page already exists at the Ground level.'
+				// 	); 
+				// }else{
+					
+				// }
+
+				$r = $q->Insert('navigation',$_POST);
+				return array(
+					'success' => true,
+					'row'=> $r,
+					'error'=> $q->error 
+				);
 			}
 
 

@@ -10,6 +10,9 @@ $(function(){
         $("#nestable2").nestable({
             group: 1
         });
+
+       
+
     }
 
     pageLoad();
