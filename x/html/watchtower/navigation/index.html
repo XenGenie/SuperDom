@@ -10,14 +10,18 @@
             </div>
         </header>
 
-        <div class="dd" id="nestable1">
-            <ol class="dd-list">
-                {foreach $navi as $n => $link}
-                    {if $link.parent == 0} 
-                        {include file="watchtower/navigation/nest.html" link=$link} 
-                    {/if} 
-                {/foreach}
-            </ol>
+        <div class="dd" id="nestable1" >
+            {if $navi == 0}
+                <div class="dd-empty"></div>
+            {else}
+                <ol class="dd-list" style=" ">  
+                    {foreach $navi as $n => $link}
+                        {if $link.parent == 0} 
+                            {include file="watchtower/navigation/nest.html" link=$link} 
+                        {/if} 
+                    {/foreach}
+                </ol> 
+            {/if} 
         </div>
          
     </div>
@@ -31,14 +35,18 @@
 		    </h5>
 		    
 		</header>
-        <div class="dd" id="nestable2">
-            <ol class="dd-list">
+        <div class="dd" id="nestable2"> 
+            {if $deku == 0}
+                <div class="dd-empty"></div>
+            {else}
+                <ol class="dd-list"> 
                 {foreach $deku as $n => $link}
                     {if $link.parent == 0} 
-                        {include file="watchtower/navigation/nest.html" link=$link} 
+                        {include file="watchtower/navigation/nest.html" link=$link navi=$deku} 
                     {/if} 
                 {/foreach}
-            </ol>
+                </ol>
+            {/if}
         </div>
     </div>
 </div> 

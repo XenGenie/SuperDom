@@ -255,30 +255,39 @@
 		}
 
 		function index($sub=null){
-			$this->menu($sub);
-
+			$this->menu($sub); 
 			return $this->manaTree();
 		}
 
 		function manaTree(){
-			$navi = $this->heyNavi(true);
-			$deku = $this->heyNavi();
+			$navi = $this->heyNavi(1);
+			$deku = $this->heyNavi(0);
 			$this->set('navi',$navi);
 			return array(
-				'navi' => $navi,
-				'deku' => $deku,
+				'navi' => ( empty($navi) ) ? 0 : $navi, 
+				'deku' => ( empty($deku) ) ? 0 : $deku,
 				'sql'	=> $this->q()->mSql
 			);
 		}
 
-		function heyNavi($a=null){
+		function heyNavi($on=null){
 			$q = $this->q();
+			
+
+			// Debugging code: 
+			// $q->Update('navigation',array(
+			// 	'parent' => 0
+			// ),array(
+			// 	'active' => 0
+			// ));
+
+
 			$q->mBy = 'ORDER BY weight ASC';
 
 			
 
 			return $q->Select('*','navigation',array(
-				'active' => $a
+				'active' => $on
 			));
 		}
 
@@ -296,7 +305,7 @@
 				$w++;
 
 				if($v['children']){
-					$this->growBranch($v['children'],$v['id']);
+					$this->growBranch($v['children'],$v['id'],$active);
 				}
 				# code...
 			}
