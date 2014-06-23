@@ -898,6 +898,7 @@
 
 								if($doc){
 									$data =  trim(preg_replace('/\r?\n *\* */', ' ', $doc));
+									 
 									preg_match_all('/@([a-z]+)\s+(.*?)\s*(?=$|@[a-z]+\s)/s', $data, $matches);
 									$info = array_combine($matches[1], $matches[2]);
 

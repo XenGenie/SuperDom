@@ -49,15 +49,19 @@
 			$this->set('success',mail($p['reply_to'],$p['subject'],$p['message'],"From: $p[from]"));
 		}
 
-
+		/**
+			@name index
+			@blox Contact Form
+			@desc A simple contact form.
+			@icon pencil
+		**/
 		function index(){
-			$this->set('WWW_PAGE','Contacts');
-
+			$this->set('WWW_PAGE','Contacts'); 
 			$door = $this->DOOR.'Door';
-			$this->$door();
-
-
+			$this->$door(); 
 		}
+
+
 
 		function frontDoor(){
 			$P = $_POST;

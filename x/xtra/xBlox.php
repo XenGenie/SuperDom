@@ -33,22 +33,99 @@
 					'blueprint_architect_email' => array('Type'=>'varchar(255)'),
 					'blueprint_domain_origin'   => array('Type'=>'varchar(255)')
 				)
+
 			);
 		}
 
-		 
 
-		/*function autoRun($sDom){
+
+		/**
+		 	@name qBlox
+		 	@desc Parses all the extras to look for which functions act as a blox.		 	
+		**/
+
+		public function qBlox()
+		{
+			// WE need all the xtras 
+			$xtras = $this->getXtras();
+
+
+			$class = array();
+			$blox = array();
+
+			// lets check to see which ones have comment functions.
+			// to make the function into a blox; add the @blox variable & use the lang variable in your lang file.
+			// ex: @blox my1stblox
+			//
+
+			// Toy Blox 1 - Static Blox
+
+			// if the @blox comment is set; add it to the default blox set.
+
+
+
+			foreach ($xtras as $x => $b) {
+				$rClass = new ReflectionClass($b['class']); 
+
+				$rMethods = $rClass->getMethods();
+                foreach($rMethods as $rMethod) {
+                    $doc = $rMethod->getDocComment();
+                    if($doc){
+
+                    	$data =  trim(preg_replace('/\r?\n *\* */', ' ', $doc));
+                    	$data =  trim(preg_replace('/\t?\t *\* *\* *\/* */', '', $doc));
+
+						preg_match_all('/@([a-z]+)\s+(.*?)\s*(?=$|@[a-z]+\s)/s', $data, $matches);
+						$info = array_combine($matches[1], $matches[2]);
+
+						if( isset($info['blox']) ){
+							$blox[$rClass->name][$info['name']]= $info;
+						}
+
+						  
+              		}
+                }
+
+                
+
+               
+
+			}
+ 
+			return $blox; 
+			// Toy Blox 2 - Custom Blox
+			// These blox are stored in the database and mainly consist of custom html, js, and css code.
+
+
+
+
+
+			// Toy Blox 3 - neXus Door Blox
+
+			// Toy Blox 4  - These Blox are an array of other blox togeth 
+
+
+
+			# code...
+		}
+
+
+		function autoRun($sDom){
 			// Does this need to run - everytime!?
 			
-			if(!$sDom->AREA51){
-				$q = $this->q();
-				$q->mBy = array('weight'=>'ASC');
-				$blox = $q->Select('*','blox');
-				$this->set('blox',$blox);
+			// if(!$sDom->AREA51){
+			// 	$q = $this->q();
+			// 	$q->mBy = array('weight'=>'ASC');
+			// 	$blox = $q->Select('*','blox');
+			// 	$this->set('blox',$blox);
+			// }
+
+			if($sDom->Key['is']['admin']){
+				$this->set('blox',$this->qBlox() );
 			}
+
 		}
-*/
+
 		/**
 		 * create read update delete!
 		 * @param $id

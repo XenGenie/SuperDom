@@ -83,8 +83,7 @@
 		border                      : 1px solid #ccc;
 		/*background                : #333;*/
 		border-radius               : 20px;
-		text-shadow                 : 1px 1px 1px rgba(0,0,0,0.6);
-
+		
 		-webkit-transform           : rotateY(-180deg);
 		-moz-transform              : rotateY(-179deg); /* setting to 180 causes an unnatural-looking half-flip */
 		transform                   : rotateY(-179deg);
@@ -221,7 +220,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', end
 	          <ul class="nav navbar-nav navbar-left">
 	           
 	            <li >
-	            	<a class="action" >
+	            	<a class="action" style="cursor: pointer" >
 	            		<i class="fa fa-sun-o"></i> God Mode
 	            	</a>
 	            </li>
@@ -286,11 +285,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', end
 						<ul class="nav navbar-nav navbar-left"> 
 							<li class="active">
 								<a class="text-success">
-									<i class="fa fa-sun-o"></i> God Mode
+									<i class="fa fa-sun-o fa-spin"></i> God Mode
 								</a>
 							</li>
 							<li>
-								<a class="edit-submit">
+								<a class="edit-submit" style="cursor: pointer">
 									<i class="fa fa-group"></i> Public Mode
 								</a>
 							</li>
@@ -301,7 +300,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', end
 					</div><!--/.nav-collapse -->
 				</div> 
 
-<script src="/x/html/layout/watchtower/js/app.js"></script>
+			<script src="/x/html/layout/watchtower/js/app.js"></script>
 				
 			</div>
 			<div id="paper-back"  data-pjax-container>
@@ -350,6 +349,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', end
 
 						padding-top: -50px;
 						overflow: hidden;
+						color:  #222 !important;
 					}
 
 
@@ -420,6 +420,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', end
 		              	<h3>Affiliate's Ads</h3>
 		              <i class="fa fa-rocket  fa-5x"></i> 
 		            </div></div>
+
+					
+
 		            <div class="blox"><div class="hover">
 		             <div class="alert alert-primary  col-md-12">
 					    	Navigation is most always crutial to surf from one link to the next.
@@ -431,14 +434,28 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', end
 		                <hr/> 
 		            </div></div> -->
 
+					{foreach $blox as $k => $v}
+		            	 {foreach $v as $b => $x}
+			            	 <div class="blox"><div class="hover">
+				              	<div class="alert alert-info  col-md-12">
+							    	{$x['desc']}
+								</div>
+				              	<h3>{$x['blox']}</h3>
+				                <i class="fa fa-{$x['icon']} fa-5x  "></i>  
+				            </div></div>
+			            {/foreach}
+		            {/foreach}
+
 		             <div class="blox"><div class="hover">
-		              	<div class="alert alert-primary  col-md-12">
+		              	<div class="alert alert-info  col-md-12">
 					    	Click <b class="text-success">Me </b> & <b class="text-info">easily</b> start building your website using Blox!
 						</div>
 		              	<h3> <b class="text-info">The</b> <b class="text-danger">Toy</b> <b class="text-success">Blox</b>
 		                </h3>
 		                <i class="fa fa-cubes fa-5x text-danger"></i>  
 		            </div></div>
+
+
 		            <!-- <div class="blox"><div class="hover"> </div></div>
 		            <div class="blox"><div class="hover"> </div></div>
 		            <div class="blox"><div class="hover"> </div></div>

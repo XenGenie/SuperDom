@@ -268,7 +268,7 @@
 			return array(
 				'navi' => ( empty($navi) ) ? 0 : $navi, 
 				'deku' => ( empty($deku) ) ? 0 : $deku,
-				'sql'	=> $this->q()->mSql,
+				// 'sql'	=> $this->q()->mSql,
 				'admin_menu' => $this->mkAdminMenu()
 			);
 		}
