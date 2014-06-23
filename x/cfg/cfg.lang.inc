@@ -59,7 +59,7 @@
 				
 				'navigate'  => 'Navigate',
 				'construct' => 'Construct',
-				'cronos'    => 'Chronicle', 
+				'cronos'    => 'Chronicles', 
 				'content'   => 'Storage', 
 				
 				'market'    => 'Market',

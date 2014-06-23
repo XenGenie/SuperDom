@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> -->
 	{if $Xtra != '' AND $method  != '' AND ($Xtra != 'index')}
 		{include file="$Door/$Xtra/$method.html" assign=XTRA_METHOD}	
 		{$HTML.BODY.HTML = $XTRA_METHOD}
@@ -9,16 +11,52 @@
 		{$HTML.BODY.HTML = $PORTAL}
 	{/if}
 		<title>{$HTML.HEAD.TITLE}</title>
+
+		<!-- <link href="/x/html/layout/watchtower/css/application.min.css" rel="stylesheet"> -->
+        
+
+  		<link rel="stylesheet" href="/bin/css/font-awesome.css">
 		<link rel="stylesheet" type="text/css" href="{$HTML.HEAD.CSS}">
 		<SCRIPT src="{$HTML.HEAD.JS}"></SCRIPT>
 	</head>
 	<body>
+ 		
+		<script src="http://modernizr.com/downloads/modernizr-latest.js"></script>
+		
+		<script src="http://yui.yahooapis.com/3.17.2/build/yui/yui-min.js"></script>
 		{$HTML.BODY.HTML}
 		{if $HTML.BODY.CSS}
 		<link rel="stylesheet" type="text/css" href="{$HTML.BODY.CSS}">
 		{/if}
+		<script>
+		// Create a new YUI instance and populate it with the required modules.
+		YUI().use('pjax', function (Y) {
+		    // Pjax is available and ready for use. Add implementation
+		    // code here.
+		});
+		</script>
+
+
+		
 		{if $HTML.BODY.JS}
 		<script src="{$HTML.BODY.JS}"></script>
 		{/if}
+
 	</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

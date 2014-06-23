@@ -41,6 +41,12 @@
 			$goto = ($X->atSideDoor) ? str_replace("$door/", '', $this->url['path']) : $this->url['path'];
 
 
+			
+			if($this->Key['is']['admin']){ 
+				$this->set('admin_menu',$this->mkAdminMenu());
+			}
+
+
 			return $this->enterKey($goto);
 		}
 

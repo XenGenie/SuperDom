@@ -5,12 +5,16 @@ $(function(){
             forcePlaceholderSize: true
         });
         $("#nestable1").nestable({
-            group: 1
+            group: 1,
+            maxDepth : 7
         });
         $("#nestable2").nestable({
-            group: 1
+            group: 1,
+            maxDepth : 7
         });
 
+
+        $("#navi-tree").disableSelection();
        
 
     }

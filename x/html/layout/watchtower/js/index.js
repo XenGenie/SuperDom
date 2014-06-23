@@ -2,45 +2,45 @@ $(function(){
     function pageLoad(){
         nv.addGraph(function() {
 
-            $.ajax({
-                url : './analytics/index/90/.json',
+            // $.ajax({
+            //     url : './analytics/index/90/.json',
 
-                type: "POST", 
-                dataType: 'json',
-                success:function(data, textStatus, jqXHR){
-                    //data: return data from server
+            //     type: "POST", 
+            //     dataType: 'json',
+            //     success:function(data, textStatus, jqXHR){
+            //         //data: return data from server
                     
-                    DATA = data.data;
+            //         DATA = data.data;
     
-                    var chart = nv.models.lineChart() 
-                        .margin({top: 0, bottom: 25, left: 25, right: 0})
-                        .showLegend(true)
-                        .color([
-                            $teal, $green
-                            //'#618fb0', '#61b082'
-                        ]);
+            //         var chart = nv.models.lineChart() 
+            //             .margin({top: 0, bottom: 25, left: 25, right: 0})
+            //             .showLegend(true)
+            //             .color([
+            //                 $teal, $green
+            //                 //'#618fb0', '#61b082'
+            //             ]);
 
-                    chart.legend.margin({top: 3});
+            //         chart.legend.margin({top: 3});
 
-                    chart.yAxis
-                        .showMaxMin(false)
-                        .tickFormat(d3.format(',.f'));
+            //         chart.yAxis
+            //             .showMaxMin(false)
+            //             .tickFormat(d3.format(',.f'));
 
-                    chart.xAxis
-                        .showMaxMin(false)
-                        .tickFormat(function(d) { return d3.time.format('%b %d')(new Date(d)) });
-                    //var data = testData(['Unique', 'Visits'], 30);
+            //         chart.xAxis
+            //             .showMaxMin(false)
+            //             .tickFormat(function(d) { return d3.time.format('%b %d')(new Date(d)) });
+            //         //var data = testData(['Unique', 'Visits'], 30);
 
                     
-                    //data[0].area = true;
-                    d3.select('#visits-chart svg')
-                        .datum(data.data)
-                        .transition().duration(500)
-                        .call(chart);
+            //         //data[0].area = true;
+            //         d3.select('#visits-chart svg')
+            //             .datum(data.data)
+            //             .transition().duration(500)
+            //             .call(chart);
 
-                    PjaxApp.onResize(chart.update);
-                }
-            });   
+            //         PjaxApp.onResize(chart.update);
+            //     }
+            // });   
 
 
         });

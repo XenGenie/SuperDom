@@ -1,1112 +1,520 @@
+<link href="/x/html/layout/watchtower/css/white.application.min.css" rel="stylesheet">
+       
+
+<script src="/x/html/layout/watchtower/lib/jquery/jquery-2.0.3.min.js"> </script>
+    <script>
+      // For IE11. May we one day live without your BS.
+      Modernizr.addTest('preserve3d', function(){ return Modernizr.testAllProps('transformStyle', 'preserve-3d');});
+    </script>
+
+    <style type="text/css">
+      body {   
+
+      }
+      .panel { 
+        float: left;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: .8em;
+        border: 0 !important;
+
+        -webkit-perspective: 600px;
+        -moz-perspective: 600px;
+                perspective: 600px;
 
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-<!-- Optional theme -->
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 
-<style>
-	
-body {
-	background-image: -webkit-gradient(linear, 0% 100%, 100% 0%, color-stop(0.14, rgb(46, 119, 203)), color-stop(0.57, rgb(74, 155, 244)));
-}
 
-</style>
+      }
+      /* -- make sure to declare a default for every property that you want animated -- */
+      /* -- general styles, including Y axis rotation -- */
+      .panel .front { 
+        float: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 900;
+        width: inherit;
+        height: inherit;
+        border: 0px solid #ccc;
+        background: #6b7077;
+        text-align: center;
+        /*box-shadow: 0 1px 5px rgba(0,0,0,0.9);*/
 
-    <!-- Fixed navbar -->
-    <!-- <div class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+        -webkit-transform: rotateX(0deg) rotateY(0deg);
+           -moz-transform: rotateX(0deg) rotateY(0deg);
+                transform: rotateX(0deg) rotateY(0deg);
 
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
+        -webkit-transform-style: preserve-3d;
+           -moz-transform-style: preserve-3d;
+                transform-style: preserve-3d;
 
-           <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Utility Belt <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Create a New Page</a></li>
-                <li><a href="#">Manage Navigation</a></li>
-                <li><a href="#">Upload Files</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Manage Navigation</li>
-                <li><a href="#">New Link</a></li>
-                <li><a href="#">New Sub Link</a></li>
-              </ul>
-            </li>
+        -webkit-backface-visibility: hidden;
+           -moz-backface-visibility: hidden;
+                backface-visibility: hidden;
 
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-           
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Public View</a></li>
-            <li class="active">
-            <a href="../navbar-static-top/">
-            	God Mode
-            </a></li>
-            <li >
-				<a href="#">
-          			Watch Tower
-          		</a>
-          	</li>
-          </ul>
-        </div> 
-      </div>
-    </div> -->
+        /* -- transition is the magic sauce for animation -- */
+        -webkit-transition: all .4s ease-in-out;
+                transition: all .4s ease-in-out;
+      }
+      .panel.flip .front { 
+        z-index: 900;
+        border-color: #eee;
+        background: #333;
+        /*box-shadow: 0 15px 50px rgba(0,0,0,0.2);*/
+
+        -webkit-transform: rotateY(180deg);
+           -moz-transform: rotateY(180deg);
+                transform: rotateY(180deg);
+      }
+
+  	.panel .back { 
+		float                       : none;
+		position                    : absolute;
+		top                         : 0;
+		left                        : 0;
+		z-index                     : 800;
+		width                       : inherit;
+		height                      : inherit;
+		border                      : 1px solid #ccc;
+		/*background                : #333;*/
+		border-radius               : 20px;
+		text-shadow                 : 1px 1px 1px rgba(0,0,0,0.6);
+
+		-webkit-transform           : rotateY(-180deg);
+		-moz-transform              : rotateY(-179deg); /* setting to 180 causes an unnatural-looking half-flip */
+		transform                   : rotateY(-179deg);
+
+		-webkit-transform-style     : preserve-3d;
+		-moz-transform-style        : preserve-3d;
+		transform-style             : preserve-3d;
+
+		-webkit-backface-visibility : hidden;
+		-moz-backface-visibility    : hidden;
+		backface-visibility         : hidden;
+
+		/* -- transition is the magic sauce for animation -- */
+		-webkit-transition          : all .4s ease-in-out;
+		transition                  : all .4s ease-in-out;
+
+
+  	}
+
+      .panel.flip .back { 
+        z-index: 1000;
+        /*background: #80868d;*/
+
+        border-radius: 20px;
+        padding-top: 50px;
+        -webkit-transform: rotateX(0deg) rotateY(0deg);
+           -moz-transform: rotateX(0deg) rotateY(0deg);
+                transform: rotateX(0deg) rotateY(0deg);
+
+        box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+        
+    background: rgb(254,255,255); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(254,255,255,1) 0%, rgba(210,235,249,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(254,255,255,1)), color-stop(100%,rgba(210,235,249,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#d2ebf9',GradientType=0 ); /* IE6-9 */
+
+
+      }
+
+      /* -- X axis rotation for click panel -- */
+      .click .front { 
+        cursor: pointer;
+        -webkit-transform: rotateX(0deg);
+           -moz-transform: rotateX(0deg);
+                transform: rotateX(0deg);
+      }
+      .click.flip .front { 
+        -webkit-transform: rotateX(180deg);
+           -moz-transform: rotateX(180deg);
+                transform: rotateX(180deg);
+      }
+      .click .back { 
+        cursor: pointer;
+        -webkit-transform: rotateX(-180deg);
+           -moz-transform: rotateX(-180deg);
+                transform: rotateX(-180deg);
+      }
+      .click.flip .back { 
+        -webkit-transform: rotateX(0deg);
+           -moz-transform: rotateX(0deg);
+                transform: rotateX(0deg);
+      }
  
-	<!--[if lt IE 9]>
-		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
+      /* -- cosmetics -- */
+      .panel .pad { padding: 0 15px; }
+      /*.panel.flip .action { display: none; }*/
+      .block ol li { text-align: left; margin: 0 0 0 28px; }
+      /*.block .action { display: block; padding: 3px; background: #333; text-align: right; font-size: .8em; opacity: 0; position: absolute; cursor: pointer; -webkit-transition: opacity .2s linear; }*/
+      /*.block:hover .action { opacity: .7; }*/
+      .circle div {  border-radius: 100px; width: 100px; }
+      .circle div h2 {  padding-top: 3em; text-align: center; }
 
-	<!--jQuery-->
-	<script src="/bin/javascript/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-	<script src="/bin/javascript/preloader.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript">
-	    var images = {
-	        'parallax1':    '/images/bghome3.jpg',
-	        //'parallax2':    'http://www.exot.sk/goforit-reloaded-bonus/images/services.jpg',
-	        //'parallax3':    'http://www.exot.sk/goforit-reloaded-bonus/images/clients.jpg'
-	    };
-	 
-	    // config
-	    Royal_Preloader.config({
-	        mode:       'number',
-	        images:     images,
-	        timeout:    10,
-	        showInfo:   false,
-	        background: ['#fefefe']
-	    });
-	</script>
+    </style>
+    <script>
+      $(document).ready(function(){ 
 
-	<style type="text/css">
+        // set up hover panels
+        // although this can be done without JavaScript, we've attached these events
+        // because it causes the hover to be triggered when the element is tapped on a touch device
+         
+        // set up click/tap panels
+        $('.click').toggle(function(){ 
+          $(this).addClass('flip');
+        },function(){ 
+          $(this).removeClass('flip');
+        });
 
-	.panel {
-		float               : left;
-		width               : 100%;
-		height              : 100%;
-		margin              : 1px;
-		position            : relative;
-		font-size           : .8em;
-		/*z-index: 9999999999999999;*/
-		-webkit-perspective : 300px;
-		-moz-perspective    : 300px;
-		perspective         : 300px;
-	}
-	/* -- make sure to declare a default for every property that you want animated -- */
-	/* -- general styles, including Y axis rotation -- */
-	.panel .front {
-		float      : none;
-		position   : absolute;
-		top        : 0;
-		left       : 0;
-		z-index    : 900;
-		width      : inherit;
-		height     : inherit;
-		border     : 0px solid #ccc;
-		/*background : #6b7077;*/
-		text-align : center;
-		/*box-shadow : 0 1px 5px rgba(0,0,0,0.9);*/
+        // set up block configuration
+        $('.block .action').click(function(){ 
+          $('.block').addClass('flip');
+        });
+        $('.block .edit-submit').click(function(e){ 
+          $('.block').removeClass('flip');
 
-		-webkit-transform: rotateX(0deg) rotateY(0deg);
-			 -moz-transform: rotateX(0deg) rotateY(0deg);
-						transform: rotateX(0deg) rotateY(0deg);
+          // why not update that list for fun?
+          
+          e.preventDefault();
+        });
+ 
 
-		-webkit-transform-style: preserve-3d;
-			 -moz-transform-style: preserve-3d;
-						transform-style: preserve-3d;
-
-		-webkit-backface-visibility: hidden;
-			 -moz-backface-visibility: hidden;
-						backface-visibility: hidden;
-
-		/* -- transition is the magic sauce for animation -- */
-		-webkit-transition: all .4s ease-in-out;
-						transition: all .4s ease-in-out;
-	}
-	.panel.flip .front {
-		z-index           : 900;
-		/*border-color      : #eee;*/
-		background        : #333;
-		box-shadow        : 0 15px 50px rgba(0,0,0,0.2);
-		
-		-webkit-transform : rotateY(180deg);
-		-moz-transform    : rotateY(180deg);
-		transform         : rotateY(180deg);
-	}
-
-	.panel .back {
-		float       : none;
-		position    : absolute;
-		top         : 0;
-		left        : 0;
-		z-index     : 800;
-		width       : inherit;
-		height      : inherit;
-		/*border      : 1px solid #ccc;*/
-		background  : #333;
-		text-shadow : 1px 1px 1px rgba(0,0,0,0.6);
-
-		-webkit-transform: rotateY(-180deg);
-			 -moz-transform: rotateY(-179deg); /* setting to 180 causes an unnatural-looking half-flip */
-						transform: rotateY(-179deg);
-
-		-webkit-transform-style: preserve-3d;
-			 -moz-transform-style: preserve-3d;
-						transform-style: preserve-3d;
-
-		-webkit-backface-visibility: hidden;
-			 -moz-backface-visibility: hidden;
-						backface-visibility: hidden;
-
-		/* -- transition is the magic sauce for animation -- */
-		-webkit-transition: all .4s ease-in-out;
-						transition: all .4s ease-in-out;
-	}
-
-	.panel.flip .back {
-		z-index: 1000;
-		
-		background: rgb(255,255,255); /* Old browsers */
-background: -moz-linear-gradient(45deg,  rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(255,255,255,1)), color-stop(47%,rgba(246,246,246,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(45deg,  rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(45deg,  rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(45deg,  rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%); /* IE10+ */
-background: linear-gradient(45deg,  rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+      });
+    </script>
+     
 
 
-		-webkit-transform: rotateX(0deg) rotateY(0deg);
-			 -moz-transform: rotateX(0deg) rotateY(0deg);
-						transform: rotateX(0deg) rotateY(0deg);
+    <div class="block panel">
+      <div class="front">
+        <!-- Fixed navbar -->
+	    <div class="navbar navbar-default navbar-fixed-top navbar-inverse"  role="navigation">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#"></a>
+	        </div>
+	        <div class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav navbar-right">
+	            <li class="action "><a href="#"><i class="fa fa-globe"></i> Home</a></li>
+	            <!-- TODO: Add Navigation Here -->
+	            {foreach $navi as $n => $link}
+                    {if $link.parent == 0} 
+                        {include file="~blox/godbar/navi.nest.html" link=$link} 
+                    {/if} 
+                {/foreach}
+	          </ul>
+	          <ul class="nav navbar-nav navbar-left">
+	           
+	            <li >
+	            	<a class="action" >
+	            		<i class="fa fa-sun-o"></i> God Mode
+	            	</a>
+	            </li>
+	            <li class="active">
+	            	<a href="../navbar-static-top/">
+	            		<i class="fa fa-group"></i> Public Mode</a>
+	            </li>
+	          </ul>
+	        </div><!--/.nav-collapse -->
+	      </div>
+	    </div>
+        
+        <!-- <div class="click panel circle">
+          <div class="front">
+            <h2>Click or tap this circle!</h2>
+          </div>
+          <div class="back">
+            <h2>Tap Again!</h2>
+          </div>
+        </div> -->
+      </div>
+      <div class="back">
+        <div class="pad">
+        	<!-- Fixed navbar -->
+			<div class="navbar navbar-default navbar-fixed-top"  role="navigation">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#"></a>
+						</div>
+						<div class="navbar-collapse collapse">
+						<ul class="nav navbar-nav navbar-right" id="admin_menu">
 
-		box-shadow: 0 15px 50px rgba(0,0,0,0.2);
-	}
-
-	/* -- X axis rotation for click panel -- */
-	.click .front {
-		cursor: pointer;
-		-webkit-transform: rotateX(0deg);
-			 -moz-transform: rotateX(0deg);
-						transform: rotateX(0deg);
-	}
-	.click.flip .front {
-		-webkit-transform: rotateX(180deg);
-			 -moz-transform: rotateX(180deg);
-						transform: rotateX(180deg);
-	}
-	.click .back {
-		cursor: pointer;
-		-webkit-transform: rotateX(-180deg);
-			 -moz-transform: rotateX(-180deg);
-						transform: rotateX(-180deg);
-	}
-	.click.flip .back {
-		-webkit-transform: rotateX(0deg);
-			 -moz-transform: rotateX(0deg);
-						transform: rotateX(0deg);
-	}
-
-	</style>
-
-	<!--fonts-->
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-
-	<!--css-->
-	<link rel="stylesheet" type="text/css" href="/bin/stylesheets/loader.css">
-	<link rel="stylesheet" type="text/css" href="/bin/stylesheets/reset.css">
-	<link rel="stylesheet" type="text/css" href="/bin/stylesheets/grid.css">
-	<link rel="stylesheet" type="text/css" href="/bin/stylesheets/style.css">
-	<link rel="stylesheet" type="text/css" href="/bin/stylesheets/colors.css">
-	<link rel="stylesheet" type="text/css" href="/bin/stylesheets/anims.css">
-	<link rel="stylesheet" type="text/css" href="/bin/stylesheets/longshadows.css">
-
-	<!--[if lt IE 9]>
-		<link rel="stylesheet" type="text/css" href="stylesheets/ie.css" />
-	<![endif]-->
-
-	 
-
-</head>
-
-<body class="royal_loader">
-
-<script>
-	$(document).ready(function(){
-
-		// set up hover panels
-		// although this can be done without JavaScript, we've attached these events
-		// because it causes the hover to be triggered when the element is tapped on a touch device
-		$('.hover').hover(function(){
-			$(this).addClass('flip');
-		},function(){
-			$(this).removeClass('flip');
-		});
-
-		// set up click/tap panels
-		$('.click').toggle(function(){
-			$(this).addClass('flip');
-		},function(){
-			$(this).removeClass('flip');
-		});
-
-		// set up block configuration
-		$('.block .action').click(function(){
-			$('.block').addClass('flip');
-		});
-		$('.block .edit-submit').click(function(e){
-			$('.block').removeClass('flip');
-
-			// why not update that list for fun?
-			$('#list-title').text($('#form_title').val());
-			$('#list-items').empty();
-			for (var num = $('#form_items').val(); num >= 1; num--) {
-				$('#list-items').append('<li>Super seller</li>');
-			}
-			e.preventDefault();
-		});
-
-		// set up contact form link
-		$('.contact .action').click(function(e){
-			$('.contact').addClass('flip');
-			e.preventDefault();
-		});
-		$('.contact .edit-submit').click(function(e){
-			$('.contact').removeClass('flip');
-			e.preventDefault();
-		});
-
-	});
-</script> 
-	<style>
-
-		.godbar.scrolled{
-			position: fixed;
-			top: 0;
-			left: 0;
-			height: 85px;
-			width: 100px;
-		}
-	</style>
-	<!--nav-->
-	<nav class="clearfix">
-
-		<!--logo-->
-		<!-- <div class="logo">
-			<a id="top" href="http://midknightknerd.com" target="_blank">
-				<img src="/bin/images/logo_invert.png" width="90"   alt="">
-			</a>
-		</div> -->
-		<!--/logo end-->
-
-		<!--/menu--> 
-	    <nav id="bt-menu" class="bt-menu">
-	        <a href="#" class="bt-menu-trigger"><span>Menu</span></a>
-	        <ul>
-	          	<li><a class="active" href="#section1">Home</a></li>
-				<li><a href="#section2">Welcome</a></li>
-				<li><a href="#section3">Toy Box</a></li>
-				<li><a href="#section4">Portfolio</a></li>
-				<li><a href="#section5">Clients</a></li>
-				<li><a href="#section6">Contact</a></li>
-
-	        </ul>
-	    </nav>
-		<!--/menu end-->
-
-	</nav>
-	<!--/nav end-->	
-
-	<!--home-->
-	<section id="section1" class="parallax-bg1 hero parallax clearfix">
-
-		<div class="block panel">
-			<div class="front" style="background-image: -webkit-gradient(linear, 0% 100%, 100% 0%, color-stop(0.14, rgb(46, 119, 203)), color-stop(0.57, rgb(74, 155, 244)));">
-
-				<div class="jumbotron dark content container" style="background: transparent">
-					<div class="container">
-					<div class="row">
-					<div class="col-lg-12 golink">
+							{foreach $admin_menu as $key => $item}
+								{if $key}  
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="{$item.desc|ucfirst}"><i class="fa fa-{$key}"></i> {$item.area|ucfirst} <b class="caret"></b></a>
+										<ul class="dropdown-menu">
+										{foreach $xtras as $x => $xtra}
+										{if $xtra.icon && $key == $xtra.see}
+										<li><a  href="/x/{$xtra.link}" title="{$xtra.desc}"  data-placement="top" data-original-title="{$xtra.desc}" class="{if $xtra.alpha}panel-danger{elseif $xtra.beta}panel-warning{elseif $xtra.delta}panel-success{elseif $xtra.omega}panel-primary{else}panel-default" disabled="disabled{/if}" > 
 
 
 
-					<img alt="" src="/bin/images/logos/sdx.png" >  <br/><br/>	
+										<i class="fa fa-{$xtra.mini}"></i> {$xtra.name} 
+										</a></li>  
+									{/if}
+									{/foreach} 
+									</ul>
+									</li> 
+								{/if}
+							{/foreach} 
+						</ul>
 
-					<a href="#section2">
-						<h1 class="maintitle" style="font-size: 140px">
-							<span class="glyphicon glyphicon-cloud"></span>
-						</h1>
-					</a>
-
-					<p>Your Kingdom; On the Cloud</p>
 
 
-					<h1 class="maintitle">Welcome Home</h1> 
+						<ul class="nav navbar-nav navbar-left"> 
+							<li class="active">
+								<a class="text-success">
+									<i class="fa fa-sun-o"></i> God Mode
+								</a>
+							</li>
+							<li>
+								<a class="edit-submit">
+									<i class="fa fa-group"></i> Public Mode
+								</a>
+							</li>
+						</ul>
+
+
+
+					</div><!--/.nav-collapse -->
+				</div> 
+
+<script src="/x/html/layout/watchtower/js/app.js"></script>
+				
+			</div>
+			<div id="paper-back"  data-pjax-container>
+				<style type="text/css"> 
+					.blox {
+						display: inline-block;
+						width    : 200px;
+						height   : 200px;
+						margin   : -20px;
+						position : relative;
+					}
+
+
+					/* -- make sure to declare a default for every property that you want animated -- */
+					.blox .hover {
+						float              : none;
+						position           : absolute;
+						top                : 0;
+						left               : 0;
+						z-index            : 100;
+						width              : 200px;
+						height             : 200px;
+						border             : 1px solid #aaa;
+						border-top         : 1px solid #888;
+						border-left        : 1px solid #888;
+						/*background         : #6b7077;*/
+
+      					  border-radius: 20px;
+						text-align         : center;
+						
+						-o-transform       : scale(.7);
+						-moz-transform     : scale(.7);
+						-webkit-transform  : scale(.7);
+						transform          : scale(.7);
+						
+						-moz-box-shadow    : inset 1px 2px 8px #222;
+						-webkit-box-shadow : inset 1px 2px 8px rgba(0,0,0,0.7);
+						box-shadow         : inset 1px 2px 8px rgba(0,0,0,0.7);
+						
+						
+						/* -- transition is the magic sauce for animation -- */
+						-o-transition      : all .15s;
+						-moz-transition    : all .15s ease-out;
+						-webkit-transition : all .15s ease-out;
+						transition         : all .15s ease-out;
+
+						padding-top: -50px;
+						overflow: hidden;
+					}
+
 
 					
-					<br/>
-				<!-- 	<a   class="action"><div class="btn btn-lg btn-info" style="cursor: pointer; border-radius: 1000px 1000px 125px 125px; padding: 15px;  ">Enter</div></a> -->
 
+					.blox .hover:hover {
+						padding-top: 0px;
+						z-index            : 1000;
+						border-color       : #bbb;
+						border-right       : 1px solid #aaa;
+						border-bottom      : 1px solid #aaa;
+						
+						-o-transform       : scale(1.051);
+						-moz-transform     : scale(1.051);
+						-webkit-transform  : scale(1.051);
+						transform          : scale(1.05);
+						
+						-moz-box-shadow    : 0 15px 50px rgba(100,100,100,0.3), inset 10px -15px -15px white;
+						-webkit-box-shadow : 0 15px 50px rgba(100,100,100,0.3), inset 10px -15px -15px white;
+						box-shadow         : 0 15px 50px rgba(100,100,100,0.3), inset 10px -15px -15px white;
+						cursor: pointer;
+					}
 
+					 
 
-
-					</div> <!--/col-lg-12 end--> 
-					</div> <!--/row end--> 
-					</div> <!--/container end--> 
-				</div>
-			</div>
-			<div class="back" style="overflow: auto;">
-				<div class="pad">
-					<form action="###" method="post">
+					.activeBlox{
+						background-color : rgba(0,255,70,0.25);
+					}
+					.blox .hover .alert{
+						/*position: absolute;*/
+						margin-top: -70px; 
 						 
-						<div class="container theme-showcase" role="main">
-							 <h1>
-						        <div class="alert alert-danger">
-							       Now Editing:  <strong>Cover Blox</strong> 
-					      			<a href="#" class="btn btn-default btn-lg" role="button">Watch Video &raquo;</a>
-							        <input type="submit" class="edit-submit btn btn-info btn-lg"  role="button" value="Preview Changes &raquo;" />
-									<input type="submit" class="edit-submit btn btn-success btn-lg"  role="button" value="Save Changes &raquo;" />
-						      	</div> 
-						      	</h1>
-					       
-					      <!-- Main jumbotron for a primary marketing message or call to action -->
+						-o-transition      : all .35s;
+						-moz-transition    : all .35s ease-out;
+						-webkit-transition : all .35s ease-out;
+						transition         : all .35s ease-out;
+					}
+					.blox .hover:hover .alert { 
+						margin-top:0; 
+					};
+				</style>
+				
+	            <!-- <h1>Blox on this page:</h1> -->
+	            <br/>
+	            <br/>
+	            <br/>
+	  			<div class="text-center row">
+		            <!-- <div class="blox"><div class="hover">
+		            	 
+		                <div class="alert alert-primary  col-md-12">
+		                      
+		                    Give your visitors a very welcoming greeting.  
+		                </div>
+		                <h3>Welcome </h3>
+		                <i class="fa fa-desktop fa-5x"></i>
+		            </div></div>
+		            <div class="blox"><div class="hover">
+		            	<div class="alert alert-primary  col-md-12">
+					    	Attract email address and send routine news.
+						</div>
+		              	<h3>Form Magnet</h3>
+		              	<i class="fa fa-magnet fa-5x"></i>
+		            </div></div>
+		            <div class="blox"><div class="hover">
+		              <div class="alert alert-primary  col-md-12">
+					    	Increase revenue by supporting your affiliates. 
+						</div>
+		              	<h3>Affiliate's Ads</h3>
+		              <i class="fa fa-rocket  fa-5x"></i> 
+		            </div></div>
+		            <div class="blox"><div class="hover">
+		             <div class="alert alert-primary  col-md-12">
+					    	Navigation is most always crutial to surf from one link to the next.
+						</div>
+		              	<h3>Navigation Bar</h3>
+		              	<i class="fa fa-sitemap  fa-5x"></i> 
+						 
+		             
+		                <hr/> 
+		            </div></div> -->
 
-					      <div class=" jumbotron">
-					        <h1>"Hello, world!"</h1>
-					        <p>
-					        	Every great Resume, Project, etc. has a wonderfull <strong>cover page</strong>. <br/>
-					        Capture your audience now and they'll stick around to browse your whole Domain.
-					        </p>
+		             <div class="blox"><div class="hover">
+		              	<div class="alert alert-primary  col-md-12">
+					    	Click <b class="text-success">Me </b> & <b class="text-info">easily</b> start building your website using Blox!
+						</div>
+		              	<h3> <b class="text-info">The</b> <b class="text-danger">Toy</b> <b class="text-success">Blox</b>
+		                </h3>
+		                <i class="fa fa-cubes fa-5x text-danger"></i>  
+		            </div></div>
+		            <!-- <div class="blox"><div class="hover"> </div></div>
+		            <div class="blox"><div class="hover"> </div></div>
+		            <div class="blox"><div class="hover"> </div></div>
+		            <div class="blox"><div class="hover"> </div></div>
+		            <div class="blox"><div class="hover"> </div></div>
+		            <div class="blox"><div class="hover"> </div></div>
+		            <div class="blox"><div class="hover"> </div></div>
+		            <div class="blox"><div class="hover"> </div></div>
+		            <div class="blox"><div class="hover"> </div></div>
+		            <div class="blox"><div class="hover"> </div></div>
+		            <div class="blox"><div class="hover"> </div></div>
+		            <div class="blox"><div class="hover"> </div></div>
+		            <div class="blox"><div class="hover"> </div></div>
+		            <div class="blox"><div class="hover"> </div></div>
+		            <div class="blox"><div class="hover"> </div></div>
+		            <div class="blox"><div class="hover"> </div></div>
+		            <div class="blox"><div class="hover"> </div></div>
+		            <div class="blox"><div class="hover"> </div></div>
+		            <div class="blox"><div class="hover"> </div></div>
+		            <div class="blox"><div class="hover"> </div></div> -->
+	 			</div>
+			</div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
 
-					        
 
-					      </div>
 
+    $(document).ready(function() {
+    	 
+    	 
+    	$('.blox .hover').click(function() {
+
+
+
+
+
+    		$(this).toggleClass('activeBlox');
+    		 
  
+    	});
 
+    	$('#admin_menu ul a').click(function (e) {
+    		$.pjax({ 
+				container : '#paper-back',
+				fragment  : '.content',
+				timeout   : 9000,
+				url       : $(this).attr('href')
+			});
 
+			e.preventDefault();
+    		// body...
+    	});
 
-					      <div class="page-header">
-					        <h1>Background Color</h1>
-					      </div>
+    	//$(document).pjax('a', '#paper-back', { fragment: '#content' });
+    	
+    });
 
-					      <div style="height: 100px;" class="img-thumbnail col-sm-4"></div>
 
-					      <div class="img-thumbnail col-sm-1"></div>
-					      <div class="img-thumbnail col-sm-1"></div>
-					      <div class="img-thumbnail col-sm-1"></div>
-					      <div class="img-thumbnail col-sm-1"></div>
-					      <div class="img-thumbnail col-sm-1"></div>
-					      <div class="img-thumbnail col-sm-1"></div>
-					      <div class="img-thumbnail col-sm-1"></div>
-					      <div class="img-thumbnail col-sm-1"></div>
-					      <div class="img-thumbnail col-sm-1"></div>
-					      <div class="img-thumbnail col-sm-1"></div>
-					      <div class="img-thumbnail col-sm-1"></div>
-					      <div class="img-thumbnail col-sm-1"></div>
+    </script>
+    <!-- End Switch Panel -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+   
 
+<script src="/x/html/layout/watchtower/lib/jquery-pjax/jquery.pjax.js"></script>
 
+    <!-- Include all compiled plugins (below), or include individual files as needed --> 
 
-  
+    <!-- Latest compiled and minified JavaScript -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 
-
-
-					      <div class="page-header">
-					        <h1>Navbars</h1>
-					      </div>
-
-					      <div class="navbar navbar-default">
-					        <div class="container">
-					          <div class="navbar-header">
-					            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					              <span class="sr-only">Toggle navigation</span>
-					              <span class="icon-bar"></span>
-					              <span class="icon-bar"></span>
-					              <span class="icon-bar"></span>
-					            </button>
-					            <a class="navbar-brand" href="#">Project name</a>
-					          </div>
-					          <div class="navbar-collapse collapse">
-					            <ul class="nav navbar-nav">
-					              <li class="active"><a href="#">Home</a></li>
-					              <li><a href="#about">About</a></li>
-					              <li><a href="#contact">Contact</a></li>
-					              <li class="dropdown">
-					                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-					                <ul class="dropdown-menu">
-					                  <li><a href="#">Action</a></li>
-					                  <li><a href="#">Another action</a></li>
-					                  <li><a href="#">Something else here</a></li>
-					                  <li class="divider"></li>
-					                  <li class="dropdown-header">Nav header</li>
-					                  <li><a href="#">Separated link</a></li>
-					                  <li><a href="#">One more separated link</a></li>
-					                </ul>
-					              </li>
-					            </ul>
-					          </div><!--/.nav-collapse -->
-					        </div>
-					      </div>
-
-					      <div class="navbar navbar-inverse">
-					        <div class="container">
-					          <div class="navbar-header">
-					            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					              <span class="sr-only">Toggle navigation</span>
-					              <span class="icon-bar"></span>
-					              <span class="icon-bar"></span>
-					              <span class="icon-bar"></span>
-					            </button>
-					            <a class="navbar-brand" href="#">Project name</a>
-					          </div>
-					          <div class="navbar-collapse collapse">
-					            <ul class="nav navbar-nav">
-					              <li class="active"><a href="#">Home</a></li>
-					              <li><a href="#about">About</a></li>
-					              <li><a href="#contact">Contact</a></li>
-					              <li class="dropdown">
-					                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-					                <ul class="dropdown-menu">
-					                  <li><a href="#">Action</a></li>
-					                  <li><a href="#">Another action</a></li>
-					                  <li><a href="#">Something else here</a></li>
-					                  <li class="divider"></li>
-					                  <li class="dropdown-header">Nav header</li>
-					                  <li><a href="#">Separated link</a></li>
-					                  <li><a href="#">One more separated link</a></li>
-					                </ul>
-					              </li>
-					            </ul>
-					          </div><!--/.nav-collapse -->
-					        </div>
-					      </div>
-
-
-
-					      <div class="page-header">
-					        <h1>Alerts</h1>
-					      </div>
-					      <div class="alert alert-success">
-					        <strong>Well done!</strong> You successfully read this important alert message.
-					      </div>
-					      <div class="alert alert-info">
-					        <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
-					      </div>
-					      <div class="alert alert-warning">
-					        <strong>Warning!</strong> Best check yo self, you're not looking too good.
-					      </div>
-					      <div class="alert alert-danger">
-					        <strong>Oh snap!</strong> Change a few things up and try submitting again.
-					      </div>
-
-
-
-					      <div class="page-header">
-					        <h1>Progress bars</h1>
-					      </div>
-					      <div class="progress">
-					        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span class="sr-only">60% Complete</span></div>
-					      </div>
-					      <div class="progress">
-					        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"><span class="sr-only">40% Complete (success)</span></div>
-					      </div>
-					      <div class="progress">
-					        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%"><span class="sr-only">20% Complete</span></div>
-					      </div>
-					      <div class="progress">
-					        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%"><span class="sr-only">60% Complete (warning)</span></div>
-					      </div>
-					      <div class="progress">
-					        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%"><span class="sr-only">80% Complete (danger)</span></div>
-					      </div>
-					      <div class="progress">
-					        <div class="progress-bar progress-bar-success" style="width: 35%"><span class="sr-only">35% Complete (success)</span></div>
-					        <div class="progress-bar progress-bar-warning" style="width: 20%"><span class="sr-only">20% Complete (warning)</span></div>
-					        <div class="progress-bar progress-bar-danger" style="width: 10%"><span class='sr-only'>10% Complete (danger)</span></div>
-					      </div>
-
-
-
-					      <div class="page-header">
-					        <h1>List groups</h1>
-					      </div>
-					      <div class="row">
-					        <div class="col-sm-4">
-					          <ul class="list-group">
-					            <li class="list-group-item">Cras justo odio</li>
-					            <li class="list-group-item">Dapibus ac facilisis in</li>
-					            <li class="list-group-item">Morbi leo risus</li>
-					            <li class="list-group-item">Porta ac consectetur ac</li>
-					            <li class="list-group-item">Vestibulum at eros</li>
-					          </ul>
-					        </div><!-- /.col-sm-4 -->
-					        <div class="col-sm-4">
-					          <div class="list-group">
-					            <a href="#" class="list-group-item active">
-					              Cras justo odio
-					            </a>
-					            <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-					            <a href="#" class="list-group-item">Morbi leo risus</a>
-					            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-					            <a href="#" class="list-group-item">Vestibulum at eros</a>
-					          </div>
-					        </div><!-- /.col-sm-4 -->
-					        <div class="col-sm-4">
-					          <div class="list-group">
-					            <a href="#" class="list-group-item active">
-					              <h4 class="list-group-item-heading">List group item heading</h4>
-					              <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-					            </a>
-					            <a href="#" class="list-group-item">
-					              <h4 class="list-group-item-heading">List group item heading</h4>
-					              <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-					            </a>
-					            <a href="#" class="list-group-item">
-					              <h4 class="list-group-item-heading">List group item heading</h4>
-					              <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-					            </a>
-					          </div>
-					        </div><!-- /.col-sm-4 -->
-					      </div>
-
-
-
-					      <div class="page-header">
-					        <h1>Panels</h1>
-					      </div>
-					      <div class="row">
-					        <div class="col-sm-4">
-					          <div class="panel panel-default">
-					            <div class="panel-heading">
-					              <h3 class="panel-title">Panel title</h3>
-					            </div>
-					            <div class="panel-body">
-					              Panel content
-					            </div>
-					          </div>
-					          <div class="panel panel-primary">
-					            <div class="panel-heading">
-					              <h3 class="panel-title">Panel title</h3>
-					            </div>
-					            <div class="panel-body">
-					              Panel content
-					            </div>
-					          </div>
-					        </div><!-- /.col-sm-4 -->
-					        <div class="col-sm-4">
-					          <div class="panel panel-success">
-					            <div class="panel-heading">
-					              <h3 class="panel-title">Panel title</h3>
-					            </div>
-					            <div class="panel-body">
-					              Panel content
-					            </div>
-					          </div>
-					          <div class="panel panel-info">
-					            <div class="panel-heading">
-					              <h3 class="panel-title">Panel title</h3>
-					            </div>
-					            <div class="panel-body">
-					              Panel content
-					            </div>
-					          </div>
-					        </div><!-- /.col-sm-4 -->
-					        <div class="col-sm-4">
-					          <div class="panel panel-warning">
-					            <div class="panel-heading">
-					              <h3 class="panel-title">Panel title</h3>
-					            </div>
-					            <div class="panel-body">
-					              Panel content
-					            </div>
-					          </div>
-					          <div class="panel panel-danger">
-					            <div class="panel-heading">
-					              <h3 class="panel-title">Panel title</h3>
-					            </div>
-					            <div class="panel-body">
-					              Panel content
-					            </div>
-					          </div>
-					        </div><!-- /.col-sm-4 -->
-					      </div>
-
-
-
-					      <div class="page-header">
-					        <h1>Wells</h1>
-					      </div>
-					      <div class="well">
-					        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Aenean lacinia bibendum nulla sed consectetur.</p>
-					      </div>
-
-
-					    </div> <!-- /container -->
-
-
-					</form>
-				</div>
-			</div>
-		</div> 
-
-		<!-- Content -->
-		
-		<div class="section-logo golink"><a href="#section2"><img alt="" src="/bin/images/tree-logo.png" ></a></div>
-
-	</section>
-	<!--/home end-->
-
-	<!-- Begin About -->
-	<section id="section2" class="content container golink">
-
-		<!-- Text -->
-		<div class="title grid-full golink">
-			<h2>The Golden Goose Egg</h2>
-			 
-		</div>
-
-		<!-- Image -->
-		<a href="#section3"><img class="animated slide"  data-appear-bottom-offset="100" src="/bin/images/about2.jpg" alt=""></a>
-	</section>
-	<!-- End About -->
-
-	<!-- Begin Services -->
-	<section id="section3" class="parallax-bg2 parallax colored clearfix ">
-
-		<div class="content dark padded container">
-
-			<!-- Text -->
-			<div class="title grid-full">
-				<h2>The Toy Blox</h2>
-				<p class="sub-heading"> 
-				<p class="lead">
-				With Superdom, Building your Kingdom is Child's Play! Everything is made up of Building Bricks called Blox. 
-				Please, Kick your shoes off; Stay a while. See to-it that you make your self at Home and have fun! <br/>
-
-				<br/>
-				Go Ahead; Fool around.
-			</p>
-
-			<br/><br/>
-			<!-- Icons -->
-			<ul class="icons clearfix">
-
-
-				<!-- Single Icon -->
-				<li class="overview animated entrance" data-appear-bottom-offset="100">
-
-					<!-- Feature Lis -->
-					<div class="tooltip">
-						<ul class="feature-list">
-							<li><span class="list-dot"></span>Upload Your Files</li>
-							<li><span class="list-dot"></span>Access them Anywhere</li>
-							<li><span class="list-dot"></span>Manage Permissions</li>
-						</ul>
-					</div>
-					<span class="arrow-down"></span>
-
-					<!-- Icon -->
-					<div class="icon icongfi"  style="color: #ae00ff;"><span>&#9729;</span></div>
-
-					<!-- Title -->
-					<h4>Clouds</h4>
-				</li>
-
-				<!-- Single Icon -->
-				<li class="overview animated entrance" data-appear-bottom-offset="100">
-
-					<!-- Feature List -->
-					<div class="tooltip">
-						<ul class="feature-list">
-							<li><span class="list-dot"></span>Post a Video</li>
-							<li><span class="list-dot"></span>Share Photos</li>
-							<li><span class="list-dot"></span>Write a Blog</li>
-						</ul>
-					</div>
-					<span class="arrow-down"></span>
-
-					<!-- Icon -->
-					<div class="icon icongfi" style="color: #0072ff;"><span>&#9835;</span></div>
-
-					<!-- Title -->
-					<h4>Notes</h4>
-
-				</li>
- 
-
-				<!-- Single Icon -->
-				<li class="overview animated entrance" data-appear-bottom-offset="100">
-
-					<!-- Feature List -->
-					<div class="tooltip">
-						<ul class="feature-list">
-							<li><span class="list-dot"></span>Open Shop</li>
-							<li><span class="list-dot"></span>Accept Payments</li>
-							<li><span class="list-dot"></span>Manage Orders</li>
-						</ul>
-					</div>
-					<span class="arrow-down"></span>
-
-					<!-- Icon -->
-					<div class="icon icongfi"  style="color: #06ff00;"><span>&#162;</span></div>
-
-					<!-- Title -->
-					<h4>Sense</h4>
-				</li>
-
-				<!-- Single Icon -->
-				<li class="overview animated entrance" data-appear-bottom-offset="100">
-
-					<!-- Feature List -->
-					<div class="tooltip">
-						<ul class="feature-list">
-							<li><span class="list-dot"></span>Manage Menu</li>
-							<li><span class="list-dot"></span>Site Analytics</li>
-							<li><span class="list-dot"></span>Shine like a star</li>
-						</ul>
-					</div>
-					<span class="arrow-down"></span>
-
-					<!-- Icon -->
-					<div class="icon icongfi"  style="color: gold;"><span>&#9734;</span></div>
-
-					<!-- Title -->
-					<h4>Sights</h4>
-				</li>
-
-				<!-- Single Icon -->
-				<li class="overview animated entrance" data-appear-bottom-offset="100">
-
-					<!-- Feature List -->
-					<div class="tooltip">
-						<ul class="feature-list"  >
-							<li><span class="list-dot"></span>Increase Traffic</li>
-							<li><span class="list-dot"></span>Promote Content</li>
-							<li><span class="list-dot"></span>No problem</li>
-						</ul>
-					</div>
-					<span class="arrow-down"></span>
-
-					<!-- Icon -->
-					<div class="icon icongfi"  style="color: orange;"><span>&#9728;</span></div>
-
-					<!-- Title -->
-					<h4>Tastes</h4>
-				</li>
-
-				<!-- Single Icon -->
-				<li class="overview animated entrance" data-appear-bottom-offset="100">
-
-					<!-- Feature List -->
-					<div class="tooltip">
-						<ul class="feature-list">
-							<li><span class="list-dot"></span>Love your web</li>
-							<li><span class="list-dot"></span>Enjoyable UI</li>
-							<li><span class="list-dot"></span>Good pricing</li>
-						</ul>
-					</div>
-					<span class="arrow-down"></span>
-
-					<!-- Icon -->
-					<div class="icon icongfi"  style="color: red;"><span>&#9829;</span></div>
-
-					<!-- Title -->
-					<h4>Lifes</h4>
-				</li>
-
-
-
-
-
-			</ul>
-
- 
-
-			</div>
-		</div>
-		
-	</section>
-	<!-- End Services -->
-
-	<!-- Begin Portfolio -->
-	<section id="section4" class="portfolio clearfix">
-
-		<!-- Title -->
-		<div class="content container">
-			<div class="title grid-full">
-				<h2>Live Seeds</h2>
-			</div>
-		</div>
-
-		<div id="works_items">
-                <ul id="og-grid" class="og-grid">
-                    <li>
-                        <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/z1.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.">
-                            <img src="temp/thumbs/z1b.jpg" alt="img01"/><div>Maserati photoshooting 2013</div>
-                        </a>
-                                                <div class="thumbs">
-                                                    <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/z1.jpg" data-thumb="temp/thumbs/z1.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot."></a>
-                                                    <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/z2.jpg" data-thumb="temp/thumbs/z2.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu."></a>
-                                                    <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/z3.jpg" data-thumb="temp/thumbs/z3.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot."></a>
-                                                    <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/z4.jpg" data-thumb="temp/thumbs/z4.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu."></a>
-                                                    <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/z5.jpg" data-thumb="temp/thumbs/z5.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot."></a>
-                                                    <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/z6.jpg" data-thumb="temp/thumbs/z6.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu."></a>
-                                                    <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/z7.jpg" data-thumb="temp/thumbs/z7.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot."></a>
-                                                    <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/z8.jpg" data-thumb="temp/thumbs/z8.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu."></a>
-                                                    <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/z9.jpg" data-thumb="temp/thumbs/z9.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot."></a>
-                                                    <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/1.jpg" data-thumb="temp/thumbs/1.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu."></a>
-
-                                                </div>
-                    </li>
-                    <li>
-                        <a href="#" data-largesrc="temp/2.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.">
-                            <img src="temp/thumbs/2.jpg" alt="img02"/><div>Magazine publishing 2013</div>
-                        </a>
-                                                <div class="thumbs">
-                                                    <a href="#" data-largesrc="temp/2.jpg" data-thumb="temp/thumbs/2.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu."></a>
-                                                    <a href="#" data-largesrc="temp/z1.jpg" data-thumb="temp/thumbs/z1.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot."></a>
-                                                    <a href="#" data-largesrc="temp/z2.jpg" data-thumb="temp/thumbs/z2.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu."></a>
-                                                    <a href="#" data-largesrc="temp/z3.jpg" data-thumb="temp/thumbs/z3.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot."></a>
-                                                </div>
-                    </li>
-                    <li>
-                        <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/3.jpg" data-title="Dandelion horseradish" data-description="Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.">
-                            <img src="temp/thumbs/3.jpg" alt="img03"/><div>Business marketing event</div>
-                        </a>
-                                                <div class="thumbs">
-                                                    <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/3.jpg" data-thumb="temp/thumbs/3.jpg" data-title="Dandelion horseradish" data-description="Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato."></a>
-                                                    <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/z1.jpg" data-thumb="temp/thumbs/z1.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot."></a>
-                                                    <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/z2.jpg" data-thumb="temp/thumbs/z2.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu."></a>
-                                                    <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/z3.jpg" data-thumb="temp/thumbs/z3.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot."></a>
-                                                    <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/1.jpg" data-thumb="temp/thumbs/1.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot."></a>
-                                                </div>
-                    </li>
-                    <li>
-                        <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/4.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.">
-                            <img src="temp/thumbs/4.jpg" alt="img01"/><div>Magazine publishing and graphic design</div>
-                        </a>
-                                                <div class="thumbs">
-                                                    <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/4.jpg" data-thumb="temp/thumbs/4.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot."></a>
-                                                    <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/z1.jpg" data-thumb="temp/thumbs/z1.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot."></a>
-                                                    <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/z2.jpg" data-thumb="temp/thumbs/z2.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu."></a>
-                                                    <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/z3.jpg" data-thumb="temp/thumbs/z3.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot."></a>
-                                                </div>
-                    </li>
-                    <li>
-                        <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/5.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.">
-                            <img src="temp/thumbs/5.jpg" alt="img02"/><div>Motor boat photoshooting</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/6.jpg" data-title="Dandelion horseradish" data-description="Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.">
-                            <img src="temp/thumbs/6.jpg" alt="img03"/><div>Superstar website development</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/7.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.">
-                            <img src="temp/thumbs/7.jpg" alt="img01"/><div>Yacht magazine design</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://exot.sk/goforit-reloaded/" data-largesrc="temp/8.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.">
-                            <img src="temp/thumbs/8.jpg" alt="img02"/><div>Motor boat design contest</div>
-                        </a>
-                    </li>
-                </ul>
-            </div><!-- end: #works_items -->
-		
-
-	</section>
-	<!-- End Portfolio -->
-
-	
-
-	<!-- Begin Clients -->
-	<section id="section5" class="parallax-bg3 parallax black clearfix">
-		<div class="content dark padded container">
-
-			<!-- Title -->
-			<div class="title grid-full">
-				<h2>Testimonials</h2>
-			</div>
-
-			<!-- Logos -->
-			<ul id="bx-pager" class="animated fade grid-full" data-appear-bottom-offset="150">
-				<li><a data-slide-index="0" href=""><img src="/bin/images/clients/logo1.png" alt="logo" width="142" height="95"></a></li>
-				<li><a data-slide-index="1" href=""><img src="/bin/images/clients/logo2.png" alt="logo" width="142" height="95"></a></li>
-				<li><a data-slide-index="2" href=""><img src="/bin/images/clients/logo3.png" alt="logo" width="142" height="95"></a></li>
-				<li><a data-slide-index="3" href=""><img src="/bin/images/clients/logo4.png" alt="logo" width="142" height="95"></a></li>
-			</ul>
-
-			<div id="bx-prev"></div>
-			<div id="bx-next"></div>
-
-			<!-- Testimonials -->
-			<div class="grid-full">
-				<ul class="bxslider">
-					<li>
-						<h3>“Recently, many organizations have implemented feedback loops that allow them to capture feedback at the point of experience.”</h3>
-						<h6>Russel Crowe</h6>
-					</li>
-					<li>
-						<h3>“A challenge in working with customer service, is to ensure that you have focused your attention on the right key areas.”</h3>
-						<h6>Leonardo di Caprio</h6>
-					</li>
-					<li>
-						<h3>“One of the most important aspects of a customer service KPI is that of what is often referred to as the Feel Good Factor.”</h3>
-						<h6>Joe Lajoie</h6>
-					</li>
-					<li>
-						<h3>“Nothing surprises your customer more than an employee going the extra mile to help them. Always look for ways to go above and beyond the expectations of your customer.”</h3>
-						<h6>Bruce Willis</h6>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</section>
-	<!-- End Clients -->
-
-	<!-- Begin Team -->
-	<section id="section6" class="content container">
-		<div class="title grid-full">
-			<h2>Contact us</h2>
-		</div>
-		<ul class="team-list clearfix">
-			<li class="team-member grid-2">
-				<div class="name">
-					<h4>P.J. Dixon</h4>
-					<h6><em>Big Boss</em></h6>
-				</div>
-				<p>P.J. is ready to help you with all the things you need even when he is not around.</p>
-				<ul class="social-list">
-					<li><a href="#" target="_blank"><i class="social-icon email small"></i></a></li>
-				</ul>
-			</li>
-			<li class="team-member grid-2">
-				<div class="name">
-					<h4>Xopher Dee</h4>
-					<h6><em>Web Genie</em></h6>
-				</div>
-				<p>With Xopher here. Whatever you can imagine he will transform it into reality.</p>
-				<ul class="social-list">
-					<li><a href="#" target="_blank"><i class="social-icon email small"></i></a></li>
-					<li><a href="#" target="_blank"><i class="social-icon twitter small"></i></a></li>
-					<li><a href="#" target="_blank"><i class="social-icon facebook small"></i></a></li>
-				</ul>
-			</li>
-			<li class="team-member grid-2">
-				<div class="name">
-					<h4>Yvette Madison</h4>
-					<h6><em>Humanitarian</em></h6>
-				</div>
-				<p>Yvette is so very connected to our Mother Earth; She takes every precaution to insure no thing is ever goes to waste.</p>
-				<ul class="social-list">
-					<li><a href="#" target="_blank"><i class="social-icon email small"></i></a></li>
-				</ul>
-			</li>
-		</ul>
-		<img class="animated slide" src="/bin/images/team.png" alt="" data-appear-bottom-offset="150">
-	</section>
-	<!-- End Team -->
-
-	<!-- Begin Footer -->
-	<footer id="footer" class="clearfix">
-		<div class="content dark container">
-
-			<!-- Contact Links -->
-			<ul class="contact animated hatch clearfix">
-				<li class="grid-2">
-					<img src="/bin/images/icons/telephone.png" alt="telephone" width="20" height="20">
-					<p>(520) 762.4947</p>
-				</li>
-				<li class="grid-2">
-					<a href="#">
-						<img src="/bin/images/icons/mail.png" alt="mail" width="20" height="20">
-						<br>
-						heylisten@xtiv.net
-					</a>
-				</li>
-				<li class="grid-2">
-					<a href="#" target="_blank">
-						<img src="/bin/images/icons/location.png" alt="location" width="20" height="20">
-						<br>
-						Tucson, Arizona<br>United States of America 85705
-					</a>
-				</li>
-			</ul>
-		</div>
-
-
-		<div class="container">
-
-			<!-- Social Links -->
-			<ul class="social-links grid-full">
-				<li><a href="http://facebook.com" target="_blank"><img src="/bin/images/icons/facebook-large.png" alt="facebook" width="36" height="36"></a></li>
-				<li><a href="http://twitter.com" target="_blank"><img src="/bin/images/icons/twitter-large.png" alt="twitter" width="36" height="36"></a></li>
-				<li><a href="http://vimeo.com" target="_blank"><img src="/bin/images/icons/vimeo-large.png" alt="vimeo" width="36" height="36"></a></li>
-				<li><a href="http://rss.com" target="_blank"><img src="/bin/images/icons/rss-large.png" alt="rss" width="36" height="36"></a></li>
-
-				<!-- 
-				<li><a href="http://flickr.com" target="_blank"><img src="/bin/images/icons/flickr-large.png" alt="flickr" width="36" height="36"></a></li>
-				<li><a href="http://dribbble.com" target="_blank"><img src="/bin/images/icons/dribbble-large.png" alt="dribbble" width="36" height="36"></a></li>
-				<li><a href="http://linkedin.com" target="_blank"><img src="/bin/images/icons/linkedin-large.png" alt="linkedin" width="36" height="36"></a></li>
-				<li><a href="http://youtube.com" target="_blank"><img src="/bin/images/icons/youtube-large.png" alt="youtube" width="36" height="36"></a></li>
-				<li><a href="http://google.com" target="_blank"><img src="/bin/images/icons/google-large.png" alt="google" width="36" height="36"></a></li>
-				-->
-			</ul>
-
-			<!-- Copyright Info -->
-			<div class="copyright grid-full"><h6>©2010-2014 SuperdomX</h6></div>
-
-		</div>
-	</footer>
-	<!-- End Footer -->
-
-	<!-- Javascript -->
-
-	<script src="/bin/javascript/jquery.easing.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/bin/javascript/jquery.fittext.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/bin/javascript/jquery.localscroll.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/bin/javascript/jquery.scrollto.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/bin/javascript/jquery.appear.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/bin/javascript/jquery.waitforimages.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/bin/javascript/jquery.bxslider.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/bin/javascript/classie.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/bin/javascript/borderMenu.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/bin/javascript/grid.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/bin/javascript/smoothscroll.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/bin/javascript/waypoints.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/bin/javascript/parallax.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/bin/javascript/modernizr.custom.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/bin/javascript/navigation.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/bin/javascript/jquery.longshadows.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/bin/javascript/main.js" type="text/javascript" charset="utf-8"></script>
-	
-	<script>
-		$(function() {
-			Grid.init();
-		});
-	</script>
-	
-</body>
-
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  </body>
 </html>
-
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
-<!-- Include all compiled plugins (below), or include individual files as needed --> 
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
- 
 
