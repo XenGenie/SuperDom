@@ -241,7 +241,7 @@
 	            	</a>
 	            </li>
 	            <li class="active">
-	            	<a href="../navbar-static-top/">
+	            	<a href="{$SERVER.REQUEST_URI}">
 	            		<span class="label label-info"><i class="fa fa-2x fa-group"></i> Public Mode</span></a>
 	            </li>
 	          </ul>
@@ -280,10 +280,10 @@
 
 						<ul class="nav navbar-nav navbar-right" id="admin_menu">
 
-						<li class="dropdown active" ><a href="#"  class="dropdown-toggle "  data-toggle="dropdown">
+						<li class="dropdown active" ><a   class="dropdown-toggle "  data-toggle="dropdown">
 							<i class="fa  fa-spin-reverse fa-cubes"></i> Toy Blox <b class="caret"></b>
 							</a>
-								<ul class="dropdown-menu">
+								<ul class="dropdown-menu" id="toy-blox-menu">
 									{foreach $admin_menu as $key => $item}
 										{assign var="hasBlox" value=false}
 										{foreach $xtras as $x => $xtra} 
@@ -296,7 +296,7 @@
 
 										{if $key && $hasBlox == true}  
 											<li class="dropdown-submenu">
-												<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="{$item.desc|ucfirst}"><i class="fa fa-{$key} pull-right"></i> {$item.area|ucfirst} <!-- <i class="fa fa-caret-right"></i> --></a>
+												<a data-filter="{$key}" href="/blox/qBlox/{$key}" class="dropdown-toggle" data-toggle="dropdown" title="{$item.desc|ucfirst}"><i class="fa fa-{$key} pull-right"></i> {$item.area|ucfirst} <!-- <i class="fa fa-caret-right"></i> --></a>
 												<ul class="dropdown-menu">
 												{foreach $xtras as $x => $xtra}
 
@@ -304,7 +304,7 @@
 
 													{if $xtra.icon && $key == $xtra.see}
 														{if $blox[$xtra.class]}
-															<li class="dropdown-submenu"><a  href="/x/{$xtra.link}" title="{$xtra.desc}"  data-placement="top" data-original-title="{$xtra.desc}" class="{if $xtra.alpha}panel-danger{elseif $xtra.beta}panel-warning{elseif $xtra.delta}panel-success{elseif $xtra.omega}panel-primary{else}panel-default" disabled="disabled{/if}" > 
+															<li class="dropdown-submenu"><a data-filter="{$xtra.class}" href="/blox/qBlox/{$key}/{$xtra.class}" title="{$xtra.desc}"  data-placement="top" data-original-title="{$xtra.desc}" class="{if $xtra.alpha}panel-danger{elseif $xtra.beta}panel-warning{elseif $xtra.delta}panel-success{elseif $xtra.omega}panel-primary{else}panel-default" disabled="disabled{/if}" > 
 
 
 
@@ -312,7 +312,7 @@
 																</a>
 																<ul class="dropdown-menu">
 																	{foreach $blox[$xtra.class] as $b => $y}
-																		<li><a  href=" " title=" "  data-placement="top" data-original-title=" " class=" " disabled=" " >
+																		<li><a data-filter="{$y.name}" href="/blox/qBlox/{$key}/{$xtra.class}/{$y.name}" title=" "  data-placement="top" data-original-title=" " class=" " disabled=" " >
 																		<i class="fa fa-{$y.icon}  pull-right"></i> {$y.blox} 
 																</a>
 																	{/foreach}
@@ -336,7 +336,7 @@
 						<ul class="nav navbar-nav navbar-left"> 
 							<li class="active">
 								<a class="text-success text-center">
-									<span class="label label-danger"> <i class="fa fa-2x fa-sun-o fa-spin-slow"></i> God Mode</span>
+									<span class="label label-success"> <i class="fa fa-2x fa-sun-o fa-spin-slow"></i> God Mode</span>
 								</a>
 							</li>
 							<li>
@@ -355,173 +355,55 @@
 				
 			</div>
 			<div id="paper-back"  data-pjax-container>
-				<style type="text/css"> 
-					.blox {
-						display  : inline-block;
-						width    : 200px;
-						height   : 200px;
-						margin   : -20px;
-						position : relative;
-					}
-
-
-					/* -- make sure to declare a default for every property that you want animated -- */
-					.blox .hover {
-						float              : none;
-						position           : absolute;
-						top                : 0;
-						left               : 0;
-						z-index            : 100;
-						width              : 200px;
-						height             : 200px;
-						border             : 1px solid #aaa;
-						border-top         : 1px solid #888;
-						border-left        : 1px solid #888;
-						/*background         : #6b7077;*/
-
-      					  border-radius: 20px;
-						text-align         : center;
-						
-						-o-transform       : scale(.7);
-						-moz-transform     : scale(.7);
-						-webkit-transform  : scale(.7);
-						transform          : scale(.7);
-						
-						-moz-box-shadow    : inset 1px 2px 8px #222;
-						-webkit-box-shadow : inset 1px 2px 8px rgba(0,0,0,0.7);
-						box-shadow         : inset 1px 2px 8px rgba(0,0,0,0.7);
-						
-						
-						/* -- transition is the magic sauce for animation -- */
-						-o-transition      : all .15s;
-						-moz-transition    : all .15s ease-out;
-						-webkit-transition : all .15s ease-out;
-						transition         : all .15s ease-out;
-
-						padding-top: -50px;
-						overflow: hidden;
-						color:  #222 !important;
-					}
-
-
-					
-
-					.blox .hover:hover {
-						padding-top: 0px;
-						z-index            : 1000;
-						border-color       : #bbb;
-						border-right       : 1px solid #aaa;
-						border-bottom      : 1px solid #aaa;
-						
-						-o-transform       : scale(1.051);
-						-moz-transform     : scale(1.051);
-						-webkit-transform  : scale(1.051);
-						transform          : scale(1.05);
-						
-						-moz-box-shadow    : 0 15px 50px rgba(100,100,100,0.3), inset 10px -15px -15px white;
-						-webkit-box-shadow : 0 15px 50px rgba(100,100,100,0.3), inset 10px -15px -15px white;
-						box-shadow         : 0 15px 50px rgba(100,100,100,0.3), inset 10px -15px -15px white;
-						cursor: pointer;
-					}
-
-					 
-
-					.activeBlox{
-						background-color : rgba(0,255,70,0.25);
-					}
-
-					.deactiveBlox{
-						background-color : rgba(200,0,00,0.55);
-					}
-
-					.blox .hover .alert{
-						/*position: absolute;*/
-						margin-top: -70px; 
-						 
-						-o-transition      : all .35s;
-						-moz-transition    : all .35s ease-out;
-						-webkit-transition : all .35s ease-out;
-						transition         : all .35s ease-out;
-					}
-					.blox .hover:hover .alert { 
-						margin-top:0; 
-					};
-
-					
-				</style>
-				
-	            <!-- <h1>Blox on this page:</h1> -->
-	            <br/>
-	            <br/>
-	            <br/>
-	  			<div class="text-center row"> 
-		            <!-- <div class="blox"><div class="hover">
-		            	 
-		                <div class="alert alert-primary  col-md-12">
-		                      
-		                    Give your visitors a very welcoming greeting.  
-		                </div>
-		                <h3>Welcome </h3>
-		                <i class="fa fa-desktop fa-5x"></i>
-		            </div></div>
-		            <div class="blox"><div class="hover">
-		            	<div class="alert alert-primary  col-md-12">
-					    	Attract email address and send routine news.
-						</div>
-		              	<h3>Form Magnet</h3>
-		              	<i class="fa fa-magnet fa-5x"></i>
-		            </div></div>
-		            <div class="blox"><div class="hover">
-		              <div class="alert alert-primary  col-md-12">
-					    	Increase revenue by supporting your affiliates. 
-						</div>
-		              	<h3>Affiliate's Ads</h3>
-		              <i class="fa fa-rocket  fa-5x"></i> 
-		            </div></div>
-
-					
-
-		            <div class="blox"><div class="hover">
-		             <div class="alert alert-primary  col-md-12">
-					    	Navigation is most always crutial to surf from one link to the next.
-						</div>
-		              	<h3>Navigation Bar</h3>
-		              	<i class="fa fa-sitemap  fa-5x"></i> 
-						 
-		             
-		                <hr/> 
-		            </div></div> -->
-
-					<!-- {foreach $blox as $k => $v}
-		            	 {foreach $v as $b => $x}
-			            	 <a data-toggle="modal" href="#windowTitleDialog">
-				            	 <div class="blox"><div class="hover" id="{$k}-{$x['name']}" title="{$x['blox']}" icon="{$x['icon']}">
-					              	<div class="alert alert-info  col-md-12">
-								    	{$x['desc']}
-									</div>
-					              	<h3>{$x['blox']}</h3>
-					                <i class="fa fa-{$x['icon']} fa-5x  "></i>  
-					            </div></div>
-				            </a>
-			            {/foreach}
-		            {/foreach} -->
-
-		             <!-- <div class="blox"><div class="hover">
-		              	<div class="alert alert-info  col-md-12">
-					    	Click <b class="text-success">Me </b> & <b class="text-info">easily</b> start building your website using Blox!
-						</div>
-		              	<h3> <b class="text-info">The</b> <b class="text-danger">Toy</b> <b class="text-success">Blox</b>
-		                </h3>
-		                <i class="fa fa-cubes fa-5x text-danger"></i>  
-		            </div></div> -->
- 
-	 			</div>
+				{include file="frontdoor/blox/qBlox.html"}
 			</div>
         </div>
       </div>
     </div>
-    <script type="text/javascript">
+    <style type="text/css">
 
+    #toy-blox-menu *, .hover {
+    	/* -- transition is the magic sauce for animation -- */
+		-webkit-transition          : all .3s linear;
+		transition                  : all .3s linear;
+    }
+
+    </style>
+    <script type="text/javascript">
+	//Product board filtering 
+	$(document).on('click', '#toy-blox-menu a', function(e){
+		$filter = $(this);
+
+		// $('#toy-blox-menu a').removeClass('filter-hidden');
+
+
+		if($filter.data('filter') == 'all'){
+			//show all
+			$('.blox').show();
+			$filter.addClass('label-success');			
+		}
+		else{
+			if(!$filter.hasClass('label-success')){
+				//hide
+				$('.'+$filter.data('filter')).show();
+
+				$('#toy-blox-menu a').removeClass('label-success');
+
+				$('.blox').not('.'+$filter.data('filter')).not('.static').hide();
+				$filter.addClass('label-success');
+			}
+			else{
+				//show
+				$('.blox').not('.'+$filter.data('filter')).show();
+				$filter.removeClass('label-success');
+			}
+		} 
+		// reflow masonry		
+		// $('#product-board').masonry();
+		// alert('owos');
+		e.preventDefault();
+		return false;
+	});
 
 
     $(document).ready(function() {

@@ -508,8 +508,14 @@
 			{
 				// $Xtra->Q = $this->Q;
     			# call the function w/ params
-    			$this->_comment("Running $php");
-				$return = call_user_func_array(array($Xtra,$this->_SET['method']), $this->_SET['params']);
+    			$this->_comment("Running $php");	
+
+    			array_values($this->_SET['params']);
+
+
+    		 
+				$return = call_user_func_array( array($Xtra,$this->_SET['method']), $this->_SET['params'] );
+
 
 				$this->_SET = $this->apply($this->_SET,$Xtra->_SET); 
 				

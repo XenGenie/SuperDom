@@ -44,8 +44,10 @@
 		 	@desc Parses all the extras to look for which functions act as a blox.		 	
 		**/
 
-		public function qBlox()
+		public function qBlox($cat=null,$class=null,$method=null)
 		{
+
+			 
 			// WE need all the xtras 
 			$xtras = $this->getXtras();
 
@@ -61,30 +63,38 @@
 			// Toy Blox 1 - Static Blox
 
 			// if the @blox comment is set; add it to the default blox set.
-
-
-
+ 		
+ 			// exit;
 			foreach ($xtras as $x => $b) {
-				$rClass = new ReflectionClass($b['class']); 
 
-				$rMethods = $rClass->getMethods();
-                foreach($rMethods as $rMethod) {
-                    $doc = $rMethod->getDocComment();
-                    if($doc){
+				if( ($cat == null || $b['see'] == $cat)  ){
+					$rClass = new ReflectionClass($b['class']); 
+					if ( $class != null && $class != $b['class'] )  
+						continue;
 
-                    	$data =  trim(preg_replace('/\r?\n *\* */', ' ', $doc));
-                    	$data =  trim(preg_replace('/\t?\t *\* *\* *\/* */', '', $doc));
+					$rMethods = $rClass->getMethods();
+	                foreach($rMethods as $rMethod) {
+	                    $doc = $rMethod->getDocComment();
+	                    if($doc){
 
-						preg_match_all('/@([a-z]+)\s+(.*?)\s*(?=$|@[a-z]+\s)/s', $data, $matches);
-						$info = array_combine($matches[1], $matches[2]);
+	                    	$data =  trim(preg_replace('/\r?\n *\* */', ' ', $doc));
+	                    	$data =  trim(preg_replace('/\t?\t *\* *\* *\/* */', '', $doc));
 
-						if( isset($info['blox']) ){
-							$blox[$rClass->name][$info['name']]= $info;
-						}
+							preg_match_all('/@([a-z]+)\s+(.*?)\s*(?=$|@[a-z]+\s)/s', $data, $matches);
+							$info = array_combine($matches[1], $matches[2]);
 
-						  
-              		}
-                }
+							if( isset($info['blox']) && ($method == null || $method == $info['name'] ) ){
+								$blox[$rClass->name][$info['name']]= $info;
+							}
+
+							  
+	              		}
+	                }
+				}
+					
+				
+
+				
 
                 
 
@@ -92,6 +102,8 @@
 
 			}
  
+			$this->set('blox',$blox );
+
 			return $blox; 
 			// Toy Blox 2 - Custom Blox
 			// These blox are stored in the database and mainly consist of custom html, js, and css code.
@@ -374,7 +386,7 @@
 			if($this->Key['is']['admin']){
 				$q = $this->q();
 
-				
+
 
 			}
 		}
