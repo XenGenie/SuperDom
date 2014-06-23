@@ -1,7 +1,7 @@
 <link href="/x/html/layout/watchtower/css/white.application.min.css" rel="stylesheet">
-       
-
 <script src="/x/html/layout/watchtower/lib/jquery/jquery-2.0.3.min.js"> </script>
+
+<script type="text/javascript" src="/x/html/layout/watchtower/lib/jquery-ui-1.10.3.custom.js"> </script>
     <script>
       // For IE11. May we one day live without your BS.
       Modernizr.addTest('preserve3d', function(){ return Modernizr.testAllProps('transformStyle', 'preserve-3d');});
@@ -11,20 +11,20 @@
       body {   
 
       }
-      .panel { 
-        float: left;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        position: absolute;
-        left: 0;
-        top: 0;
-        font-size: .8em;
-        border: 0 !important;
-
-        -webkit-perspective: 600px;
-        -moz-perspective: 600px;
-                perspective: 600px;
+		.panel { 
+		float               : left;
+		width               : 100%;
+		height              : 100%;
+		margin              : 0;
+		position            : absolute;
+		left                : 0;
+		top                 : 0;
+		font-size           : .8em;
+		border              : 0 !important;
+		
+		-webkit-perspective : 600px;
+		-moz-perspective    : 600px;
+		perspective         : 600px;
 
 
 
@@ -32,44 +32,55 @@
       }
       /* -- make sure to declare a default for every property that you want animated -- */
       /* -- general styles, including Y axis rotation -- */
-      .panel .front { 
-        float: none;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 900;
-        width: inherit;
-        height: inherit;
-        border: 0px solid #ccc;
-        background: #6b7077;
-        text-align: center;
-        /*box-shadow: 0 1px 5px rgba(0,0,0,0.9);*/
+	.panel .front { 
+		float                       : none;
+		position                    : absolute;
+		top                         : 0;
+		left                        : 0;
+		z-index                     : 900;
+		width                       : inherit;
+		height                      : inherit;
+		border                      : 0px solid #ccc;
+		background                  : #6b7077;
+		text-align                  : center;
+		padding-top: 50px;
+		/*box-shadow                : 0 1px 5px rgba(0,0,0,0.9);*/
 
-        -webkit-transform: rotateX(0deg) rotateY(0deg);
-           -moz-transform: rotateX(0deg) rotateY(0deg);
-                transform: rotateX(0deg) rotateY(0deg);
+		-webkit-transform           : rotateX(0deg) rotateY(0deg);
+		-moz-transform              : rotateX(0deg) rotateY(0deg);
+		transform                   : rotateX(0deg) rotateY(0deg);
 
-        -webkit-transform-style: preserve-3d;
-           -moz-transform-style: preserve-3d;
-                transform-style: preserve-3d;
+		-webkit-transform-style     : preserve-3d;
+		-moz-transform-style        : preserve-3d;
+		transform-style             : preserve-3d;
 
-        -webkit-backface-visibility: hidden;
-           -moz-backface-visibility: hidden;
-                backface-visibility: hidden;
+		-webkit-backface-visibility : hidden;
+		-moz-backface-visibility    : hidden;
+		backface-visibility         : hidden;
 
-        /* -- transition is the magic sauce for animation -- */
-        -webkit-transition: all .4s ease-in-out;
-                transition: all .4s ease-in-out;
+		/* -- transition is the magic sauce for animation -- */
+		-webkit-transition          : all .4s ease-in-out;
+		transition                  : all .4s ease-in-out;
+
+		background: rgb(204,204,204); /* Old browsers */
+		background: -moz-linear-gradient(-45deg,  rgba(204,204,204,1) 0%, rgba(238,238,238,1) 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(204,204,204,1)), color-stop(100%,rgba(238,238,238,1))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(-45deg,  rgba(204,204,204,1) 0%,rgba(238,238,238,1) 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(-45deg,  rgba(204,204,204,1) 0%,rgba(238,238,238,1) 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(-45deg,  rgba(204,204,204,1) 0%,rgba(238,238,238,1) 100%); /* IE10+ */
+		background: linear-gradient(135deg,  rgba(204,204,204,1) 0%,rgba(238,238,238,1) 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cccccc', endColorstr='#eeeeee',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
       }
       .panel.flip .front { 
-        z-index: 900;
-        border-color: #eee;
-        background: #333;
-        /*box-shadow: 0 15px 50px rgba(0,0,0,0.2);*/
-
-        -webkit-transform: rotateY(180deg);
-           -moz-transform: rotateY(180deg);
-                transform: rotateY(180deg);
+		z-index           : 900;
+		border-color      : #eee;
+		 
+		/*box-shadow      : 0 15px 50px rgba(0,0,0,0.2);*/
+		
+		-webkit-transform : rotateY(180deg);
+		-moz-transform    : rotateY(180deg);
+		transform         : rotateY(180deg);
       }
 
   	.panel .back { 
@@ -104,25 +115,25 @@
   	}
 
       .panel.flip .back { 
-        z-index: 1000;
-        /*background: #80868d;*/
-
-        border-radius: 20px;
-        padding-top: 50px;
-        -webkit-transform: rotateX(0deg) rotateY(0deg);
-           -moz-transform: rotateX(0deg) rotateY(0deg);
-                transform: rotateX(0deg) rotateY(0deg);
-
-        box-shadow: 0 15px 50px rgba(0,0,0,0.2);
-        
-    background: rgb(254,255,255); /* Old browsers */
-background: -moz-linear-gradient(top,  rgba(254,255,255,1) 0%, rgba(210,235,249,1) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(254,255,255,1)), color-stop(100%,rgba(210,235,249,1))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* IE10+ */
-background: linear-gradient(to bottom,  rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#d2ebf9',GradientType=0 ); /* IE6-9 */
+		z-index           : 1000;
+		/*background      : #80868d;*/
+		
+		border-radius     : 20px;
+		padding-top       : 50px;
+		-webkit-transform : rotateX(0deg) rotateY(0deg);
+		-moz-transform    : rotateX(0deg) rotateY(0deg);
+		transform         : rotateX(0deg) rotateY(0deg);
+		
+		box-shadow        : 0 15px 50px rgba(0,0,0,0.2);
+		
+		background        : rgb(254,255,255); /* Old browsers */
+		background        : -moz-linear-gradient(top,  rgba(254,255,255,1) 0%, rgba(210,235,249,1) 100%); /* FF3.6+ */
+		background        : -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(254,255,255,1)), color-stop(100%,rgba(210,235,249,1))); /* Chrome,Safari4+ */
+		background        : -webkit-linear-gradient(top,  rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* Chrome10+,Safari5.1+ */
+		background        : -o-linear-gradient(top,  rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* Opera 11.10+ */
+		background        : -ms-linear-gradient(top,  rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* IE10+ */
+		background        : linear-gradient(to bottom,  rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* W3C */
+		filter            : progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#d2ebf9',GradientType=0 ); /* IE6-9 */
 
 
       }
@@ -196,6 +207,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', end
     <div class="block panel">
       <div class="front">
         <!-- Fixed navbar -->
+        <style type="text/css">
+        	body > .container {
+        		padding-top: 50px;
+        	}
+        </style>
 	    <div class="navbar navbar-default navbar-fixed-top navbar-inverse"  role="navigation">
 	      <div class="container">
 	        <div class="navbar-header">
@@ -209,7 +225,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', end
 	        </div>
 	        <div class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
-	            <li class="action "><a href="#"><i class="fa fa-globe"></i> Home</a></li>
+	            <li class="action "><a href="#"><i class="fa fa-globe text-info"></i> Home</a></li>
 	            <!-- TODO: Add Navigation Here -->
 	            {foreach $navi as $n => $link}
                     {if $link.parent == 0} 
@@ -221,18 +237,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', end
 	           
 	            <li >
 	            	<a class="action" style="cursor: pointer" >
-	            		<i class="fa fa-sun-o"></i> God Mode
+	            		<i class="fa fa-sun-o text-danger"></i> God Mode
 	            	</a>
 	            </li>
 	            <li class="active">
 	            	<a href="../navbar-static-top/">
-	            		<i class="fa fa-group"></i> Public Mode</a>
+	            		<span class="label label-info"><i class="fa fa-2x fa-group"></i> Public Mode</span></a>
 	            </li>
 	          </ul>
 	        </div><!--/.nav-collapse -->
 	      </div>
 	    </div>
-        
+        <div class="content">
+        	
+        </div>
         <!-- <div class="click panel circle">
           <div class="front">
             <h2>Click or tap this circle!</h2>
@@ -256,41 +274,74 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', end
 						</button>
 						<a class="navbar-brand" href="#"></a>
 						</div>
-						<div class="navbar-collapse collapse">
+						<div class="navbar-collapse collapse text-center">
+
+						<!-- <img src="{$thumb}src=/bin/images/logos/sdx.png&h=10" class=""> -->
+
 						<ul class="nav navbar-nav navbar-right" id="admin_menu">
 
-							{foreach $admin_menu as $key => $item}
-								{if $key}  
-									<li class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="{$item.desc|ucfirst}"><i class="fa fa-{$key}"></i> {$item.area|ucfirst} <b class="caret"></b></a>
-										<ul class="dropdown-menu">
-										{foreach $xtras as $x => $xtra}
-										{if $xtra.icon && $key == $xtra.see}
-										<li><a  href="/x/{$xtra.link}" title="{$xtra.desc}"  data-placement="top" data-original-title="{$xtra.desc}" class="{if $xtra.alpha}panel-danger{elseif $xtra.beta}panel-warning{elseif $xtra.delta}panel-success{elseif $xtra.omega}panel-primary{else}panel-default" disabled="disabled{/if}" > 
+						<li class="dropdown active" ><a href="#"  class="dropdown-toggle "  data-toggle="dropdown">
+							<i class="fa  fa-spin-reverse fa-cubes"></i> Toy Blox <b class="caret"></b>
+							</a>
+								<ul class="dropdown-menu">
+									{foreach $admin_menu as $key => $item}
+										{assign var="hasBlox" value=false}
+										{foreach $xtras as $x => $xtra} 
+											{if $xtra.icon && $key == $xtra.see}
+												{if $blox[$xtra.class]}
+													{assign var="hasBlox" value=true}
+												{/if}
+											{/if}
+										{/foreach}
+
+										{if $key && $hasBlox == true}  
+											<li class="dropdown-submenu">
+												<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="{$item.desc|ucfirst}"><i class="fa fa-{$key} pull-right"></i> {$item.area|ucfirst} <!-- <i class="fa fa-caret-right"></i> --></a>
+												<ul class="dropdown-menu">
+												{foreach $xtras as $x => $xtra}
 
 
 
-										<i class="fa fa-{$xtra.mini}"></i> {$xtra.name} 
-										</a></li>  
-									{/if}
+													{if $xtra.icon && $key == $xtra.see}
+														{if $blox[$xtra.class]}
+															<li class="dropdown-submenu"><a  href="/x/{$xtra.link}" title="{$xtra.desc}"  data-placement="top" data-original-title="{$xtra.desc}" class="{if $xtra.alpha}panel-danger{elseif $xtra.beta}panel-warning{elseif $xtra.delta}panel-success{elseif $xtra.omega}panel-primary{else}panel-default" disabled="disabled{/if}" > 
+
+
+
+																<i class="fa fa-{$xtra.mini}  pull-right"></i> {$xtra.name} 
+																</a>
+																<ul class="dropdown-menu">
+																	{foreach $blox[$xtra.class] as $b => $y}
+																		<li><a  href=" " title=" "  data-placement="top" data-original-title=" " class=" " disabled=" " >
+																		<i class="fa fa-{$y.icon}  pull-right"></i> {$y.blox} 
+																</a>
+																	{/foreach}
+																</ul>
+															</li>  
+														{/if}
+													{/if}
+												{/foreach} 
+											</ul>
+											</li> 
+										{/if}
 									{/foreach} 
-									</ul>
-									</li> 
-								{/if}
-							{/foreach} 
+								</ul>
+						</a>
+
+							 
 						</ul>
 
 
 
 						<ul class="nav navbar-nav navbar-left"> 
 							<li class="active">
-								<a class="text-success">
-									<i class="fa fa-sun-o fa-spin"></i> God Mode
+								<a class="text-success text-center">
+									<span class="label label-danger"> <i class="fa fa-2x fa-sun-o fa-spin-slow"></i> God Mode</span>
 								</a>
 							</li>
 							<li>
 								<a class="edit-submit" style="cursor: pointer">
-									<i class="fa fa-group"></i> Public Mode
+									<i class="fa fa-group  text-info"></i> Public Mode
 								</a>
 							</li>
 						</ul>
@@ -306,7 +357,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', end
 			<div id="paper-back"  data-pjax-container>
 				<style type="text/css"> 
 					.blox {
-						display: inline-block;
+						display  : inline-block;
 						width    : 200px;
 						height   : 200px;
 						margin   : -20px;
@@ -378,6 +429,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', end
 					.activeBlox{
 						background-color : rgba(0,255,70,0.25);
 					}
+
+					.deactiveBlox{
+						background-color : rgba(200,0,00,0.55);
+					}
+
 					.blox .hover .alert{
 						/*position: absolute;*/
 						margin-top: -70px; 
@@ -390,13 +446,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', end
 					.blox .hover:hover .alert { 
 						margin-top:0; 
 					};
+
+					
 				</style>
 				
 	            <!-- <h1>Blox on this page:</h1> -->
 	            <br/>
 	            <br/>
 	            <br/>
-	  			<div class="text-center row">
+	  			<div class="text-center row"> 
 		            <!-- <div class="blox"><div class="hover">
 		            	 
 		                <div class="alert alert-primary  col-md-12">
@@ -434,48 +492,29 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', end
 		                <hr/> 
 		            </div></div> -->
 
-					{foreach $blox as $k => $v}
+					<!-- {foreach $blox as $k => $v}
 		            	 {foreach $v as $b => $x}
-			            	 <div class="blox"><div class="hover">
-				              	<div class="alert alert-info  col-md-12">
-							    	{$x['desc']}
-								</div>
-				              	<h3>{$x['blox']}</h3>
-				                <i class="fa fa-{$x['icon']} fa-5x  "></i>  
-				            </div></div>
+			            	 <a data-toggle="modal" href="#windowTitleDialog">
+				            	 <div class="blox"><div class="hover" id="{$k}-{$x['name']}" title="{$x['blox']}" icon="{$x['icon']}">
+					              	<div class="alert alert-info  col-md-12">
+								    	{$x['desc']}
+									</div>
+					              	<h3>{$x['blox']}</h3>
+					                <i class="fa fa-{$x['icon']} fa-5x  "></i>  
+					            </div></div>
+				            </a>
 			            {/foreach}
-		            {/foreach}
+		            {/foreach} -->
 
-		             <div class="blox"><div class="hover">
+		             <!-- <div class="blox"><div class="hover">
 		              	<div class="alert alert-info  col-md-12">
 					    	Click <b class="text-success">Me </b> & <b class="text-info">easily</b> start building your website using Blox!
 						</div>
 		              	<h3> <b class="text-info">The</b> <b class="text-danger">Toy</b> <b class="text-success">Blox</b>
 		                </h3>
 		                <i class="fa fa-cubes fa-5x text-danger"></i>  
-		            </div></div>
-
-
-		            <!-- <div class="blox"><div class="hover"> </div></div>
-		            <div class="blox"><div class="hover"> </div></div>
-		            <div class="blox"><div class="hover"> </div></div>
-		            <div class="blox"><div class="hover"> </div></div>
-		            <div class="blox"><div class="hover"> </div></div>
-		            <div class="blox"><div class="hover"> </div></div>
-		            <div class="blox"><div class="hover"> </div></div>
-		            <div class="blox"><div class="hover"> </div></div>
-		            <div class="blox"><div class="hover"> </div></div>
-		            <div class="blox"><div class="hover"> </div></div>
-		            <div class="blox"><div class="hover"> </div></div>
-		            <div class="blox"><div class="hover"> </div></div>
-		            <div class="blox"><div class="hover"> </div></div>
-		            <div class="blox"><div class="hover"> </div></div>
-		            <div class="blox"><div class="hover"> </div></div>
-		            <div class="blox"><div class="hover"> </div></div>
-		            <div class="blox"><div class="hover"> </div></div>
-		            <div class="blox"><div class="hover"> </div></div>
-		            <div class="blox"><div class="hover"> </div></div>
-		            <div class="blox"><div class="hover"> </div></div> -->
+		            </div></div> -->
+ 
 	 			</div>
 			</div>
         </div>
@@ -486,17 +525,31 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', end
 
 
     $(document).ready(function() {
-    	 
-    	 
-    	$('.blox .hover').click(function() {
+    	// $('.blox').sortable(); 
+    	$('.blox .hover').click(function() { 
 
+    		if($(this).hasClass('activeBlox')){
+    			$('#windowTitleDialog .btn-success').addClass('active'); 
+    			$('#windowTitleDialog .btn-danger').removeClass('active');
+    		}else{
+    			$('#windowTitleDialog .btn-success').removeClass('active'); 
+    			$('#windowTitleDialog .btn-danger').addClass('active');
+    		};
 
+    		var i = $('#windowTitleDialog h2 i');
+			
+    		i.attr('class','').addClass('fa fa-5x');
 
+			i.addClass('fa-'+$(this).attr('icon'));
 
+			i.attr({
+				id : 'icon-'+$(this).attr('id')
+			});
 
-    		$(this).toggleClass('activeBlox');
-    		 
- 
+			var s = $('#windowTitleDialog h2 span');
+			s.html($(this).attr('title'));
+  
+
     	});
 
     	$('#admin_menu ul a').click(function (e) {
@@ -514,7 +567,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', end
     	//$(document).pjax('a', '#paper-back', { fragment: '#content' });
     	
     });
-
+	 
 
     </script>
     <!-- End Switch Panel -->
@@ -532,6 +585,25 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', end
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-  </body>
-</html>
+
+<div id="windowTitleDialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true" style="  overflow: hidden; position: absolute;    background-color : rgba(0,0,0,0.80);">
+	<div class=" text-center">
+		<!-- <a href="#" class="close" data-dismiss="modal">&times;</a> -->
+		<h2 style="color: white;">
+			<i class="fa fa-5x"></i><br/><span></span>
+		</h2>  
+		<div class="btn-group">
+			<a href="#" class="btn btn-left btn-success btn-lg" onclick="bloxSwitch(true);">
+				<i class="fa fa-eye"></i> On
+			</a>
+			<a href="#" class="btn btn-left btn-info btn-lg active" onclick="$(this).toggleClass('active')">
+				<i class="fa fa-graduation-cap"></i>
+			</a>
+			<a href="#" class="btn btn-right btn-danger btn-lg" onclick="bloxSwitch(false);">
+				Off <i class="fa fa-eye-slash"></i>
+			</a>
+		</div> 
+	</div> 
+</div>
+
 

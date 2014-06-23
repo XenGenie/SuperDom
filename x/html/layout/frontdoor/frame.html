@@ -24,16 +24,70 @@
 		<script src="http://modernizr.com/downloads/modernizr-latest.js"></script>
 		
 		<script src="http://yui.yahooapis.com/3.17.2/build/yui/yui-min.js"></script>
-		{$HTML.BODY.HTML}
+		<div class="container content"> 
+			{$HTML.BODY.HTML}
+        </div>
 		{if $HTML.BODY.CSS}
 		<link rel="stylesheet" type="text/css" href="{$HTML.BODY.CSS}">
 		{/if}
 		<script>
 		// Create a new YUI instance and populate it with the required modules.
-		YUI().use('pjax', function (Y) {
-		    // Pjax is available and ready for use. Add implementation
-		    // code here.
-		});
+		// YUI().use('pjax', function (Y) {
+		//     // Pjax is available and ready for use. Add implementation
+		//     // code here.
+		// });
+
+		function closeDialog () {
+				$('#windowTitleDialog').modal('hide'); 
+
+
+				var i = $('#windowTitleDialog h2 i');
+				$('#'+i).toggleClass('activeBlox');
+				
+				};
+
+
+		function bloxSwitch(active) {
+			$('#windowTitleDialog').modal('hide'); 
+
+			var i = $('#windowTitleDialog h2 i').attr('id').replace('icon-',''); 
+			
+			if( active ){  
+				$('#'+i).removeClass('deactiveBlox'); 
+				$('#'+i).addClass('activeBlox');
+			}else{
+				$('#'+i).removeClass('activeBlox'); 
+				$('#'+i).addClass('deactiveBlox');
+			}
+
+			 $.ajax({
+				type     : "POST",
+				url      : '/{$toBackDoor}/blox/bloxSwitch',
+				data     : dataString,
+				dataType : "json",
+			    success: function(data)
+			    {
+			      // Handle the server response (display errors if necessary)
+
+			      $.pjax({ 
+					container : '.content',
+					fragment  : '.content',
+					timeout   : 5000,
+					url       : window.location.pathname+window.location.search+window.location.hash
+			      });
+
+			    }
+			  });
+
+
+
+		
+		};
+		function okClicked () {
+			document.title = document.getElementById ("xlInput").value;
+				closeDialog ();
+			};
+
 		</script>
 
 
@@ -41,6 +95,15 @@
 		{if $HTML.BODY.JS}
 		<script src="{$HTML.BODY.JS}"></script>
 		{/if}
+		<style type="text/css">
+			.dropdown-submenu{ position:relative;}
+			.dropdown-submenu>.dropdown-menu{ top:0;right:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
+			.dropdown-submenu:hover>.dropdown-menu{ display:block;}
+			.dropdown-submenu>a:after{ display:block;content:" ";float:left;width:0;height:0;border-color:transparent;border-style:solid;
+			border-width:5px  5px 5px 0;border-right-color:#222;margin-top:5px;margin-left:-10px;}
+			.dropdown-submenu:hover>a:after{ border-left-color:#ffffff;}
+			.dropdown-submenu.pull-left{ float:none;}.dropdown-submenu.pull-left>.dropdown-menu{ right:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
+		</style>
 
 	</body>
 </html>

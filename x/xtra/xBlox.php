@@ -365,6 +365,41 @@
 		{
 			
 		}
+		/**
+
+		**/
+		public function bloxSwitch()
+		{
+			# code...
+			if($this->Key['is']['admin']){
+				$q = $this->q();
+
+				
+
+			}
+		}
+
+		/**
+			@name cover
+			@blox Coversheet
+			@desc Every great website deserves A Professionally Sexy Coverpage
+			@icon flag
+		**/
+		public function cover()
+		{
+			# code...
+		}
+
+		/**
+			@name custom
+			@blox Custom
+			@desc Simple Easy to use Custom Code Blox
+			@icon html5
+		**/
+		public function custom()
+		{
+			# code...
+		}
 	}
 
 ?>

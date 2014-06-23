@@ -14,18 +14,12 @@
 class xBloxLang {
 	// Used for Complex values.
 	var $_LANG = array(
-		'TUTOR' => array(
-			'PAGE' => [
-				array(
-					'STEP' => []
-				),
-				array(
-					'STEP' => []
-				),
-				array(
-					'STEP' => []
-				)
-			]
+		'BLOX' => array(
+			'cover' => array(
+				'name' => 'Coversheet',
+				'desc' => 'Every great Website deserves a professionally sexy coverpage',
+				'icon' => ''
+			),
 		),
 		'JUMBO' => array(
 			'HEAD' => 'Play in the Toy Blox',
