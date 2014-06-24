@@ -55,7 +55,12 @@
 				));
 				
 				$this->set('page_landing', $page_landing[0]);
+
+				$this->set('SVR',$_SERVER);
 			}			
+
+
+
 		}
 
 		public function statistics($function)

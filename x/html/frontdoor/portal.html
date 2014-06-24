@@ -138,6 +138,12 @@
 
       }
 
+.panel .back .navbar *{ 
+ 	/* -- transition is the magic sauce for animation -- */
+		-webkit-transition          : all .1s linear;
+		transition                  : all .1s linear;
+}
+
       /* -- X axis rotation for click panel -- */
       .click .front { 
         cursor: pointer;
@@ -223,9 +229,10 @@
 	          </button>
 	          <a class="navbar-brand" href="#"></a>
 	        </div>
-	        <div class="navbar-collapse collapse">
+	        
+	        <div class="navbar-collapse collapse text-center">
 	          <ul class="nav navbar-nav navbar-right text-right">
-	            <li class="action "><a href="#"><i class="fa fa-globe text-success"></i> Home</a></li>
+	            <li class="action "><a href="#"><i class="fa fa-home text-success"></i> Home</a></li>
 	            <!-- TODO: Add Navigation Here -->
 	            {foreach $navi as $n => $link}
                     {if $link.parent == 0} 
@@ -233,6 +240,7 @@
                     {/if} 
                 {/foreach}
 	          </ul>
+	          
 	          <ul class="nav navbar-nav navbar-left">
 	           
 	            <li >
@@ -242,7 +250,7 @@
 	            </li>
 	            <li class="active">
 	            	<a href="{$SERVER.REQUEST_URI}">
-	            		<span class="label label-info"><i class="fa fa-2x fa-group"></i> Public Mode</span></a>
+	            		<span class="label label-info"><i class="fa fa-2x fa-globe fa-spin-slow"></i> Public Mode</span></a>
 	            </li>
 	          </ul>
 	        </div><!--/.nav-collapse -->
@@ -274,12 +282,63 @@
 						</button>
 						<a class="navbar-brand" href="#"></a>
 						</div>
-						<div class="navbar-collapse collapse ">
+						<div class="navbar-collapse collapse text-center ">
 
+						<div class="btn-group" style="padding-top: 10px;">
 						<!-- <img src="{$thumb}src=/bin/images/logos/sdx.png&h=10" class=""> -->
+							<button class="btn btn-info disabled  btn-sm"> 
+							<strong><i class="fa fa-globe"></i></strong>
+							</button>	
+							<button class="btn btn-info   btn-sm"> 
+							<strong>{$SVR['SERVER_NAME']}</strong>
+							</button>	
+							<button class="btn btn-success active btn-sm"> 
+							<strong>{$SVR['REQUEST_URI']}</strong>
+							</button>	
 
+							<button class="active btn btn-success  text-primary  btn-sm" style="cursor: pointer; " onmousedown="onlineBtn.m(this,'over');"   > 
+							<strong><i class="fa fa-eye"></i> Online <i class="fa fa-eye"></i></strong>
+							</button>
+							 
+<button class="btn btn-sm dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a ><i class="fa fa-cubes"></i> Blox</a></li>
+    <li><a ><i class="fa fa-language"></i> Mirror</a></li>
+    <li><a ><i class="fa fa-link"></i> Link</a></li>
+    
+  </ul>
+						</div>
+						<script type="text/javascript">
+						 	var onlineBtn = {
+								mouseover  : false, 
+								m: function  (t,i) {
+
+						 			function toggle () {
+						 				$(t).toggleClass('text-primary'); 
+										if(!$(t).hasClass('text-primary')){ 
+											$(t).toggleClass('btn-danger');
+											$(t).html('<strong><i class="fa fa-eye-slash"></i> OFFLINE <i class="fa fa-eye-slash"></i></strong>');
+										}else{
+											$(t).toggleClass('btn-danger');
+											$(t).html('<strong><i class="fa fa-eye"></i> Online <i class="fa fa-eye"></i></strong>');
+										}; 
+						 			}
+
+						 			toggle();
+									 
+
+						 			
+						 		} 
+						 	};
+						</script>
 						<ul class="nav navbar-nav navbar-right" id="admin_menu">
 
+						<li class="dropdown" ><a href="/x/" class="text text-danger">
+							<i class="fa fa-dashboard text-danger"></i> <strong class=" text text-success">Super</strong><span class="text-info">Dom</span>
+							</a>
+						</li>
 						<li class="dropdown active" ><a   class="dropdown-toggle "  data-toggle="dropdown">
 							<i class="fa  fa-spin-reverse fa-cubes"></i> Toy Blox <b class="caret"></b>
 							</a>
@@ -341,7 +400,7 @@
 							</li>
 							<li>
 								<a class="edit-submit" style="cursor: pointer">
-									<i class="fa fa-group  text-info"></i> Public Mode
+									<i class="fa fa-globe text-info"></i> Public Mode
 								</a>
 							</li>
 						</ul>
