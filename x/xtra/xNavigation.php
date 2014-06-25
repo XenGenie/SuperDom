@@ -154,17 +154,25 @@
 				);
 			} else {
 
+				$quest = strtolower(str_replace('%20', '-', $_SERVER['REQUEST_URI']));
+
+
+
 				$link = $X->q()->Select("*","navi_heylisten", array(
-					'quest' => $_SERVER['REQUEST_URI']
+					'quest' => $quest
 				));
 
+				// var_dump($link);
+				// exit;
+
 				if(!empty($link)){
-					$X->Key['heylisten'] = $link[0];
+					$this->Key['heylisten'] = $link[0];
+
 
 					switch ($link[0]['linktothe']) {
 						case 'blox':
 							$b = $X->q()->Select('*','blox_quest',array(
-								'quest' => $_SERVER['REQUEST_URI']
+								'quest' => $quest
 							));
 							$this->set('oBlox',$b);
 						# code...

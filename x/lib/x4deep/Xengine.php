@@ -689,10 +689,7 @@
 				$this->set(array(
 					'action' => 'index',
 					'method' => 'index'
-				));	
-
-				
-
+				));	 
 			}else if(!file_exists($this->_CFG['dir']['html']
 				.'/'.$html_door
 				.'/'.$this->_SET['action']
