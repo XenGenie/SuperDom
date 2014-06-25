@@ -54,6 +54,11 @@
 					'weight'	=>	array('Type' => 'int(2)'),
 					'active'	=>  array('Type' => 'int(1)','Default'=>'0')
 				),
+				'navi_heylisten' => array( 
+					'quest' 	  		=>	array('Type' => 'varchar(255)'),
+					'linktothe'        	=>	array('Type' => 'varchar(25)'), 
+					'online'        	=>	array('Type' => 'boolean','Default'=>'false') 
+				)
 			);
 		}
 
@@ -148,6 +153,16 @@
 					'axis_bar'   => $this->getAxis(1)
 				);
 			} else {
+
+				$link = $X->q()->Select("*","navi_heylisten", array(
+					'quest' => $_SERVER['REQUEST_URI']
+				));
+
+				if(!empty($link)){
+					$X->Key['heylisten'] = $link[0];
+				}
+
+
 				return $this->manaTree();
 			}
 			
@@ -261,6 +276,11 @@
 			return $this->manaTree();
 		}
 
+		/**
+		  @name manaTree
+		  @desc Returns the Navigation 
+		  @var navi = active links deku = offline links.
+		**/
 		function manaTree(){
 			$navi = $this->heyNavi(1);
 			$deku = $this->heyNavi(0);

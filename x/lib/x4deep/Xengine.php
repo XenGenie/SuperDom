@@ -540,6 +540,10 @@
 				}
 			# Illegal Method has been Called!
     		}else{
+
+    			// Test to see if Navi knows where to go.
+
+
     			# Kill the Engine send a 404!!
 				$this->_SET['action']   = 'access';
 				$this->_SET['method'] = 'notFound';
@@ -676,11 +680,15 @@
 			$lib = $lib[count($lib)-1];
 
 
-			// This is our last chance to change the output's HTML template. 
-
+			// This is our last chance to change the output's HTML template.  
 			$html_door = ($this->atBackDoor) ? $this->_CFG['html']['private'] : $this->_CFG['html']['public'];
 
-			if(!file_exists($this->_CFG['dir']['html']
+			// Override any and all links with custom navigation.
+			if( isset($this->Key['heylisten']) ){
+				// Get List of Bloxs.
+
+
+			}else if(!file_exists($this->_CFG['dir']['html']
 				.'/'.$html_door
 				.'/'.$this->_SET['action']
 				.'/'.$this->_SET['method']

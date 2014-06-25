@@ -47,42 +47,7 @@
 				};
 
 
-		function bloxSwitch(active) {
-			$('#windowTitleDialog').modal('hide'); 
-
-			var i = $('#windowTitleDialog h2 i').attr('id').replace('icon-',''); 
-			
-			if( active ){  
-				$('#'+i).removeClass('deactiveBlox'); 
-				$('#'+i).addClass('activeBlox');
-			}else{
-				$('#'+i).removeClass('activeBlox'); 
-				$('#'+i).addClass('deactiveBlox');
-			}
-
-			 $.ajax({
-				type     : "POST",
-				url      : '/{$toBackDoor}/blox/bloxSwitch',
-				data     : dataString,
-				dataType : "json",
-			    success: function(data)
-			    {
-			      // Handle the server response (display errors if necessary)
-
-			      $.pjax({ 
-					container : '.content',
-					fragment  : '.content',
-					timeout   : 5000,
-					url       : window.location.pathname+window.location.search+window.location.hash
-			      });
-
-			    }
-			  });
-
-
-
 		
-		};
 		function okClicked () {
 			document.title = document.getElementById ("xlInput").value;
 				closeDialog ();
