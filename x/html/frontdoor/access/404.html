@@ -2,19 +2,22 @@
     <section class="widget transparent widget-404">
         <div class="body">
             <div class="row">
-                <div class="col-md-5">
-                    <h1 class="text-align-center">404</h1>
-                </div>
-                <div class="col-md-7">
+                <div class="col-md-12">
+                    <h1 class="text-align-center">4<i class="fa   fa-ban">4 </i>
+                          <i class="fa  fa-arrow-down"></i> 
+                         
+                       </h1>
+                     <div class="btn-group">
+
+                        <button class="btn btn-lg btn-warning action{if $masterKey.is.admin}active disabled{/if}"><i class="fa fa-key"></i></button>
+                        {if $masterKey.is.admin}
+                        <button class="btn btn-lg btn-info action"><i class="fa fa-link"></i></button>
+                        <button class="btn btn-lg btn-info  action"><i class="fa fa-language"></i></button>
+                        <button class="btn btn-lg btn-info  action"><i class="fa fa-cube"></i></button>
+                        {/if}
+                      </div> 
                     <div class="description">
-                        <h3>Opps! Whatever you were looking for it not here.</h3>
-                        <p>If you are sure it should, search for it.</p>
-                        Admin Options
-                        <div class="btn-group">
-                          <button class="btn btn-info action"><i class="fa fa-link"></i></button>
-                          <button class="btn btn-info  action"><i class="fa fa-language"></i></button>
-                          <button class="btn btn-info  action"><i class="fa fa-cube"></i></button>
-                        </div>
+                       <h3>Opps! Whatever you were looking for, it's not here.  <i class="fa  fa-search"></i></h3> 
                     </div>
                 </div>
             </div>
@@ -25,6 +28,7 @@
             <form class="form-inline form-search no-margin text-align-center" method="get" action="special_search.html"
                   role="form">
                 <div class="input-group">
+                    
                     <input type="search" class="form-control"
                            placeholder="Pages: Posts, Tags">
                     <span class="input-group-btn">
@@ -34,6 +38,8 @@
                     </span>
                 </div>
             </form>
+
         </div>
     </section>
+
 </div>

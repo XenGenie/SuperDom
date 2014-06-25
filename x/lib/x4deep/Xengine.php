@@ -683,10 +683,15 @@
 			// This is our last chance to change the output's HTML template.  
 			$html_door = ($this->atBackDoor) ? $this->_CFG['html']['private'] : $this->_CFG['html']['public'];
 
-			// Override any and all links with custom navigation.
+			// Override any all all links with custom navigation.
 			if( isset($this->Key['heylisten']) ){
 				// Get List of Bloxs.
+				$this->set(array(
+					'action' => 'index',
+					'method' => 'index'
+				));	
 
+				
 
 			}else if(!file_exists($this->_CFG['dir']['html']
 				.'/'.$html_door
@@ -725,6 +730,9 @@
 				// Sets the template variable TPL_EXISTS to make sure we have the page
 				'LANG'        => $lang ,
 				
+				// KEY
+				'masterKey' => $this->Key,
+
 				// Depreciate
 				'IS_ADMIN'    => $this->_LANG,
 				'blox'        => false,

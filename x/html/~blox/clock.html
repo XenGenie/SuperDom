@@ -1,7 +1,6 @@
 <div id="clock" align="center">
-	<img title="{$SUPERDOMX.version}" src="{$thumb}src=/bin/images/logos/sdx.png&h=15&q=100&f=png" align="absmiddle"/>
-	<div id="time"></div> 
-	
+	<!-- <img title="{$SUPERDOMX.version}" src="{$thumb}src=/bin/images/logos/sdx.png&h=15&q=100&f=png" align="absmiddle"/> -->
+	<div id="time"></div>  
 </div>
 <script type="text/javascript">
 	
@@ -79,7 +78,7 @@
 		  digitalClock.innerHTML = x4.theTimeIs;
 	  }
 
-	  document.getElementById("time").innerHTML = currentTimeString;
+	  document.getElementById("time").innerHTML = '<i class="fa fa-clock-o "></i> '+currentTimeString;
 		
 	  setTimeout(updateClock,500);
 	}

@@ -57,7 +57,7 @@
 				'navi_heylisten' => array( 
 					'quest' 	  		=>	array('Type' => 'varchar(255)'),
 					'linktothe'        	=>	array('Type' => 'varchar(25)'), 
-					'online'        	=>	array('Type' => 'boolean','Default'=>'false') 
+					'online'        	=>	array('Type' => 'boolean') 
 				)
 			);
 		}
@@ -160,7 +160,23 @@
 
 				if(!empty($link)){
 					$X->Key['heylisten'] = $link[0];
+
+					switch ($link[0]['linktothe']) {
+						case 'blox':
+							$b = $X->q()->Select('*','blox_quest',array(
+								'quest' => $_SERVER['REQUEST_URI']
+							));
+							$this->set('oBlox',$b);
+						# code...
+						break;
+						
+						default:
+						# code...
+						break;	
+					} 
 				}
+
+
 
 
 				return $this->manaTree();

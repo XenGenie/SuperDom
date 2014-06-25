@@ -1,1 +1,9 @@
+{foreach $oBlox as $b => $o}
+	<div id="{$o.blox}-{$o.id}">
+		Loading... {$o.blox}
+	</div> 
+	<script type="text/javascript">
+	$('#{$o.blox}-{$o.id}').load('/html/{$o.blox|substr:1|strtolower|replace:'-':'/'}')
+	</script>
+{/foreach}
 

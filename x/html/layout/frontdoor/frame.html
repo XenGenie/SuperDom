@@ -12,7 +12,7 @@
 		{$HTML.BODY.HTML = $PORTAL}
 	{/if}
 		<title>{$HTML.HEAD.TITLE}</title>
-
+		{assign var=quest value=$SVR['QUERY_STRING']|replace:'%20':'-'}
 		<!-- <link href="/x/html/layout/watchtower/css/application.min.css" rel="stylesheet"> -->
         
 
@@ -36,6 +36,8 @@
 
       Modernizr.addTest('preserve3d', function(){ return Modernizr.testAllProps('transformStyle', 'preserve-3d');});
     </script>
+{if $masterKey.is.admin}   
+{/if}
 <!--[if gte IE 9]>
   <style type="text/css">
     .gradient {
@@ -44,9 +46,16 @@
   </style>
 <![endif]-->
     <style type="text/css">
-      body {   
+      {if !$masterKey.is.admin}
+	      body {   
+	      	background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjEwJSIgY3k9IjAiIHI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9InJnYmEoNzQsIDEyMSwgMTQ3LCAwLjg5KSIvPjxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSJyZ2JhKDIyNiwgMjI2LCAyMjYsIDAuODcpIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSJyZ2JhKDE4NSwgMTM1LCAxMzEsIDAuODcpIi8+PC9yYWRpYWxHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4=),url(../img/bgnoise_lg_dark.png);
 
-      }
+	      }
+	   {else }
+	   html, body {
+	   	background: none;
+	   }
+      {/if}
 		.panel { 
 		float               : left;
 		width               : 100%;
@@ -99,6 +108,7 @@
 		transition                  : all .4s ease-in-out;
 
 		 
+background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjEwJSIgY3k9IjAiIHI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9InJnYmEoNzQsIDEyMSwgMTQ3LCAwLjg5KSIvPjxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSJyZ2JhKDIyNiwgMjI2LCAyMjYsIDAuODcpIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSJyZ2JhKDE4NSwgMTM1LCAxMzEsIDAuODcpIi8+PC9yYWRpYWxHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4=),url(../img/bgnoise_lg_dark.png);
 
       }
       .panel.flip .front { 
@@ -218,22 +228,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
         // because it causes the hover to be triggered when the element is tapped on a touch device
          
         // set up click/tap panels
-        $('.click').toggle(function(){ 
-          $(this).addClass('flip');
-        },function(){ 
-          $(this).removeClass('flip');
-        });
+         
 
         // set up block configuration
         $('.block .action').click(function(){ 
           $('.block').addClass('flip');
         });
         $('.block .edit-submit').click(function(e){ 
-          $('.block').removeClass('flip');
-
-          // why not update that list for fun?
-          
-          e.preventDefault();
+          	$('.block').removeClass('flip');
+			// e.preventDefault();
         });
  
 
@@ -241,8 +244,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
     </script>
      
 
-
+{if $masterKey.is.admin}  
     <div class="block panel">
+
+
       <div class="front">
         <!-- Fixed navbar -->
         <style type="text/css">
@@ -263,22 +268,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
 	        </div>
 	        
 	        <div class="navbar-collapse collapse text-center">
-	          <ul class="nav navbar-nav navbar-right text-right">
-	            <li class="action "><a href="#"><i class="fa fa-home text-success"></i> Home</a></li>
-	            <!-- TODO: Add Navigation Here -->
-	            {foreach $navi as $n => $link}
-                    {if $link.parent == 0} 
-                        {include file="~blox/godbar/navi.nest.html" link=$link} 
-                    {/if} 
-                {/foreach}
-	          </ul>
+
 	          <script type="text/javascript">
 	          var x4;
 	          </script>
           
-	          <a href="/x/calendar" class="btn btn-primary btn-sm">
-	          	{include file="~blox/clock.html"}
-	          </a>
+	         
 
 	          <ul class="nav navbar-nav navbar-left">
 	           
@@ -292,53 +287,47 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
 	            		<span class="label label-info"><i class="fa fa-2x fa-globe fa-spin-slow"></i> Public Mode</span></a>
 	            </li>
 	          </ul>
-	        </div><!--/.nav-collapse -->
-	      </div>
-	    </div>
-        <div class="content"> 
-			{$HTML.BODY.HTML}
-        </div>        
-      </div>
-      <div class="back">
-        <div class="pad">
-        	<!-- Fixed navbar -->
-			<div class="navbar navbar-default navbar-fixed-top"  role="navigation">
-				<div class="container">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="#"></a>
-						</div>
-						<div class="navbar-collapse collapse text-center ">
 
-						<div class="btn-group" style="padding-top: 10px;">
+	          <ul class="nav navbar-nav navbar-right text-right">
+	            <li class="{if $quest == ''}active{/if}"><a href="/"><i class="fa fa-home text-success"></i> Home</a></li>
+	            <!-- TODO: Add Navigation Here -->
+	            {foreach $navi as $n => $link}
+                    {if $link.parent == 0} 
+                        {include file="~blox/godbar/navi.nest.html" link=$link} 
+                    {/if} 
+                {/foreach}
+	          </ul>
+
+	          <div class="btn-group" style="padding-top: 10px;">
 						<!-- <img src="{$thumb}src=/bin/images/logos/sdx.png&h=10" class=""> -->
-							<button class="btn btn-info disabled  btn-sm"> 
-							<strong><i class="fa fa-globe"></i></strong>
+							<!-- <button class="btn btn-warning action btn-sm"><i class="fa fa-key"></i></button> -->
+							<button class="btn btn-warning active disabled  btn-sm"> 
+							<strong><i class="fa fa-key"></i></strong>
 							</button>	
 							<button class="btn btn-info   btn-sm"> 
-							<strong>{$SVR['SERVER_NAME']}</strong>
+							<strong><i class="fa fa-globe"></i> {$SVR['SERVER_NAME']}</strong>
 							</button>	
 							<button class="btn btn-success active btn-sm"> 
-							<strong>{$SVR['REQUEST_URI']|replace:'%20':'-'}</strong>
+								<strong>
+								{if $quest == ''}
+								<i class="fa fa-home"></i>
+								{else}
+								{$quest}
+								{/if}
+								</strong>
 							</button>	
 
 							<button class="active btn btn-success  text-primary  btn-sm" style="cursor: pointer; " onmousedown="onlineBtn.m(this,'over');"   > 
 							<strong><i class="fa fa-eye"></i> Online <i class="fa fa-eye"></i></strong>
 							</button>
 							 
-<button class="btn btn-sm dropdown-toggle" data-toggle="dropdown">
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu text-right">
-    <li><a ><i class="fa fa-link pull-left"></i> Link</a></li>
-    <li><a ><i class="fa fa-language pull-left"></i> Mirror</a></li>
-    <li><a ><i class="fa fa-cube pull-left"></i> Trunk</a></li>
-  </ul>
+							 
+	                        <!-- <button class="btn btn-sm btn-info  "><i class="fa fa-cube"></i></button>
+							<button class="btn btn-sm btn-info  "><i class="fa fa-link"></i></button>
+	                        <button class="btn btn-sm btn-info   "><i class="fa fa-language"></i></button>
+ -->
+							
+
 						</div>
 						<script type="text/javascript">
 						 	var onlineBtn = {
@@ -363,7 +352,35 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
 						 		} 
 						 	};
 						</script>
-						<ul class="nav navbar-nav navbar-right" id="admin_menu">
+	        </div><!--/.nav-collapse -->
+	      </div>
+	    </div>
+{/if}
+        <div class="content"> 
+			{$HTML.BODY.HTML}
+        </div>        
+{if $masterKey.is.admin}  
+      </div>
+      <div class="back">
+        <div class="pad">
+        	<!-- Fixed navbar -->
+			<div class="navbar navbar-default navbar-fixed-top"  role="navigation">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#"></a>
+						</div>
+						<div class="navbar-collapse collapse text-center ">
+
+	          
+	         
+						
+						<ul class="nav navbar-nav navbar-right admin_menu" >
 
 						<li class="dropdown" ><a href="/x/" class="text text-danger">
 							<i class="fa fa-dashboard text-danger"></i> <strong class=" text text-success">Super</strong><span class="text-info">Dom</span>
@@ -372,50 +389,50 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
 						<li class="dropdown active" ><a   class="dropdown-toggle "  data-toggle="dropdown">
 							<i class="fa  fa-spin-reverse fa-cubes"></i> Toy Blox <b class="caret"></b>
 							</a>
-								<ul class="dropdown-menu" id="toy-blox-menu">
-									{foreach $admin_menu as $key => $item}
-										{assign var="hasBlox" value=false}
-										{foreach $xtras as $x => $xtra} 
-											{if $xtra.icon && $key == $xtra.see}
-												{if $blox[$xtra.class]}
-													{assign var="hasBlox" value=true}
-												{/if}
+							<ul class="dropdown-menu" id="toy-blox-menu">
+								{foreach $admin_menu as $key => $item}
+									{assign var="hasBlox" value=false}
+									{foreach $xtras as $x => $xtra} 
+										{if $xtra.icon && $key == $xtra.see}
+											{if $blox[$xtra.class]}
+												{assign var="hasBlox" value=true}
 											{/if}
-										{/foreach}
-
-										{if $key && $hasBlox == true}  
-											<li class="dropdown-submenu">
-												<a data-filter="{$key}" href="/blox/qBlox/{$key}" class="dropdown-toggle" data-toggle="dropdown" title="{$item.desc|ucfirst}"><i class="fa fa-{$key} pull-right"></i> {$item.area|ucfirst} <!-- <i class="fa fa-caret-right"></i> --></a>
-												<ul class="dropdown-menu">
-												{foreach $xtras as $x => $xtra}
-
-
-
-													{if $xtra.icon && $key == $xtra.see}
-														{if $blox[$xtra.class]}
-															<li class="dropdown-submenu"><a data-filter="{$xtra.class}" href="/blox/qBlox/{$key}/{$xtra.class}" title="{$xtra.desc}"  data-placement="top" data-original-title="{$xtra.desc}" class="{if $xtra.alpha}panel-danger{elseif $xtra.beta}panel-warning{elseif $xtra.delta}panel-success{elseif $xtra.omega}panel-primary{else}panel-default" disabled="disabled{/if}" > 
-
-
-
-																<i class="fa fa-{$xtra.mini}  pull-right"></i> {$xtra.name} 
-																</a>
-																<ul class="dropdown-menu">
-																	{foreach $blox[$xtra.class] as $b => $y}
-																		<li><a data-filter="{$y.name}" href="/blox/qBlox/{$key}/{$xtra.class}/{$y.name}" title=" "  data-placement="top" data-original-title=" " class=" " disabled=" " >
-																		<i class="fa fa-{$y.icon}  pull-right"></i> {$y.blox} 
-																</a>
-																	{/foreach}
-																</ul>
-															</li>  
-														{/if}
-													{/if}
-												{/foreach} 
-											</ul>
-											</li> 
 										{/if}
-									{/foreach} 
-								</ul>
-						</a>
+									{/foreach}
+
+									{if $key && $hasBlox == true}  
+										<li class="dropdown-submenu">
+											<a data-filter="{$key}" href="/blox/qBlox/{$key}" class="dropdown-toggle" data-toggle="dropdown" title="{$item.desc|ucfirst}"><i class="fa fa-{$key} pull-right"></i> {$item.area|ucfirst} <!-- <i class="fa fa-caret-right"></i> --></a>
+											<ul class="dropdown-menu">
+											{foreach $xtras as $x => $xtra}
+
+
+
+												{if $xtra.icon && $key == $xtra.see}
+													{if $blox[$xtra.class]}
+														<li class="dropdown-submenu"><a data-filter="{$xtra.class}" href="/blox/qBlox/{$key}/{$xtra.class}" title="{$xtra.desc}"  data-placement="top" data-original-title="{$xtra.desc}" class="{if $xtra.alpha}panel-danger{elseif $xtra.beta}panel-warning{elseif $xtra.delta}panel-success{elseif $xtra.omega}panel-primary{else}panel-default" disabled="disabled{/if}" > 
+
+
+
+															<i class="fa fa-{$xtra.mini}  pull-right"></i> {$xtra.name} 
+															</a>
+															<ul class="dropdown-menu">
+																{foreach $blox[$xtra.class] as $b => $y}
+																	<li><a data-filter="{$y.name}" href="/blox/qBlox/{$key}/{$xtra.class}/{$y.name}" title=" "  data-placement="top" data-original-title=" " class=" " disabled=" " >
+																	<i class="fa fa-{$y.icon}  pull-right"></i> {$y.blox} 
+															</a>
+																{/foreach}
+															</ul>
+														</li>  
+													{/if}
+												{/if}
+											{/foreach} 
+										</ul>
+										</li> 
+									{/if}
+								{/foreach} 
+							</ul>
+						</li>
 
 							 
 						</ul>
@@ -435,7 +452,33 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
 							</li>
 						</ul>
 
+						 <div class="btn-group" style="margin-top: 10px;">
+					          <button class="btn btn-primary btn-sm" onclick="location.href = '/login/logout'"><i class="fa fa-key "></i></button>
+					          <a href="/x/calendar" class="btn btn-success btn-sm" >
+					          	 {include file="~blox/clock.html"}
+					          </a> 
+					          {foreach $admin_menu as $key => $item} 
+							  {if $key}  
+								<button class="btn btn-sm btn-info admin_menu"   > 
+									<span class="dropdown-toggle" data-toggle="dropdown" style="position: absolute; top : 0; left: 0; block; width: 100%; height: 100%;"></span><i class="fa fa-{$key}"></i>
+									<ul class="dropdown-menu">
+										{foreach $xtras as $x => $xtra} 
+											{if $xtra.icon && $key == $xtra.see}
+												<li><a data-filter="{$xtra.class}" href="/{$toBackDoor}/{$xtra.link}" title="{$xtra.desc}"  data-placement="top" data-original-title="{$xtra.desc}" class="{if $xtra.alpha}panel-danger{elseif $xtra.beta}panel-warning{elseif $xtra.delta}panel-success{elseif $xtra.omega}panel-primary{else}panel-default" disabled="disabled{/if}" > 
 
+
+
+														<i class="fa fa-{$xtra.mini}  pull-right"></i> {$xtra.name} 
+														</a> 
+													</li>  
+											{/if}
+										{/foreach} 
+									</ul>
+								</button>
+								{/if}
+
+							{/foreach}
+				          </div>
 
 					</div><!--/.nav-collapse -->
 				</div> 
@@ -444,13 +487,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
 				
 			</div>
 			<div id="paper-back"  data-pjax-container>
+				<!-- Check for Blox 
+					* Load Blue Print... 
+					* Load Blox
+				 -->
 				{include file="frontdoor/blox/qBlox.html"}
 			</div>
+
+			
         </div>
       </div>
     </div>
+    
     <style type="text/css">
-
+  
     #toy-blox-menu *, .hover {
     	/* -- transition is the magic sauce for animation -- */
 		-webkit-transition          : all .3s linear;
@@ -517,13 +567,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
 				id : 'icon-'+$(this).attr('id')
 			});
 
+			i.attr({
+				id : 'icon-'+$(this).attr('id'),
+				blox : $(this).attr('id')
+			});
+
 			var s = $('#windowTitleDialog h2 span');
 			s.html($(this).attr('title'));
   
 
     	});
 
-    	$('#admin_menu ul a').click(function (e) {
+    	$('.admin_menu ul a').click(function (e) {
     		$.pjax({ 
 				container : '#paper-back',
 				fragment  : '.content',
@@ -542,8 +597,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
 function bloxSwitch(active) {
 	$('#windowTitleDialog').modal('hide'); 
 
-	var i = $('#windowTitleDialog h2 i').attr('id').replace('icon-',''); 
+	var i = $('#windowTitleDialog h2 i')
 	
+	var blox = i.attr('blox');
+	i = i.attr('id').replace('icon-',''); 
+
 	if( active ){  
 		$('#'+i).removeClass('deactiveBlox'); 
 		$('#'+i).addClass('activeBlox');
@@ -552,13 +610,36 @@ function bloxSwitch(active) {
 		$('#'+i).addClass('deactiveBlox');
 	}
 
+
+
 	 $.ajax({
 		type     : "POST",
-		url      : '/{$toBackDoor}/blox/bloxSwitch',
-		data     : active,
+		url      : './.json',
+		data     : {
+			bloxSwitch : {
+				on : active,
+				blox   : blox,
+				quest  : location.pathname.replace('%20','-').toLowerCase()
+			}
+		},
 		dataType : "json",
 	    success: function(data)
-	    {
+	    { 
+	    	if(active){
+	    		jQuery('<div/>', {
+				id    : blox,
+				// href  : 'http://google.com',
+				// title : 'Become a Googler',
+				// rel   : 'external',
+				// text  : 'Go to Google!'
+				}).appendTo('.content');
+
+		    	$('#'+blox).load('/html/'+blox.slice(1).toLowerCase().replace('-','/'));	
+	    	}else{
+	    		$('#'+blox).remove();
+	    	}
+	    	
+
 	      // Handle the server response (display errors if necessary)
 
 	  //     $.pjax({ 
@@ -567,7 +648,13 @@ function bloxSwitch(active) {
 			// timeout   : 5000,
 			// url       : window.location.pathname+window.location.search+window.location.hash
 	  //     });
-
+	 		if( active ){  
+				$('#'+i).removeClass('deactiveBlox'); 
+				$('#'+i).addClass('activeBlox');
+			}else{
+				$('#'+i).removeClass('activeBlox'); 
+				$('#'+i).addClass('deactiveBlox');
+			}
 	    }
 	  });
 
@@ -586,9 +673,6 @@ function bloxSwitch(active) {
 
     <!-- Latest compiled and minified JavaScript -->
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
@@ -612,6 +696,10 @@ function bloxSwitch(active) {
 	</div> 
 </div>
 
+{/if}
+ 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 
 
 

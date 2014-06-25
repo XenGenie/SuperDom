@@ -32,6 +32,13 @@
 					'blueprint_architect'       => array('Type'=>'varchar(50)'),
 					'blueprint_architect_email' => array('Type'=>'varchar(255)'),
 					'blueprint_domain_origin'   => array('Type'=>'varchar(255)')
+				),
+				//
+				'blox_quest' 	=> array(
+					'quest' 	=> array('Type'=>'varchar(255)'),
+					'blox'		=> array('Type'=>'varchar(50)'),
+					'params'	=> array('Type'=>'blob'),
+					'on'		=> array('Type'=>'boolean','Default'=>true)
 				)
 
 			);
@@ -134,6 +141,10 @@
 
 			if($sDom->Key['is']['admin']){
 				$this->set('blox',$this->qBlox() );
+			}
+
+			if($_POST['bloxSwitch']){
+				$this->bloxSwitch($_POST['bloxSwitch']);
 			}
 
 		}
@@ -380,14 +391,40 @@
 		/**
 
 		**/
-		public function bloxSwitch()
+		public function bloxSwitch($blox)
 		{
-			# code...
+			# Admins Only...
 			if($this->Key['is']['admin']){
 				$q = $this->q();
+				
+				// Get the Navi Request
+				$isLink = $q->Select('linktothe','navi_heylisten',array(
+					'quest' => $blox['quest']
+				));
+
+				if(empty($isLink)){
+					$q->Insert('navi_heylisten',array(
+						'quest' 	=> $blox['quest'],
+						'linktothe' => 'blox'
+					));
+				}
+
+				$findQuest = $q->Select('id','blox_quest',array(
+					'quest' => $blox['quest'],
+					'blox' => $blox['blox']
+				));
+
+				if(empty($findQuest)){
+					$id = $q->Insert('blox_quest',$blox);
+				}else{
+					$id = $q->Update('blox_quest',$blox,$findQuest[0]);
+				}
 
 
-
+				return array(
+					'success' => true,
+					'id' => $id
+				);
 			}
 		}
 
