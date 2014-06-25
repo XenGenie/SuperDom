@@ -1,5 +1,5 @@
 <div id="clock" align="center">
-	<img title="{$SUPERDOMX.version}" src="/@/libs/phpThumb/phpThumb.php?src=/bin/images/logos/sdx.png&h=15&q=100&f=png" align="absmiddle"/>
+	<img title="{$SUPERDOMX.version}" src="{$thumb}src=/bin/images/logos/sdx.png&h=15&q=100&f=png" align="absmiddle"/>
 	<div id="time"></div> 
 	
 </div>
@@ -54,14 +54,22 @@
 	  // 	currentTime.format('F jS h:i(s) A') :
 	  // 	month[d.getMonth()] + " "+ d.getDay() + " | hi | " + currentHours + blink + currentMinutes + " " + timeOfDay ; 
 	
-	  var currentTimeString = (currentTime.format) ? 
+	  var currentTimeString = (typeof currentTime.format != 'undefined') ? 
 	  	currentTime.format('F jS' + ' h:i(s) A') :
-	  	month[d.getMonth()] + " "+ d.getDay() + " | hi | " + currentHours + blink + currentMinutes + " " + timeOfDay ; 
+	  	month[d.getMonth()] + " "+ d.getDate() + " Z " + currentHours + blink + currentMinutes + " " + timeOfDay ; 
+
+
+	  	var next = ( d.getDate() > trans[d.getMonth()] ) ? 1 : 0;
+
+	  	next = ( d.getMonth() == 11 && next ) ? -11 : next
+
+	  	currentTimeString = currentTimeString.replace('Z','<b>'+zodiac[d.getMonth()+next]+'</b>');
+
 	
 
 	  var point = '<span class="point">:</span>';
 	  
-	  x4.theTimeIs = currentTime.format('h') + point + currentTime.format('i');// + point + currentTime.format('s');
+	  //x4.theTimeIs = currentTime.format('h') + point + currentTime.format('i');// + point + currentTime.format('s');
 	  
 	  // Update the time display
 	   
@@ -73,7 +81,7 @@
 
 	  document.getElementById("time").innerHTML = currentTimeString;
 		
-	  setTimeout(updateClock,1000);
+	  setTimeout(updateClock,500);
 	}
 	updateClock();	
 </script>
