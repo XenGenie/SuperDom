@@ -156,6 +156,8 @@
 
 				$quest = strtolower(str_replace('%20', '-', $_SERVER['REQUEST_URI']));
 
+				$path = str_replace('%20', ' ', $_SERVER['REQUEST_URI']);
+
 
 
 				$link = $X->q()->Select("*","navi_heylisten", array(
@@ -164,6 +166,9 @@
 
 				// var_dump($link);
 				// exit;
+
+				$this->set('path',explode('/',$path));
+
 
 				if(!empty($link)){
 					$this->Key['heylisten'] = $link[0];
@@ -174,7 +179,7 @@
 							$b = $X->q()->Select('*','blox_quest',array(
 								'quest' => $quest
 							));
-							$this->set('oBlox',$b);
+							$this->set('oBlox',$b); 
 						# code...
 						break;
 						

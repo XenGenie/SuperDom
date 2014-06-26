@@ -140,12 +140,14 @@
 
     	 		{foreach $oBlox as $b => $o}
 	 				{if $o['blox'] == "{$k}-{$x['name']}"}
-	 				{assign var=active value=$o.on}
+	 					{assign var=active value=$o.online}
 	 				{/if}
         	 	{/foreach}
+
+
             	 <div class="blox {$k} {$b} {$x['name']} " >
 					<a data-toggle="modal" href="#windowTitleDialog">
-		            	<div data-filter="{$k}" class="hover {if $active}activeBlox{else}deactiveBlox{/if}" id="{$k}-{$x['name']}" title="{$x['blox']}" icon="{$x['icon']}">
+		            	<div data-filter="{$k}" class="hover {if $active}activeBlox{else}deactiveBlox{/if}" id="toy-{$k}-{$x['name']}" title="{$x['blox']}" icon="{$x['icon']}">
 			              	<div class="alert alert-info  col-md-12">
 						    	{$x['desc']}
 							</div>
@@ -192,7 +194,7 @@
 
 			i.attr({
 				id : 'activate-blox',
-				blox : $(this).attr('id')
+				blox : $(this).attr('id').replace('toy-','')
 			});
 
 			var s = $('#windowTitleDialog h2 span');

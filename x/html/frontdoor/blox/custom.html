@@ -1,5 +1,4 @@
-<div class="blox custom">
-
+<div class="blox custom"> 
 	<div class="front">
 		<a class="action btn btn-info btn-block"><i class="fa fa-gear"></i></a>
 		<h2 id="list-title">Top Sellers</h2>
@@ -11,7 +10,7 @@
 	</div>
 	<div class="back">
 		<div class="pad">
-			<h3><i class="fa fa-gear fa-spin-reverse"></i> Edit Mode <i class="fa fa-gear fa-spin"></i> </h3>
+			<h3>Edit Mode <i class="fa fa-gear fa-spin-reverse"></i> <i class="fa fa-gear fa-spin"></i> </h3>
 				<div class="btn-group">
 					<a data-toggle="modal" href="#windowTitleDialog" class="btn btn-info">CSS</a>
 					<a data-toggle="modal" href="#windowTitleDialog" class="btn btn-warning">HTML</a>
@@ -61,16 +60,16 @@
   /* -- general styles, including Y axis rotation -- */
 .custom .front a{
 	position: absolute;
-	top: -125px; 
+	bottom: -125px; 
 
 	left: 0px;
 	/* -- transition is the magic sauce for animation -- */
-	-webkit-transition          : all .4s ease-in-out;
-	transition                  : all .4s ease-in-out;
+	-webkit-transition          : all .3s linear;
+	transition                  : all .3s linear;
 }
 
 .custom .front:hover a{
-	top: 0px;
+	bottom: 0px;
 	left: 0px;
 }
 

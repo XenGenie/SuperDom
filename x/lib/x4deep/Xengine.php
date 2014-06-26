@@ -690,6 +690,7 @@
 					'action' => 'index',
 					'method' => 'index'
 				));	 
+
 			}else if(!file_exists($this->_CFG['dir']['html']
 				.'/'.$html_door
 				.'/'.$this->_SET['action']
@@ -767,8 +768,12 @@
 			$this->smarty->compile_dir  = $dir."/templates_c";
 			$this->smarty->cache_dir    = $dir."/cache";
 			$this->smarty->config_dir   = $dir."/configs";
+ 
+
+			 
 			$this->smarty->template_dir = $this->_CFG['dir']['html'];
 			$this->smarty->assign($a);			
+
 
 			ob_clean();
 			$this->smarty->display('index.html');

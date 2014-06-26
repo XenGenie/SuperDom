@@ -254,8 +254,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
         	body > .container {
         		padding-top: 50px;
         	}
+
+        	.godbar{
+        		/* -- transition is the magic sauce for animation -- */
+				-webkit-transition          : all .7s ease-in-out;
+				transition                  : all .7s ease-in-out;
+        	}
+
         </style>
-	    <div class="navbar navbar-default navbar-fixed-top navbar-inverse"  role="navigation">
+	    <div class="navbar navbar-default navbar-fixed-top navbar-inverse godbar" style="top: -50px;"  role="navigation">
 	      <div class="container">
 	        <div class="navbar-header">
 	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -267,7 +274,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
 	          <a class="navbar-brand" href="#"></a>
 	        </div>
 	        
-	        <div class="navbar-collapse collapse text-center">
+	        <div class="navbar-collapse collapse text-center" >
 
 	          <script type="text/javascript">
 	          var x4;
@@ -279,7 +286,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
 	           
 	            <li >
 	            	<a class="action" style="cursor: pointer" >
-	            		<i class="fa fa-sun-o text-danger"></i> God Mode
+	            		<i class="fa fa-cloud text-info"></i> God Mode
 	            	</a>
 	            </li>
 	            <li class="active">
@@ -301,13 +308,22 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
 	          <div class="btn-group" style="padding-top: 10px;">
 						<!-- <img src="{$thumb}src=/bin/images/logos/sdx.png&h=10" class=""> -->
 							<!-- <button class="btn btn-warning action btn-sm"><i class="fa fa-key"></i></button> -->
-							<button class="btn btn-warning active disabled  btn-sm"> 
-							<strong><i class="fa fa-key"></i></strong>
+							<button class="btn btn-warning  btn-sm"> 
+							<strong><i class="fa fa-key  " onclick="location.href = '/login/logout'"></i></strong>
 							</button>	
-							<button class="btn btn-info   btn-sm"> 
+							<button class="btn btn-info   btn-sm" onclick="location.href='/' "> 
 							<strong><i class="fa fa-globe"></i> {$SVR['SERVER_NAME']}</strong>
 							</button>	
-							<button class="btn btn-success active btn-sm"> 
+
+
+
+							{foreach $path as $p => $walk}
+								{if $walk}
+									<button class="{if $walk == $path[{$path|count}] }active{/if}btn btn-success btn-sm">{$walk}</button>
+								{/if}
+							{/foreach}
+
+							<!-- <button class="btn btn-success btn-sm" onclick="location.href = location.href"> 
 								<strong>
 								{if $quest == ''}
 								<i class="fa fa-home"></i>
@@ -315,7 +331,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
 								{$quest}
 								{/if}
 								</strong>
-							</button>	
+							</button>	 -->
 
 							<button class="active btn btn-success  text-primary  btn-sm" style="cursor: pointer; " onmousedown="onlineBtn.m(this,'over');"   > 
 							<strong><i class="fa fa-eye"></i> Online <i class="fa fa-eye"></i></strong>
@@ -442,18 +458,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
 						<ul class="nav navbar-nav navbar-left"> 
 							<li class="active">
 								<a class="text-success text-center">
-									<span class="label label-success"> <i class="fa fa-2x fa-sun-o fa-spin-slow"></i> God Mode</span>
+									<span class="label label-success"> <i class="fa fa-2x fa-cloud "></i> God Mode</span>
 								</a>
 							</li>
 							<li>
 								<a class="edit-submit" style="cursor: pointer">
-									<i class="fa fa-globe text-info"></i> Public Mode
+									<i class="fa fa-globe text-success"></i> Public Mode
 								</a>
 							</li>
 						</ul>
 
 						 <div class="btn-group" style="margin-top: 10px;">
-					          <button class="btn btn-primary btn-sm" onclick="location.href = '/login/logout'"><i class="fa fa-key "></i></button>
+					          <button class="btn btn-warning btn-sm" onclick="location.href = '/login/logout'"><i class="fa fa-key fa-flip-horizontal "></i></button>
 					          <a href="/x/calendar" class="btn btn-success btn-sm" >
 					          	 {include file="~blox/clock.html"}
 					          </a> 
@@ -468,7 +484,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
 
 
 
-														<i class="fa fa-{$xtra.mini}  pull-right"></i> {$xtra.name} 
+														<i class="fa fa-{$xtra.mini}  pull-left"></i> {$xtra.name} 
 														</a> 
 													</li>  
 											{/if}
@@ -478,6 +494,53 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
 								{/if}
 
 							{/foreach}
+							 
+							 <button class="btn btn-primary btn-sm active"  >
+					          	<span class="dropdown-toggle" data-toggle="dropdown" style="position: absolute; top : 0; left: 0; block; width: 100%; height: 100%;"></span><i class="fa fa-cubes fa-spin-slow"></i>
+									<ul class="dropdown-menu">
+										{foreach $admin_menu as $key => $item}
+											{assign var="hasBlox" value=false}
+											{foreach $xtras as $x => $xtra} 
+												{if $xtra.icon && $key == $xtra.see}
+													{if $blox[$xtra.class]}
+														{assign var="hasBlox" value=true}
+													{/if}
+												{/if}
+											{/foreach}
+
+											{if $key && $hasBlox == true}  
+												<li class="dropdown-submenu">
+													<a data-filter="{$key}" href="/blox/qBlox/{$key}" class="dropdown-toggle" data-toggle="dropdown" title="{$item.desc|ucfirst}"><i class="fa fa-{$key} pull-right"></i> {$item.area|ucfirst} <!-- <i class="fa fa-caret-right"></i> --></a>
+													<ul class="dropdown-menu">
+													{foreach $xtras as $x => $xtra}
+
+
+
+														{if $xtra.icon && $key == $xtra.see}
+															{if $blox[$xtra.class]}
+																<li class="dropdown-submenu"><a data-filter="{$xtra.class}" href="/blox/qBlox/{$key}/{$xtra.class}" title="{$xtra.desc}"  data-placement="top" data-original-title="{$xtra.desc}" class="{if $xtra.alpha}panel-danger{elseif $xtra.beta}panel-warning{elseif $xtra.delta}panel-success{elseif $xtra.omega}panel-primary{else}panel-default" disabled="disabled{/if}" > 
+
+
+
+																	<i class="fa fa-{$xtra.mini}  pull-right"></i> {$xtra.name} 
+																	</a>
+																	<ul class="dropdown-menu">
+																		{foreach $blox[$xtra.class] as $b => $y}
+																			<li><a data-filter="{$y.name}" href="/blox/qBlox/{$key}/{$xtra.class}/{$y.name}" title=" "  data-placement="top" data-original-title=" " class=" " disabled=" " >
+																			<i class="fa fa-{$y.icon}  pull-right"></i> {$y.blox} 
+																	</a>
+																		{/foreach}
+																	</ul>
+																</li>  
+															{/if}
+														{/if}
+													{/foreach} 
+												</ul>
+												</li> 
+											{/if}
+										{/foreach} 	
+									</ul>
+					          </button>
 				          </div>
 
 					</div><!--/.nav-collapse -->
@@ -599,8 +662,8 @@ function bloxSwitch(active) {
 
 	var i = $('#windowTitleDialog h2 i')
 	
-	var blox = i.attr('blox');
-	i = i.attr('id').replace('icon-',''); 
+	var blox = i.attr('blox').replace('toy-','');
+	i = i.attr('id').replace('toy-',''); 
 
 	if( active ){  
 		$('#'+i).removeClass('deactiveBlox'); 
@@ -617,15 +680,18 @@ function bloxSwitch(active) {
 		url      : './.json',
 		data     : {
 			bloxSwitch : {
-				on : active,
+				online : active,
 				blox   : blox,
-				quest  : location.pathname.replace('%20','-').toLowerCase()
+				quest  : location.pathname.replace(/%20/g,'-').toLowerCase()
 			}
 		},
 		dataType : "json",
 	    success: function(data)
 	    { 
 	    	if(active){
+
+	    		$('#xAccess-404').remove();
+
 	    		jQuery('<div/>', {
 				id    : blox,
 				// href  : 'http://google.com',
@@ -633,7 +699,6 @@ function bloxSwitch(active) {
 				// rel   : 'external',
 				// text  : 'Go to Google!'
 				}).appendTo('.content');
-
 		    	$('#'+blox).load('/html/'+blox.slice(1).toLowerCase().replace('-','/'));	
 	    	}else{
 	    		$('#'+blox).remove();
@@ -729,6 +794,8 @@ function bloxSwitch(active) {
 			document.title = document.getElementById ("xlInput").value;
 				closeDialog ();
 			};
+
+
 
 		</script>
 

@@ -37,8 +37,8 @@
 				'blox_quest' 	=> array(
 					'quest' 	=> array('Type'=>'varchar(255)'),
 					'blox'		=> array('Type'=>'varchar(50)'),
-					'params'	=> array('Type'=>'blob'),
-					'on'		=> array('Type'=>'boolean','Default'=>true)
+					'params'	=> array('Type'=>'blob'), 
+					'online'	=> array('Type'=>'boolean','Default'=>true)
 				)
 
 			);
@@ -402,6 +402,8 @@
 					'quest' => $blox['quest']
 				));
 
+
+
 				if(empty($isLink)){
 					$q->Insert('navi_heylisten',array(
 						'quest' 	=> $blox['quest'],
@@ -411,10 +413,11 @@
 
 				$findQuest = $q->Select('id','blox_quest',array(
 					'quest' => $blox['quest'],
-					'blox' => $blox['blox']
+					'blox' 	=> $blox['blox']
 				));
 
 				if(empty($findQuest)){
+
 					$id = $q->Insert('blox_quest',$blox);
 				}else{
 					$id = $q->Update('blox_quest',$blox,$findQuest[0]);
