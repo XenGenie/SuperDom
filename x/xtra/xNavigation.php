@@ -177,7 +177,8 @@
 					switch ($link[0]['linktothe']) {
 						case 'blox':
 							$b = $X->q()->Select('*','blox_quest',array(
-								'quest' => $quest
+								'quest' => $quest,
+								'online' => 1
 							));
 							$this->set('oBlox',$b); 
 						# code...

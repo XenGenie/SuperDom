@@ -144,7 +144,7 @@
 			}
 
 			if($_POST['bloxSwitch']){
-				$this->bloxSwitch($_POST['bloxSwitch']);
+				return $this->bloxSwitch($_POST['bloxSwitch']);
 			}
 
 		}
@@ -409,24 +409,29 @@
 						'quest' 	=> $blox['quest'],
 						'linktothe' => 'blox'
 					));
-				}
+				} 
+
+				$blox['online'] = ($blox['online'] == 'true' )? true : false;
+
 
 				$findQuest = $q->Select('id','blox_quest',array(
 					'quest' => $blox['quest'],
 					'blox' 	=> $blox['blox']
 				));
 
-				if(empty($findQuest)){
-
+				if(empty($findQuest)){ 
 					$id = $q->Insert('blox_quest',$blox);
+
 				}else{
-					$id = $q->Update('blox_quest',$blox,$findQuest[0]);
+
+					$q->Update('blox_quest',$blox,$findQuest[0]);
+					$id = intval($findQuest[0]['id']);
 				}
 
 
 				return array(
 					'success' => true,
-					'id' => $id
+					'id' =>  $id, 
 				);
 			}
 		}

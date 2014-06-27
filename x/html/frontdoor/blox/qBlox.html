@@ -134,20 +134,20 @@
      
         <hr/> 
     </div></div> -->
-
+ 
 	{foreach $blox as $k => $v}
     	 {foreach $v as $b => $x}
-
+    	 		{assign var=online value=0}
     	 		{foreach $oBlox as $b => $o}
 	 				{if $o['blox'] == "{$k}-{$x['name']}"}
-	 					{assign var=active value=$o.online}
+	 					{assign var=online value=$o['online']}
 	 				{/if}
-        	 	{/foreach}
+        	 	{/foreach} 
 
 
             	 <div class="blox {$k} {$b} {$x['name']} " >
 					<a data-toggle="modal" href="#windowTitleDialog">
-		            	<div data-filter="{$k}" class="hover {if $active}activeBlox{else}deactiveBlox{/if}" id="toy-{$k}-{$x['name']}" title="{$x['blox']}" icon="{$x['icon']}">
+		            	<div data-filter="{$k}" class="hover {if $online == 1}activeBlox{else}deactiveBlox{/if}" id="toy-{$k}-{$x['name']}" title="{$x['blox']}" icon="{$x['icon']}">
 			              	<div class="alert alert-info  col-md-12">
 						    	{$x['desc']}
 							</div>
@@ -178,12 +178,12 @@
     	// $('.blox').sortable(); 
     	$('.blox .hover').click(function() { 
 
-    		if($(this).hasClass('activeBlox')){
-    			$('#windowTitleDialog .btn-success').addClass('active'); 
-    			$('#windowTitleDialog .btn-danger').removeClass('active');
+    		if( $(this).hasClass('activeBlox') ){
+    			$('#windowTitleDialog .btn-success').addClass('active disabled'); 
+    			$('#windowTitleDialog .btn-danger').removeClass('active disabled');
     		}else{
-    			$('#windowTitleDialog .btn-success').removeClass('active'); 
-    			$('#windowTitleDialog .btn-danger').addClass('active');
+    			$('#windowTitleDialog .btn-success').removeClass('active disabled'); 
+    			$('#windowTitleDialog .btn-danger').addClass('active disabled');
     		};
 
     		var i = $('#windowTitleDialog h2 i');

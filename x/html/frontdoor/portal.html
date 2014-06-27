@@ -26,12 +26,12 @@
 		    //alert('Done!');
 
 	
-	setTimeout(function(){
+			setTimeout(function(){
 
-					$('.godbar').css({
-		    	top: 0
-		    });
-				},777);
+							$('.godbar').css({
+						    	top: 0
+						    });
+			},777);
 
 		}
 
@@ -44,15 +44,16 @@
 		    });
 		}
 
-		$(document).ready(function() {
-			 
-
-
-
-			fadeInElements($('.blox-panel'), executeAfterFade);	
-
-
+		$(document).ready(function() { 
 			
+			{if 0 == $oBlox|count}
+				$('.godbar').css({
+			    	top: 0
+			    });
+			{else}
+
+			 fadeInElements($('.blox-panel'), executeAfterFade);	  
+			{/if}
 
 		});
 		
