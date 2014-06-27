@@ -145,13 +145,13 @@
         	 	{/foreach} 
 
 
-            	 <div class="blox {$k} {$b} {$x['name']} " >
+            	 <div class="blox" >
 					<a data-toggle="modal" href="#windowTitleDialog">
 		            	<div data-filter="{$k}" class="hover {if $online == 1}activeBlox{else}deactiveBlox{/if}" id="toy-{$k}-{$x['name']}" title="{$x['blox']}" icon="{$x['icon']}">
-			              	<div class="alert alert-info  col-md-12">
+			              	<div class="alert alert-info  col-md-12 ">
 						    	{$x['desc']}
 							</div>
-			              	<h3>{$x['blox']}</h3>
+			              	<h3 class=" ">{$x['blox']}</h3>
 			                <i class="fa fa-{$x['icon']} fa-5x  "></i>  
 			            </div>
 		            </a>
