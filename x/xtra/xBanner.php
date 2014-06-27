@@ -83,11 +83,22 @@
 
 		/**
 		@name carousel
-		@blox Carousel
+		@blox Billboard
 		@icon image
 		@desc Rotate through Images, each having its own caption & destination
 		**/
 		public function carousel($value='')
+		{
+			# code...
+		}
+
+		/**
+			@name landmark
+			@blox Landmark
+			@desc Every great website deserves A Professionally Sexy Coverpage
+			@icon flag
+		**/
+		public function landmark()
 		{
 			# code...
 		}

@@ -63,17 +63,18 @@
 		}
 
 
+		 
+
 		/**
-			@name landmark
-			@blox Landmark
-			@desc Every great website deserves A Professionally Sexy Coverpage
-			@icon flag
+			@name navbar
+			@blox Navigation
+			@desc Every page needs a navigator to help others know where to go.
+			@icon space-shuttle
 		**/
-		public function landmark()
+		public function navbar()
 		{
 			# code...
 		}
-
 
 		function __construct($c){
 			parent::__construct($c);
