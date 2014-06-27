@@ -59,16 +59,23 @@
 			);
 		}
 		
+		/**
+			@name catalog
+			@blox Shop Catalog
+			@desc Simple Easy to use Custom Code Blox
+			@icon book
+		**/
+		public function catalog()
+		{
+			# code...
+		}
+
 		function index(){
 			$f = array('label','price','stock','sold','id');
 			$this->set('inventory_attr',	json_encode($f)	);
 			
 		}
-
-		function catalog()
-		{
-			# code...
-		}
+ 
 
 		function upload($uploading){
 			if($uploading==true){

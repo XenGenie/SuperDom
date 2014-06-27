@@ -14,6 +14,7 @@
 
 
 	class xBanner extends Xengine{
+		 
 		/*
 		 * List banners.
 		 */
@@ -80,6 +81,16 @@
 			$this->set('buildXml',$contents);
 		}
 
+		/**
+		@name carousel
+		@blox Carousel
+		@icon image
+		@desc Rotate through Images, each having its own caption & destination
+		**/
+		public function carousel($value='')
+		{
+			# code...
+		}
 	}
 
 ?>

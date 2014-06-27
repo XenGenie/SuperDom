@@ -438,7 +438,7 @@
 
 		/**
 			@name cover
-			@blox Coversheet
+			@blox Landmark
 			@desc Every great website deserves A Professionally Sexy Coverpage
 			@icon flag
 		**/
@@ -449,14 +449,52 @@
 
 		/**
 			@name custom
-			@blox Custom
-			@desc Simple Easy to use Custom Code Blox
-			@icon html5
+			@blox jsFiddle
+			@desc Easily Import a JS file Link into Your Website!
+			@icon jsfiddle
 		**/
 		public function custom()
 		{
+
+			return array(
+				'jsfiddle' => file_get_contents('http://jsfiddle.net/3njag/2/show/')
+			);
 			# code...
 		}
+
+		/**
+			@name html5
+			@blox HTML
+			@desc Simple Easy to use Custom Code Blox
+			@icon html5
+		**/
+		public function html5()
+		{
+			# code...
+		}
+
+		/**
+			@name css3
+			@blox CSS
+			@desc Simple Easy to use Custom Code Blox
+			@icon css3
+		**/
+		public function css3()
+		{
+			# code...
+		}
+
+		/**
+			@name javascript
+			@blox Javscript
+			@desc Simple Easy to use Custom Code Blox
+			@icon code
+		**/
+		public function javascript()
+		{
+			# code...
+		}
+
 	}
 
 ?>
