@@ -17,9 +17,9 @@
 		z-index            : 100;
 		width              : 200px;
 		height             : 200px;
-		border             : 1px solid #aaa;
-		border-top         : 1px solid #888;
-		border-left        : 1px solid #888;
+		border             : 2px solid rgba(255,255,255,0.5);
+		border-top         : 3px solid rgba(255,255,255,0.5);
+		border-left        : 1px solid rgba(255,255,255,0.5);
 		/*background         : #6b7077;*/
 
 			  border-radius: 20px;
@@ -30,20 +30,20 @@
 		-webkit-transform  : scale(.7);
 		transform          : scale(.7);
 		
-		-moz-box-shadow    : inset 1px 2px 8px #222;
-		-webkit-box-shadow : inset 1px 2px 8px rgba(0,0,0,0.7);
-		box-shadow         : inset 1px 2px 8px rgba(0,0,0,0.7);
+		-moz-box-shadow    : inset 1px 2px 8px #fff;
+		-webkit-box-shadow : inset 1px 2px 8px rgba(255,255,255,255.7);
+		box-shadow         : inset 1px 2px 8px rgba(255,255,255,255.7);
 		
 		
 		/* -- transition is the magic sauce for animation -- */
-		-o-transition      : all .15s;
-		-moz-transition    : all .15s ease-out;
-		-webkit-transition : all .15s ease-out;
-		transition         : all .15s ease-out;
+		-o-transition      : all .25s;
+		-moz-transition    : all .25s ease-out;
+		-webkit-transition : all .25s ease-out;
+		transition         : all .25s ease-out;
 
 		padding-top: -50px;
 		overflow: hidden;
-		color:  #222 !important;
+		color:  #333 !important;
 	}
 
 
@@ -51,43 +51,74 @@
 
 	.blox .hover:hover {
 		padding-top: 0px;
-		z-index            : 1000;
-		border-color       : #bbb;
-		border-right       : 1px solid #aaa;
-		border-bottom      : 1px solid #aaa;
-		
+		z-index            : 9999999;
+		border-color       : rgba(255,255,255,0.5);
+		border-right       : 1px solid rgba(255,255,255,0.5);
+		border-bottom      : 1px solid rgba(255,255,255,0.5);
+		border-size: 1px;
 		-o-transform       : scale(1.051);
 		-moz-transform     : scale(1.051);
 		-webkit-transform  : scale(1.051);
 		transform          : scale(1.05);
 		
-		-moz-box-shadow    : 0 15px 50px rgba(100,100,100,0.3), inset 10px -15px -15px white;
-		-webkit-box-shadow : 0 15px 50px rgba(100,100,100,0.3), inset 10px -15px -15px white;
-		box-shadow         : 0 15px 50px rgba(100,100,100,0.3), inset 10px -15px -15px white;
+		-moz-box-shadow    : 0 15px 50px rgba(100,100,100,0.73), inset 10px -15px -15px white;
+		-webkit-box-shadow : 0 15px 50px rgba(100,100,100,0.73), inset 10px -15px -15px white;
+		box-shadow         : 0 15px 50px rgba(100,100,100,0.73), inset 10px -15px -15px white;
 		cursor: pointer;
+		color:  #FFF !important;
+		text-shadow: 2px 0px 0px rgba(0,0,0,0.25);
+
 	}
 
 	 
 
 	.activeBlox{
-		background-color : rgba(0,255,70,0.25);
+		/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjYjRkZGI0IiBzdG9wLW9wYWNpdHk9IjAuNzMiLz4KICAgIDxzdG9wIG9mZnNldD0iMTclIiBzdG9wLWNvbG9yPSIjODNjNzgzIiBzdG9wLW9wYWNpdHk9IjAuNzMiLz4KICAgIDxzdG9wIG9mZnNldD0iMzMlIiBzdG9wLWNvbG9yPSIjNTJiMTUyIiBzdG9wLW9wYWNpdHk9IjAuNzMiLz4KICAgIDxzdG9wIG9mZnNldD0iNjclIiBzdG9wLWNvbG9yPSIjMDA4YTAwIiBzdG9wLW9wYWNpdHk9IjAuNzIiLz4KICAgIDxzdG9wIG9mZnNldD0iODMlIiBzdG9wLWNvbG9yPSIjMDA1NzAwIiBzdG9wLW9wYWNpdHk9IjAuNzIiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMjQwMCIgc3RvcC1vcGFjaXR5PSIwLjcxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+background: -moz-linear-gradient(-45deg,  rgba(180,221,180,0.73) 0%, rgba(131,199,131,0.73) 17%, rgba(82,177,82,0.73) 33%, rgba(0,138,0,0.72) 67%, rgba(0,87,0,0.72) 83%, rgba(0,36,0,0.71) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(180,221,180,0.73)), color-stop(17%,rgba(131,199,131,0.73)), color-stop(33%,rgba(82,177,82,0.73)), color-stop(67%,rgba(0,138,0,0.72)), color-stop(83%,rgba(0,87,0,0.72)), color-stop(100%,rgba(0,36,0,0.71))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg,  rgba(180,221,180,0.73) 0%,rgba(131,199,131,0.73) 17%,rgba(82,177,82,0.73) 33%,rgba(0,138,0,0.72) 67%,rgba(0,87,0,0.72) 83%,rgba(0,36,0,0.71) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg,  rgba(180,221,180,0.73) 0%,rgba(131,199,131,0.73) 17%,rgba(82,177,82,0.73) 33%,rgba(0,138,0,0.72) 67%,rgba(0,87,0,0.72) 83%,rgba(0,36,0,0.71) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg,  rgba(180,221,180,0.73) 0%,rgba(131,199,131,0.73) 17%,rgba(82,177,82,0.73) 33%,rgba(0,138,0,0.72) 67%,rgba(0,87,0,0.72) 83%,rgba(0,36,0,0.71) 100%); /* IE10+ */
+background: linear-gradient(135deg,  rgba(180,221,180,0.73) 0%,rgba(131,199,131,0.73) 17%,rgba(82,177,82,0.73) 33%,rgba(0,138,0,0.72) 67%,rgba(0,87,0,0.72) 83%,rgba(0,36,0,0.71) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bab4ddb4', endColorstr='#b5002400',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
+
+
+color: white !important;
+
 	}
 
 	.deactiveBlox{
-		background-color : rgba(200,0,00,0.55);
+		/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjYjNkY2VkIiBzdG9wLW9wYWNpdHk9IjAuMjUiLz4KICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjMjliOGU1IiBzdG9wLW9wYWNpdHk9IjAuMjUiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2JjZTBlZSIgc3RvcC1vcGFjaXR5PSIwLjI0Ii8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+background: -moz-linear-gradient(-45deg,  rgba(179,220,237,0.25) 0%, rgba(41,184,229,0.25) 50%, rgba(188,224,238,0.24) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(179,220,237,0.25)), color-stop(50%,rgba(41,184,229,0.25)), color-stop(100%,rgba(188,224,238,0.24))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg,  rgba(179,220,237,0.25) 0%,rgba(41,184,229,0.25) 50%,rgba(188,224,238,0.24) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg,  rgba(179,220,237,0.25) 0%,rgba(41,184,229,0.25) 50%,rgba(188,224,238,0.24) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg,  rgba(179,220,237,0.25) 0%,rgba(41,184,229,0.25) 50%,rgba(188,224,238,0.24) 100%); /* IE10+ */
+background: linear-gradient(135deg,  rgba(179,220,237,0.25) 0%,rgba(41,184,229,0.25) 50%,rgba(188,224,238,0.24) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#40b3dced', endColorstr='#3dbce0ee',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
+
+
+color: white;
+
+
+
 	}
 
 	.blox .hover .alert{
-		/*position: absolute;*/
-		margin-top: -70px; 
-		 
+		position: absolute;
+		bottom: -100px; 
+		visibility: none;
+
 		-o-transition      : all .35s;
 		-moz-transition    : all .35s ease-out;
 		-webkit-transition : all .35s ease-out;
 		transition         : all .35s ease-out;
 	}
 	.blox .hover:hover .alert { 
-		margin-top:0; 
+		bottom:0; 
+		visibility: visible;
 	};
 
 	
@@ -147,12 +178,14 @@
 
             	 <div class="blox" >
 					<a data-toggle="modal" href="#windowTitleDialog">
-		            	<div data-filter="{$k}" class="hover {if $online == 1}activeBlox{else}deactiveBlox{/if}" id="toy-{$k}-{$x['name']}" title="{$x['blox']}" icon="{$x['icon']}">
-			              	<div class="alert alert-info  col-md-12 ">
+		            	<div data-filter="{$k}" class="hover {if $online == 1}activeBlox{else}deactiveBlox{/if}" id="toy-{$k}-{$x['name']}" title="{$x['blox']}" icon="{$x['icon']}"> 
+			               <div class="alert alert-info  col-md-12 ">
 						    	{$x['desc']}
 							</div>
-			              	<h3 class=" ">{$x['blox']}</h3>
+			              	<h2 class=" ">{$x['blox']}</h2>
+
 			                <i class="fa fa-{$x['icon']} fa-5x  "></i>  
+			              	
 			            </div>
 		            </a>
 	            </div>

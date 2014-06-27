@@ -62,6 +62,19 @@
 			);
 		}
 
+
+		/**
+			@name landmark
+			@blox Landmark
+			@desc Every great website deserves A Professionally Sexy Coverpage
+			@icon flag
+		**/
+		public function landmark()
+		{
+			# code...
+		}
+
+
 		function __construct($c){
 			parent::__construct($c);
 			// Recycle sql connection

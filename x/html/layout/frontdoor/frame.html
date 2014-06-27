@@ -285,40 +285,52 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
 	           
 	            <li >
 	            	<a class="action" style="cursor: pointer" >
-	            		<span class="label label-success"> <i class="fa fa-cloud fa-2x"></i> God Mode</span>
+	            		<span class="label label-success"> <i class="fa fa-cloud fa-3x"></i> <!-- God Mode --></span>
 	            	</a>
 	            </li>
 	            <li class="active">
 	            	<a href="{$SERVER.REQUEST_URI}">
-	            		<span class="label label-info"><i class="fa fa-2x fa-globe fa-spin-slow"></i> Public Mode</span></a>
+	            		<span class="label label-info"><i class="fa fa-3x fa-globe fa-spin-slow"></i><!--  Public Mode --></span></a>
 	            </li>
 	          </ul>
 
 	          <ul class="nav navbar-nav navbar-right text-right">
-	            <li class="{if $quest == ''}active{/if}"><a href="/"><i class="fa fa-home text-success"></i> Home</a></li>
+	            <!-- <li class="span2 dropdown {if $quest == ''}active{/if}"><a href="/"><i class="fa fa-home text-success"></i> Home</a></li> -->
 	            <!-- TODO: Add Navigation Here -->
-	            {foreach $navi as $n => $link}
-                    {if $link.parent == 0} 
-                        {include file="~blox/godbar/navi.nest.html" link=$link} 
-                    {/if} 
-                {/foreach}
+	            
+
+				<li class="span2 dropdown {if $quest == ''}active{/if}"><a class="dropdown-toggle"  data-toggle="dropdown" ><span class="btn btn-info "><i class="fa fa-globe {if $quest == ''}fa-1x fa-spin{/if}"></i>  </span></a>
+					<ul class="dropdown-menu">
+			            
+						{foreach $navi as $n => $link}
+		                    {if $link.parent == 0} 
+		                        {include file="~blox/godbar/navi.nest.html" link=$link sub=true} 
+		                    {/if} 
+		                {/foreach}
+			            
+			        </ul> 
+				</li> 
+
+
+
+	            
 	          </ul>
 
 	          <div class="btn-group" style="padding-top: 10px;">
 						<!-- <img src="{$thumb}src=/bin/images/logos/sdx.png&h=10" class=""> -->
 							<!-- <button class="btn btn-warning action btn-sm"><i class="fa fa-key"></i></button> -->
-							<button class="btn btn-warning  btn-sm"> 
+							<button class="btn btn-warning   "> 
 							<strong><i class="fa fa-key  " onclick="location.href = '/login/logout'"></i></strong>
 							</button>	
-							<button class="btn btn-info   btn-sm" onclick="location.href='/' "> 
-							<strong><i class="fa fa-globe"></i> {$SVR['SERVER_NAME']}</strong>
+							<button class="btn btn-info   {if $quest == ''}active{/if}  " onclick="location.href='/' "> 
+							<strong><i class="fa fa-globe "></i> {$SVR['SERVER_NAME']}</strong>
 							</button>	
 
 
 
 							{foreach $path as $p => $walk}
 								{if $walk}
-									<button class="{if $walk == $path[{$path|count}] }active{/if}btn btn-success btn-sm">{$walk}</button>
+									<button class="{if $walk == $path[{$path|count}] }active{/if}btn btn-success  ">{$walk}</button>
 								{/if}
 							{/foreach}
 
@@ -332,7 +344,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
 								</strong>
 							</button>	 -->
 
-							<button class="active btn btn-success  text-primary  btn-sm" style="cursor: pointer; " onmousedown="onlineBtn.m(this,'over');"   > 
+							<button class="active btn btn-success  text-primary   " style="cursor: pointer; " onmousedown="onlineBtn.m(this,'over');"   > 
 							<strong><i class="fa fa-eye"></i> Online <i class="fa fa-eye"></i></strong>
 							</button>
 							 
@@ -395,26 +407,117 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
 	          
 	         
 						
-						<ul class="nav   navbar-nav navbar-left admin_menu  " style="position: fixed;" >
+						
 
-							<li class="dropdown" ><a href="/x/" class="text text-danger dropdown-toggle" data-toggle="dropdown">
-								<strong class=" text text-success">Super</strong><span class="text-primary">Dom</span> <i class="fa fa-caret-down text-info"></i> 
+
+
+						<ul class="nav navbar-nav navbar-left"> 
+							
+							<li class="active">
+								<a class="text-success text-center">
+								<span class="label label-success"> 	<i class="fa fa-3x fa-cloud fa-spin"></i> <!--  God Mode  --> </span>
 								</a>
-								<ul class="dropdown-menu" id="toy-blox-menu">
-									{foreach $admin_menu as $key => $item}
-										 
-
-										{if $key  }  
-											<li class="dropdown-submenu">
-												<a data-filter="{$key}" href="/blox/qBlox/{$key}" class="dropdown-toggle" data-toggle="dropdown" title="{$item.desc|ucfirst}"><i class="fa fa-{$key} pull-left"></i> {$item.area|ucfirst}  </a>
-												<ul class="dropdown-menu">
-												{foreach $xtras as $x => $xtra} 
+							</li>
+							<li>
+								<a class="edit-submit " style="cursor: pointer">
+								<span class="label label-info"> <i class="fa fa-globe fa-3x "></i> <!-- Public Mode --> </span>
+								</a>
+							</li>
+						</ul>
+						
+						 <div class="btn-group" style="margin-top: 10px;">
+					          <button class="btn btn-success   active"  >
+					          	<span class="dropdown-toggle" data-toggle="dropdown" style="position: absolute; top : 0; left: 0; block; width: 100%; height: 100%;"></span><i class="fa fa-cubes fa-spin-slow disabled"></i>  <strong>Blox</strong>
+									 
+					          </button>
+					          
+					         <!--  {foreach $admin_menu as $key => $item} 
+							  	{if $key}  
+									<button class="btn btn-sm btn-info admin_menu"   > 
+										<span class="dropdown-toggle" data-toggle="dropdown" style="position: absolute; top : 0; left: 0; block; width: 100%; height: 100%;"></span><i class="fa fa-{$key}"></i>
+										<ul class="dropdown-menu">
+											{foreach $xtras as $x => $xtra} 
 												{if $xtra.icon && $key == $xtra.see}
 													<li><a data-filter="{$xtra.class}" href="/{$toBackDoor}/{$xtra.link}" title="{$xtra.desc}"  data-placement="top" data-original-title="{$xtra.desc}" class="{if $xtra.alpha}panel-danger{elseif $xtra.beta}panel-warning{elseif $xtra.delta}panel-success{elseif $xtra.omega}panel-primary{else}panel-default" disabled="disabled{/if}" > 
 
 
 
 															<i class="fa fa-{$xtra.mini}  pull-left"></i> {$xtra.name} 
+															</a> 
+														</li>  
+												{/if}
+											{/foreach} 
+										</ul>
+									</button>
+								{/if} 
+							{/foreach} -->
+							 
+							{foreach $admin_menu as $key => $item}
+								{assign var="hasBlox" value=false}
+								{foreach $xtras as $x => $xtra} 
+									{if $xtra.icon && $key == $xtra.see}
+										{if $blox[$xtra.class]}
+											{assign var="hasBlox" value=true}
+										{/if}
+									{/if}
+								{/foreach} 
+								
+								{if $key && $hasBlox == true}  
+									<button class="btn   btn-success admin_menu"   > 
+										<span class="dropdown-toggle" data-toggle="dropdown" style="position: absolute; top : 0; left: 0; block; width: 100%; height: 100%;" title="{$item.desc|ucfirst}"></span><i class="fa fa-{$key}"></i>
+										<!-- <a data-filter="{$key}" href="/blox/qBlox/{$key}" class="dropdown-toggle" data-toggle="dropdown" title="{$item.desc|ucfirst}" class="btn btn-success"><i class="fa fa-{$key}"></i>  <i class="fa fa-caret-right"></i></a> -->
+											<ul class="dropdown-menu">
+												{foreach $xtras as $x => $xtra} 
+													{if $xtra.icon && $key == $xtra.see}
+														{if $blox[$xtra.class]}
+															<li class="dropdown-submenu"><a data-filter="{$xtra.class}" href="/blox/qBlox/{$key}/{$xtra.class}" title="{$xtra.desc}"  data-placement="top" data-original-title="{$xtra.desc}" class="{if $xtra.alpha}panel-danger{elseif $xtra.beta}panel-warning{elseif $xtra.delta}panel-success{elseif $xtra.omega}panel-primary{else}panel-default" disabled="disabled{/if}" > 
+
+
+
+																<i class="fa fa-{$xtra.mini}  pull-left"></i> {$xtra.name} 
+																</a>
+																<ul class="dropdown-menu">
+																	{foreach $blox[$xtra.class] as $b => $y}
+																		<li ><a data-filter="{$y.name}" href="/blox/qBlox/{$key}/{$xtra.class}/{$y.name}" title=" "  data-placement="top" data-original-title=" " class=" " disabled=" " >
+																		<i class="fa fa-{$y.icon}  pull-left"></i> {$y.blox} 
+																		</a></li>
+																	{/foreach}
+																</ul>
+															</li>  
+														{/if}
+													{/if}
+												{/foreach} 
+											</ul>
+									</button>
+								{/if}
+							{/foreach} 	
+							<a href="/x/calendar" class="btn btn-info  " >
+					          	 {include file="~blox/clock.html"}
+					          </a> 
+							<button class="btn btn-warning  " onclick="location.href = '/login/logout'"><i class="fa fa-key fa-flip-horizontal "></i></button>
+				          </div>
+				          <ul class="nav   navbar-nav navbar-right admin_menu text-left "   >
+
+							<li class="dropdown" ><a href="/x/" class="text text-danger dropdown-toggle" data-toggle="dropdown">
+								<img src="{$thumb}src=/bin/images/logos/sdx.png&w=123">
+								<!-- <strong class=" text text-success">Super</strong><span class="text-primary">Dom</span>  -->
+								<i class="fa fa-caret-down text-info"></i> 
+								</a>
+								<ul class="dropdown-menu" id="toy-blox-menu">
+									{foreach $admin_menu as $key => $item}
+										 
+
+										{if $key  }  
+											<li class="dropdown-leftsubmenu">
+												<a data-filter="{$key}" href="/blox/qBlox/{$key}" class="dropdown-toggle" data-toggle="dropdown" title="{$item.desc|ucfirst}"><i class="fa fa-{$key} pull-right"></i> {$item.area|ucfirst}  </a>
+												<ul class="dropdown-menu">
+												{foreach $xtras as $x => $xtra} 
+												{if $xtra.icon && $key == $xtra.see}
+													<li class="{if $xtra.alpha}text-danger{elseif $xtra.beta}text-warning{elseif $xtra.delta}text-success{elseif $xtra.omega}text-primary{else}text-default{/if}"><a data-filter="{$xtra.class}" href="/{$toBackDoor}/{$xtra.link}" title="{$xtra.desc}"  data-placement="top" data-original-title="{$xtra.desc}" class="  " > 
+
+
+
+															<i class="fa fa-{$xtra.mini}  pull-right"></i> {$xtra.name} 
 															</a> 
 														</li>  
 												{/if}
@@ -476,95 +579,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
 
 							 
 						</ul>
-
-
-
-						<ul class="nav navbar-nav navbar-right"> 
-							
-							<li>
-								<a class="edit-submit " style="cursor: pointer">
-								<span class="label label-info"> <i class="fa fa-globe fa-2x "></i> Public Mode </span>
-								</a>
-							</li>
-							<li class="active">
-								<a class="text-success text-center">
-								<span class="label label-success"> 	<i class="fa fa-2x fa-cloud fa-spin"></i>  God Mode  </span>
-								</a>
-							</li>
-						</ul>
-
-						 <div class="btn-group" style="margin-top: 10px;">
-					          <button class="btn btn-success btn-sm active"  >
-					          	<span class="dropdown-toggle" data-toggle="dropdown" style="position: absolute; top : 0; left: 0; block; width: 100%; height: 100%;"></span><i class="fa fa-cubes fa-spin-slow disabled"></i>  <strong>Blox</strong>
-									 
-					          </button>
-					          
-					         <!--  {foreach $admin_menu as $key => $item} 
-							  	{if $key}  
-									<button class="btn btn-sm btn-info admin_menu"   > 
-										<span class="dropdown-toggle" data-toggle="dropdown" style="position: absolute; top : 0; left: 0; block; width: 100%; height: 100%;"></span><i class="fa fa-{$key}"></i>
-										<ul class="dropdown-menu">
-											{foreach $xtras as $x => $xtra} 
-												{if $xtra.icon && $key == $xtra.see}
-													<li><a data-filter="{$xtra.class}" href="/{$toBackDoor}/{$xtra.link}" title="{$xtra.desc}"  data-placement="top" data-original-title="{$xtra.desc}" class="{if $xtra.alpha}panel-danger{elseif $xtra.beta}panel-warning{elseif $xtra.delta}panel-success{elseif $xtra.omega}panel-primary{else}panel-default" disabled="disabled{/if}" > 
-
-
-
-															<i class="fa fa-{$xtra.mini}  pull-left"></i> {$xtra.name} 
-															</a> 
-														</li>  
-												{/if}
-											{/foreach} 
-										</ul>
-									</button>
-								{/if} 
-							{/foreach} -->
-							 
-							{foreach $admin_menu as $key => $item}
-								{assign var="hasBlox" value=false}
-								{foreach $xtras as $x => $xtra} 
-									{if $xtra.icon && $key == $xtra.see}
-										{if $blox[$xtra.class]}
-											{assign var="hasBlox" value=true}
-										{/if}
-									{/if}
-								{/foreach} 
-								
-								{if $key && $hasBlox == true}  
-									<button class="btn btn-sm btn-success admin_menu"   > 
-										<span class="dropdown-toggle" data-toggle="dropdown" style="position: absolute; top : 0; left: 0; block; width: 100%; height: 100%;" title="{$item.desc|ucfirst}"></span><i class="fa fa-{$key}"></i>
-										<!-- <a data-filter="{$key}" href="/blox/qBlox/{$key}" class="dropdown-toggle" data-toggle="dropdown" title="{$item.desc|ucfirst}" class="btn btn-success"><i class="fa fa-{$key}"></i>  <i class="fa fa-caret-right"></i></a> -->
-											<ul class="dropdown-menu">
-												{foreach $xtras as $x => $xtra} 
-													{if $xtra.icon && $key == $xtra.see}
-														{if $blox[$xtra.class]}
-															<li class="dropdown-submenu"><a data-filter="{$xtra.class}" href="/blox/qBlox/{$key}/{$xtra.class}" title="{$xtra.desc}"  data-placement="top" data-original-title="{$xtra.desc}" class="{if $xtra.alpha}panel-danger{elseif $xtra.beta}panel-warning{elseif $xtra.delta}panel-success{elseif $xtra.omega}panel-primary{else}panel-default" disabled="disabled{/if}" > 
-
-
-
-																<i class="fa fa-{$xtra.mini}  pull-left"></i> {$xtra.name} 
-																</a>
-																<ul class="dropdown-menu">
-																	{foreach $blox[$xtra.class] as $b => $y}
-																		<li ><a data-filter="{$y.name}" href="/blox/qBlox/{$key}/{$xtra.class}/{$y.name}" title=" "  data-placement="top" data-original-title=" " class=" " disabled=" " >
-																		<i class="fa fa-{$y.icon}  pull-left"></i> {$y.blox} 
-																		</a></li>
-																	{/foreach}
-																</ul>
-															</li>  
-														{/if}
-													{/if}
-												{/foreach} 
-											</ul>
-									</button>
-								{/if}
-							{/foreach} 	
-							<a href="/x/calendar" class="btn btn-info btn-sm" >
-					          	 {include file="~blox/clock.html"}
-					          </a> 
-							<button class="btn btn-warning btn-sm" onclick="location.href = '/login/logout'"><i class="fa fa-key fa-flip-horizontal "></i></button>
-				          </div>
-
 					</div><!--/.nav-collapse -->
 				</div> 
 
@@ -837,8 +851,16 @@ function bloxSwitch(active) {
 			.dropdown-submenu:hover>.dropdown-menu{ display:block;}
 			.dropdown-submenu>a:after{ display:block;content:" ";float:right;width:0;height:0;border-color:transparent;border-style:solid;
 			border-width:5px 0 5px 5px ;border-left-color:#222;margin-top:5px;margin-left:-10px;}
-			.dropdown-submenu:hover>a:after{ border-left-color:#ff0000;}
+			.dropdown-submenu:hover>a:after{ border-left-color:#000;}
 			.dropdown-submenu.pull-left{ float:none;}.dropdown-submenu.pull-left>.dropdown-menu{ right:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
+
+			.dropdown-leftsubmenu{ position:relative;}
+			.dropdown-leftsubmenu>.dropdown-menu{ top:0;right:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
+			.dropdown-leftsubmenu:hover>.dropdown-menu{ display:block;}
+			.dropdown-leftsubmenu>a:after{ display:block;content:" ";float:left;width:0;height:0;border-color:transparent;border-style:solid;
+			border-width:5px 5px 5px  0  ;border-right-color:#222;margin-top:5px;margin-left:-10px;}
+			.dropdown-leftsubmenu:hover>a:after{ border-right-color:#000;}
+			.dropdown-leftsubmenu.pull-left{ float:none;}.dropdown-leftsubmenu.pull-left>.dropdown-menu{ right:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
 
  
 		</style>

@@ -12,7 +12,7 @@
 
 {/if}
 
-<li class="span2 dropdown{if $sub && $children gt 0}-submenu{/if}"><a class="dropdown-toggle" {if !$sub} data-toggle="dropdown"{/if} href="{if !$sub}/{else}/{$linktothe}{/if}"> {$link.title}  {if !$sub && $children gt 0}   <b class="caret"></b>{/if}</a>
+<li class="span2 dropdown{if $sub && $children gt 0}-leftsubmenu{/if}"><a class="dropdown-toggle" {if !$sub} data-toggle="dropdown"{/if} href="{if !$sub}/{else}/{$linktothe}{/if}"> {$link.title}  {if !$sub && $children gt 0}   <b class="caret"></b>{/if}</a>
 {assign var=children value=0}
     {foreach $navi as $nav => $l} 
         {if $l.parent == $link.id} 

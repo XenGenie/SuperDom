@@ -437,12 +437,13 @@
 		}
 
 		/**
-			@name cover
-			@blox Landmark
-			@desc Every great website deserves A Professionally Sexy Coverpage
-			@icon flag
+			@name portal
+			@blox Portal
+			@icon ge fa-spin 
+			@desc Pull another page as a blox.
+			
 		**/
-		public function cover()
+		public function portal()
 		{
 			# code...
 		}
@@ -486,7 +487,7 @@
 
 		/**
 			@name javascript
-			@blox Javscript
+			@blox Javascript
 			@desc Simple Easy to use Custom Code Blox
 			@icon code
 		**/
