@@ -391,6 +391,14 @@
 		/**
 
 		**/
+
+		public function bloxDelete()
+		{
+			if($this->Key['is']['admin']){
+				
+			}
+		}
+
 		public function bloxSwitch($blox)
 		{
 			# Admins Only...

@@ -48,12 +48,12 @@
     <style type="text/css">
       {if !$masterKey.is.admin}
 	      body {   
-	     background: none;
+	     	background: white;
 
 	      }
 	   {else }
 	   html, body {
-	   	background: none;
+	   		background: white;
 	   }
       {/if}
 		.panel { 
@@ -78,7 +78,7 @@ background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZ
       }
       /* -- make sure to declare a default for every property that you want animated -- */
       /* -- general styles, including Y axis rotation -- */
-	.panel .front { 
+	.panel > .front { 
 		float                       : none;
 		position                    : absolute;
 		top                         : 0;
@@ -112,9 +112,8 @@ background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZ
 background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjEwJSIgY3k9IjAiIHI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9InJnYmEoNzQsIDEyMSwgMTQ3LCAwLjg5KSIvPjxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSJyZ2JhKDIyNiwgMjI2LCAyMjYsIDAuODcpIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSJyZ2JhKDE4NSwgMTM1LCAxMzEsIDAuODcpIi8+PC9yYWRpYWxHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4=),url(../img/bgnoise_lg_dark.png);
 
       }
-      .panel.flip .front { 
-		z-index           : 900;
-		border-color      : #eee;
+      .panel.flip > .front { 
+		z-index           : 900; 
 		 
 		/*box-shadow      : 0 15px 50px rgba(0,0,0,0.2);*/
 		
@@ -123,7 +122,7 @@ background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZ
 		transform         : rotateY(180deg);
       }
 
-  	.panel .back { 
+  	.panel > .back { 
 		float                       : none;
 		position                    : absolute;
 		top                         : 0;
@@ -162,7 +161,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b1d8f5', end
 
   	}
 
-      .panel.flip .back { 
+      .panel.flip > .back { 
 		z-index           : 1000;
 		/*background      : #80868d;*/
 		
@@ -179,11 +178,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b1d8f5', end
 
       }
 
-.panel .back .navbar *{ 
- 	/* -- transition is the magic sauce for animation -- */
-		-webkit-transition          : all .1s linear;
-		transition                  : all .1s linear;
-}
+		.panel > .back .navbar *{ 
+		 	/* -- transition is the magic sauce for animation -- */
+				-webkit-transition          : all .1s linear;
+				transition                  : all .1s linear;
+		}
 
       /* -- X axis rotation for click panel -- */
       .click .front { 
@@ -875,12 +874,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', end
 </div>
 
 {/if}
-
-		<div class="footer">
-	      <div class="container">
-	        <p class="text-muted">Place sticky footer content here.</p>
-	      </div>
-	    </div>
+ 
 <script src="/x/html/layout/watchtower/lib/jquery-pjax/jquery.pjax.js"></script>
 
     <!-- Include all compiled plugins (below), or include individual files as needed --> 
@@ -970,19 +964,4 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', end
 		</style>
 	</body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
