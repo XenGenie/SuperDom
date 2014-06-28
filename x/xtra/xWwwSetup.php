@@ -105,6 +105,11 @@ class xWwwSetup extends Xengine {
 		return $this->_SET;
 	}
 
+	public function dump($var)
+	{
+		$this->set('var',$var);
+	}
+
 	public function style($area='users'){
 		if($q = $this->q()){
 				

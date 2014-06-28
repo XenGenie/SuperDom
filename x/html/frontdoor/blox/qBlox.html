@@ -176,7 +176,7 @@ color: white;
         	 	{/foreach} 
 
 
-            	 <div class="blox" >
+            	 <div class="blox"  blox-id="{$x['id']}" >
 					<a data-toggle="modal" href="#windowTitleDialog">
 		            	<div data-filter="{$k}" class="hover {if $online == 1}activeBlox{else}deactiveBlox{/if}" id="toy-{$k}-{$x['name']}" title="{$x['blox']}" icon="{$x['icon']}"> 
 			               <div class="alert alert-{if $online == 1}success{else}info{/if}  col-md-12 ">
@@ -184,7 +184,7 @@ color: white;
 							</div>
 			              	<h2 class=" ">{$x['blox']}</h2>
 
-			                <i class="fa fa-{$x['icon']} fa-5x  "></i>  
+			                <i class="fa fa-{$x['icon']} fa-5x "></i>  
 			              	
 			            </div>
 		            </a>
@@ -211,7 +211,8 @@ color: white;
     	// TODO: This is some tasty pasta... 
     	$('.blox .hover').click(function() { 
 
-    		
+    		var id = $(this).parents('.blox').attr('blox-id') ;
+    		$('#windowTitleDialog .blox-delete').attr('href','/blox/bloxDelete/'+id);
 
     		var i = $('#windowTitleDialog .blox-cover .blox-icon'); 
     		i.attr('class','blox-icon').addClass('fa fa-5x');  

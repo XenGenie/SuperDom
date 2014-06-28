@@ -36,6 +36,8 @@ class xLogin extends Xengine {
 
 			if(isset($_POST['login']) && is_array($_POST['login']))
 				return $this->login($_POST['login']['username'],$_POST['login']['password']);
+			else
+				$this->set('user',$_SESSION['user']);
 		}
 
 		private function getUserByName($user,$cols = 'id'){

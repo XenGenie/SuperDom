@@ -438,7 +438,7 @@ top: 5px;">
 						
 						 <div class="btn-group" style="margin-top: 10px;">
 					          <button class="btn btn-success   active"  >
-					          	<span class="dropdown-toggle" data-toggle="dropdown" style="position: absolute; top : 0; left: 0; block; width: 100%; height: 100%;"></span><i class="fa fa-cubes fa-spin-slow disabled"></i>  <strong>Blox</strong>
+					          	<span  data-toggle="dropdown" style="position: absolute; top : 0; left: 0; block; width: 100%; height: 100%;"></span><i class="fa fa-cubes fa-spin-slow "></i>  <strong>Blox</strong>
 									 
 					          </button>
 					          
@@ -467,7 +467,7 @@ top: 5px;">
 								{assign var="hasBlox" value=false}
 								{foreach $xtras as $x => $xtra} 
 									{if $xtra.icon && $key == $xtra.see}
-										{if $blox[$xtra.class]}
+										{if $qBlox[$xtra.class]}
 											{assign var="hasBlox" value=true}
 										{/if}
 									{/if}
@@ -480,7 +480,7 @@ top: 5px;">
 											<ul class="dropdown-menu">
 												{foreach $xtras as $x => $xtra} 
 													{if $xtra.icon && $key == $xtra.see}
-														{if $blox[$xtra.class]}
+														{if $qBlox[$xtra.class]}
 															<li class="dropdown-submenu"><a data-filter="{$xtra.class}" href="/blox/qBlox/{$key}/{$xtra.class}" title="{$xtra.desc}"  data-placement="top" data-original-title="{$xtra.desc}" class="{if $xtra.alpha}panel-danger{elseif $xtra.beta}panel-warning{elseif $xtra.delta}panel-success{elseif $xtra.omega}panel-primary{else}panel-default" disabled="disabled{/if}" > 
 
 
@@ -488,7 +488,7 @@ top: 5px;">
 																<i class="fa fa-{$xtra.mini}  pull-left"></i> {$xtra.name} 
 																</a>
 																<ul class="dropdown-menu">
-																	{foreach $blox[$xtra.class] as $b => $y}
+																	{foreach $qBlox[$xtra.class] as $b => $y}
 																		<li ><a data-filter="{$y.name}" href="/blox/qBlox/{$key}/{$xtra.class}/{$y.name}" title=" "  data-placement="top" data-original-title=" " class=" " disabled=" " >
 																		<i class="fa fa-{$y.icon}  pull-left"></i> {$y.blox} 
 																		</a></li>
@@ -702,8 +702,33 @@ top: 5px;">
     	//$(document).pjax('a', '#paper-back', { fragment: '#content' });
     	
     });
+
+function bloxDelete (t,e) {
+
+	bloxSwitch(false);
+
+	var url = $(t).attr('href');
+
+	$.ajax({
+		type     : "POST",
+		url      : url+'/.json',
+		 
+		dataType : "json",
+	    success: function(data)
+	    {  
+	    	$('[blox-id='+url.replace('/blox/bloxDelete/','')+']').remove();
+
+			$('#windowTitleDialog').modal('hide'); 
+	    }
+	  });
+	e.preventDefault();
+	// body...
+}
+
+ 
+
 	 
-function bloxSwitch(active,t) {
+function bloxSwitch(active,t,c) {
 
 	if(active == 'star'){ 
 		var i = $(t).find('i');
@@ -714,11 +739,12 @@ function bloxSwitch(active,t) {
 		}else{
 			$(t).addClass('active');
 			i.attr('class','fa fa-star');
-		}
-		return;
+		} 
+	}else{
+		$('#windowTitleDialog').modal('hide'); 
 	}
 
-	$('#windowTitleDialog').modal('hide'); 
+	
 
 	var i = $('#windowTitleDialog .blox-icon')
 	
@@ -735,6 +761,7 @@ function bloxSwitch(active,t) {
 		$('#'+i).addClass('activeBlox');
 	}
 
+	var quest = "{$SVR['QUERY_STRING']}".replace(/%20/g,'-').toLowerCase();
 
 
 	 $.ajax({
@@ -744,7 +771,7 @@ function bloxSwitch(active,t) {
 			bloxSwitch : {
 				online : active,
 				blox   : blox,
-				quest  : location.pathname.replace(/%20/g,'-').toLowerCase()
+				quest  : (quest) ? quest : '/'
 			}
 		},
 		dataType : "json",
@@ -784,6 +811,12 @@ function bloxSwitch(active,t) {
 				$('#'+i).removeClass('activeBlox'); 
 				$('#'+i).addClass('deactiveBlox');
 			}
+
+
+			if(c){
+				c();
+			}
+
 	    }
 	  });
 
@@ -854,14 +887,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', end
           <div class="nav navbar-nav navbar-right btn-group blox-bar-btns" style="margin-top: 5px;">
             
           
-          <a class="btn btn-default btn-lg"><i class="fa fa-trash-o"></i></a>
+          <a class="btn btn-default btn-lg blox-delete" onclick="bloxDelete(this,event);"><i class="fa fa-trash-o"></i></a>
         	  <a class="btn btn-warning btn-lg" onclick="bloxSwitch('star',this);"><i class="fa fa-star-o"></i></a>
           	
           </div>
         </div><!--/.nav-collapse -->
       </div>
     </div>
-	<div class="container" style="padding-top:50px;">
+	<div class="container" style="padding-top:5s0px;">
 		<!-- <a href="#" class="close" data-dismiss="modal">&times;</a> -->
 		<div class="jumbotron blox-cover text-center">
 	       

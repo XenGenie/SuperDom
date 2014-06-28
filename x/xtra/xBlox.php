@@ -59,7 +59,6 @@
 			$xtras = $this->getXtras();
 
 
-			$class = array();
 			$blox = array();
 
 			// lets check to see which ones have comment functions.
@@ -76,7 +75,8 @@
 
 				if( ($cat == null || $b['see'] == $cat)  ){
 					$rClass = new ReflectionClass($b['class']); 
-					if ( $class != null && $class != $b['class'] )  
+					
+					if ( $class != null && $class != $rClass->name )  
 						continue;
 
 					$rMethods = $rClass->getMethods();
@@ -140,7 +140,41 @@
 			// }
 
 			if($sDom->Key['is']['admin']){
-				$this->set('blox',$this->qBlox() );
+
+				$quest = strtolower(str_replace('%20', '-', $_SERVER['REQUEST_URI']));
+
+
+				$q = $this->q();
+
+				$blox 	= $q->Select('*','blox_quest',array(
+					'quest' => $quest
+				));
+
+				$qBlox = $this->qBlox();
+
+				foreach ($blox as $r => $c) {
+					$t = explode('-', $c['blox']);
+					$rBlox[$t[0]][$t[1]] = $qBlox[$t[0]][$t[1]];
+					$rBlox[$t[0]][$t[1]]['id'] = $c['id'];
+				}
+
+				$blox 	= $q->Select('*','blox_quest',array(
+					'quest' => $quest.'*'
+				));
+
+				foreach ($blox as $r => $c) {
+					$t = explode('-', $c['blox']);
+					$rBlox[$t[0]][$t[1]] = $qBlox[$t[0]][$t[1]];
+					$rBlox[$t[0]][$t[1]]['id'] = $c['id'];
+				}
+
+
+// 				 var_dump($rBlox);
+// exit;
+				// $qBlox  = $this->qBlox() ;
+
+				$this->set('qBlox', $this->qBlox() );
+				$this->set('blox', $rBlox );
 			}
 
 			if($_POST['bloxSwitch']){
@@ -392,15 +426,39 @@
 
 		**/
 
-		public function bloxDelete()
+		public function bloxDelete($id)
 		{
 			if($this->Key['is']['admin']){
-				
+				return array(
+					'success' => $this->q()->Delete('blox_quest',array(
+						'id' => $id
+					))
+				);
+			}
+		}
+
+		public function bloxStar($id, $quest)
+		{
+			if($this->Key['is']['admin']){
+				 
+				return array(
+					'success' => $this->q()->Update('blox_quest',array(
+						'quest' => ($quest == '/') ? $quest.'*' : $quest.'/*'
+					),array(
+						'id' => $id
+					))
+				);
 			}
 		}
 
 		public function bloxSwitch($blox)
 		{
+			if($blox['online'] == 'star'){
+				$blox['online'] = 1;
+				$id = $this->bloxSwitch($blox);
+				$this->bloxStar($id['id'],$blox['quest']); 
+			}
+
 			# Admins Only...
 			if($this->Key['is']['admin']){
 				$q = $this->q();
