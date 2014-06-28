@@ -208,7 +208,7 @@ color: white;
 
 
     $(document).ready(function() {
-    	// $('.blox').sortable(); 
+    	// TODO: This is some tasty pasta... 
     	$('.blox .hover').click(function() { 
 
     		if( $(this).hasClass('activeBlox') ){
@@ -219,19 +219,27 @@ color: white;
     			$('#windowTitleDialog .btn-danger').addClass('active disabled');
     		};
 
-    		var i = $('#windowTitleDialog h2 i');
-			
-    		i.attr('class','').addClass('fa fa-5x');
+    		var i = $('#windowTitleDialog .blox-cover .blox-icon'); 
+    		i.attr('class','blox-icon').addClass('fa fa-5x');  
+			i.addClass('fa-'+$(this).attr('icon'));
 
+    		var i = $('#windowTitleDialog .blox-bar .blox-icon'); 
+    		i.attr('class','blox-icon').addClass('fa fa-2x'); 
 			i.addClass('fa-'+$(this).attr('icon'));
 
 			i.attr({
-				id : 'activate-blox',
+				// id   : 'activate-blox',
 				blox : $(this).attr('id').replace('toy-','')
 			});
 
-			var s = $('#windowTitleDialog h2 span');
-			s.html($(this).attr('title'));
+			var txt = $('#windowTitleDialog .blox-blox');
+			txt.html(' '+$(this).attr('title'));
+
+			var desc = $('#windowTitleDialog .blox-desc');
+			desc.html($(this).find('.alert').html());
+			// s.append(' '+);
+
+			 $('#windowTitleDialog .blox-bar-btns i').removeClass('fa-2x');
   
 
     	});

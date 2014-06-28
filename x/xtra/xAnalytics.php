@@ -57,13 +57,15 @@
 				$this->set('page_landing', $page_landing[0]);
 
 				$this->set('SVR',$_SERVER);
+				// $stats = $X->statistics();
+				$this->set('site_stats',$stats);
 			}			
 
 
 
 		}
 
-		public function statistics($function)
+		function statistics($function='')
 		{
 			return array(
 				"emails" => count($this->Q->Select("id",'Users',"last_login > UNIX_TIMESTAMP( NOW() - INTERVAL 24 HOUR )")),

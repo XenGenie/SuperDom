@@ -299,7 +299,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
 	            <!-- TODO: Add Navigation Here -->
 	            
 
-				<li class="span2 dropdown {if $quest == ''}active{/if}"><a class="dropdown-toggle"  data-toggle="dropdown" ><span class="btn btn-info btn-sm"><i class="fa fa-globe {if $quest == ''}fa-1x fa-spin{/if}"></i>  </span></a>
+				<li class="span2 dropdown {if $quest == ''}active{/if}"><a class="dropdown-toggle"  data-toggle="dropdown" ><span class="btn btn-info btn-sm"><i class="fa fa-globe {if $quest == ''}fa-1x fa-spin{/if}"></i><span class="label label-success">{$site_stats.hits}</span></span></a>
 					<ul class="dropdown-menu">
 			            
 						{foreach $navi as $n => $link}
@@ -693,13 +693,27 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0feffff', e
     	
     });
 	 
-function bloxSwitch(active) {
+function bloxSwitch(active,t) {
+
+	if(active == 'star'){ 
+		var i = $(t).find('i');
+
+		if($(t).hasClass('active')){
+			$(t).removeClass('active');
+			i.attr('class','fa fa-star-o');
+		}else{
+			$(t).addClass('active');
+			i.attr('class','fa fa-star');
+		}
+		return;
+	}
+
 	$('#windowTitleDialog').modal('hide'); 
 
-	var i = $('#windowTitleDialog h2 i')
+	var i = $('#windowTitleDialog .blox-icon')
 	
 	var blox = i.attr('blox').replace('toy-','');
-	i = i.attr('id').replace('toy-','').replace('icon-','toy-'); 
+	i = 'toy-'+blox; 
 
  
 	if( !active ){   
@@ -781,7 +795,15 @@ function bloxSwitch(active) {
 
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-<div id="windowTitleDialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true" style="  overflow: hidden; position: absolute;    background-color : rgba(0,0,0,0.80);">
+<div id="windowTitleDialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true" style="  overflow: hidden; position: absolute;    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjYjNkY2VkIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMiUiIHN0b3AtY29sb3I9IiNhZGRiZWQiIHN0b3Atb3BhY2l0eT0iMC44Ii8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iIzI5YjhlNSIgc3RvcC1vcGFjaXR5PSIwLjgiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2JjZTBlZSIgc3RvcC1vcGFjaXR5PSIwLjgiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+background: -moz-linear-gradient(-45deg,  rgba(179,220,237,1) 0%, rgba(173,219,237,0.8) 2%, rgba(41,184,229,0.8) 50%, rgba(188,224,238,0.8) 100%);
+background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(179,220,237,1)), color-stop(2%,rgba(173,219,237,0.8)), color-stop(50%,rgba(41,184,229,0.8)), color-stop(100%,rgba(188,224,238,0.8)));
+background: -webkit-linear-gradient(-45deg,  rgba(179,220,237,1) 0%,rgba(173,219,237,0.8) 2%,rgba(41,184,229,0.8) 50%,rgba(188,224,238,0.8) 100%);
+background: -o-linear-gradient(-45deg,  rgba(179,220,237,1) 0%,rgba(173,219,237,0.8) 2%,rgba(41,184,229,0.8) 50%,rgba(188,224,238,0.8) 100%);
+background: -ms-linear-gradient(-45deg,  rgba(179,220,237,1) 0%,rgba(173,219,237,0.8) 2%,rgba(41,184,229,0.8) 50%,rgba(188,224,238,0.8) 100%);
+background: linear-gradient(135deg,  rgba(179,220,237,1) 0%,rgba(173,219,237,0.8) 2%,rgba(41,184,229,0.8) 50%,rgba(188,224,238,0.8) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', endColorstr='#ccbce0ee',GradientType=1 );
+">
   <!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
@@ -792,26 +814,37 @@ function bloxSwitch(active) {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <!-- <a class="navbar-brand" href="#">Project name</a> -->
         </div>
-        <div class="navbar-collapse collapse">
+        <div class="navbar-collapse collapse text-center blox-bar">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
+             <li class="">
+            	<a class="" style="cursor: pointer" onclick="closeDialog();">
+	            	<span class="label label-default"> <i class="fa fa-cloud fa-2x"></i> <!-- God Mode --></span>
+	            </a>
+	        </li>
+            <li class="active">
+            	<a class="action" style="cursor: pointer" >
+	            	<span class="label label-info"> <i class="blox-icon"></i> <!-- God Mode --></span>
+	            </a>
+	        </li>
+             
           </ul>
+          <div class="btn-group blox-bar-btns" style="margin-top: 5px;">
+
+
+          	
+          	<a class="btn btn-info active btn-lg"><i class="blox-icon"></i></a>
+          	<a class="btn btn-default active btn-lg">
+          		<i class="fa fa-gear fa-spin-reverse text-success"></i>
+          		<span class="blox-blox"></span>
+          		<i class="fa fa-gear fa-spin text-info"></i></a>
+          	<a class="btn btn-success btn-lg" onclick="bloxSwitch(true);"><i class="fa fa-eye"></i></a>
+          	<a class="btn btn-warning btn-lg" onclick="bloxSwitch('star',this);"><i class="fa fa-star-o"></i></a>
+          	<a class="btn btn-danger btn-lg"  onclick="bloxSwitch(false);"><i class="fa fa-eye-slash"></i></a>
+
+
+          </div>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="../navbar/">Default</a></li>
             <li><a href="../navbar-static-top/">Static top</a></li>
@@ -820,22 +853,15 @@ function bloxSwitch(active) {
         </div><!--/.nav-collapse -->
       </div>
     </div>
-	<div class=" text-center">
+	<div class="container" style="padding-top:50px;">
 		<!-- <a href="#" class="close" data-dismiss="modal">&times;</a> -->
-		<h2 style="color: white;">
-			<i class="fa fa-5x"></i><br/><span></span>
-		</h2>  
-		<div class="btn-group">
-			<a href="#" class="btn btn-left btn-success btn-lg" onclick="bloxSwitch(true);">
-				<i class="fa fa-eye"></i> On
-			</a>
-			<a href="#" class="btn btn-left btn-info btn-lg active" onclick="$(this).toggleClass('active')">
-				<i class="fa fa-graduation-cap"></i>
-			</a>
-			<a href="#" class="btn btn-right btn-danger btn-lg" onclick="bloxSwitch(false);">
-				Off <i class="fa fa-eye-slash"></i>
-			</a>
-		</div> 
+		<div class="jumbotron blox-cover text-center">
+	       
+	        <h1><span class="blox-blox"></span><br/><i class="blox-icon"></i><br/></h1>
+	        
+	        <p><span class="blox-desc"></span></p>
+	          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button"><i class="fa fa-graduation-cap"></i>View Tutorial »</a>
+		</div>
 	</div> 
 </div>
 

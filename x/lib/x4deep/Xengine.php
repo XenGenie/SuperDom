@@ -768,15 +768,29 @@
 			$this->smarty->compile_dir  = $dir."/templates_c";
 			$this->smarty->cache_dir    = $dir."/cache";
 			$this->smarty->config_dir   = $dir."/configs";
+
+
+			
+
  
 
 			 
 			$this->smarty->template_dir = $this->_CFG['dir']['html'];
 			$this->smarty->assign($a);			
 
+			
+			//
+			if($this->_CFG['debug']['cache']  == false){
+				$this->smarty->clearAllCache();
+			}
+
 
 			ob_clean();
 			$this->smarty->display('index.html');
+			//
+			if($this->_CFG['debug']['cache'] == false){
+				$this->smarty->clearAllCache();
+			}
 
 			return $this->smarty;
 		}

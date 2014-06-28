@@ -25,7 +25,8 @@
 		),
 		'db'    => 'MySql',
 		'debug' => array(
-			'on' => false,
+			'on'      => false,
+			'cache'   => false,
 			'runtime' => microtime(true)
 		),
 		'html' => array(
