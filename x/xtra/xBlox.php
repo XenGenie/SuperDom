@@ -464,14 +464,14 @@
 		}
 
 		/**
-			@name html5
+			@name html
 			@blox HTML
 			@desc Simple Easy to use Custom Code Blox
 			@icon html5
 		**/
-		public function html5()
+		public function html()
 		{
-			# code...
+			# code...cus
 		}
 
 		/**

@@ -80,12 +80,15 @@
 					    {
 					      // Handle the server response (display errors if necessary)
 
-					      $.pjax({
-
+					      $.pjax({ 
 							container : '.content',
 							fragment  : '.content',
 							timeout   : 5000,
-							url       : window.location.pathname+window.location.search+window.location.hash
+                            {if $masterKey.is.atBackDoor}
+                            url       : window.location.pathname+window.location.search+window.location.hash
+                            {else}
+                            url       : '/'
+                            {/if} 
 					      });
 
 					    }

@@ -76,6 +76,17 @@
 			# code...
 		}
 
+		/**
+			@name breadcrumb
+			@blox Breadcrumbs
+			@desc This blox breaks down the navigation making a trail home.
+			@icon road
+		**/
+		public function breadcrumb()
+		{
+			# code...
+		}
+
 		function __construct($c){
 			parent::__construct($c);
 			// Recycle sql connection

@@ -211,13 +211,7 @@ color: white;
     	// TODO: This is some tasty pasta... 
     	$('.blox .hover').click(function() { 
 
-    		if( $(this).hasClass('activeBlox') ){
-    			$('#windowTitleDialog .btn-success').addClass('active disabled'); 
-    			$('#windowTitleDialog .btn-danger').removeClass('active disabled');
-    		}else{
-    			$('#windowTitleDialog .btn-success').removeClass('active disabled'); 
-    			$('#windowTitleDialog .btn-danger').addClass('active disabled');
-    		};
+    		
 
     		var i = $('#windowTitleDialog .blox-cover .blox-icon'); 
     		i.attr('class','blox-icon').addClass('fa fa-5x');  
@@ -237,7 +231,26 @@ color: white;
 
 			var desc = $('#windowTitleDialog .blox-desc');
 			desc.html($(this).find('.alert').html());
+
+
 			// s.append(' '+);
+
+			if( $(this).hasClass('activeBlox') ){
+    			$('#windowTitleDialog .btn-success').addClass('active disabled'); 
+    			$('#windowTitleDialog .btn-danger').removeClass('active disabled');
+    			// desc.addClass('text-success');
+    			// desc.removeClass('text-danger');
+    			// txt.addClass('text-success');
+    			// txt.removeClass('text-danger');
+
+    		}else{
+    			// desc.removeClass('text-success');
+    			// desc.addClass('text-danger');
+    			// txt.removeClass('text-success');
+    			// txt.addClass('text-danger');
+    			$('#windowTitleDialog .btn-success').removeClass('active disabled'); 
+    			$('#windowTitleDialog .btn-danger').addClass('active disabled');
+    		};
 
 			 $('#windowTitleDialog .blox-bar-btns i').removeClass('fa-2x');
   
