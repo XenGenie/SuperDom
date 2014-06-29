@@ -146,19 +146,11 @@
 
 				$q = $this->q();
 
-				$blox 	= $q->Select('*','blox_quest',array(
-					'quest' => $quest
-				));
+				
 
 				$qBlox = $this->qBlox();
 
-				foreach ($blox as $r => $c) {
-					$t = explode('-', $c['blox']);
-					$rBlox[$t[0]][$t[1]] = $qBlox[$t[0]][$t[1]];
-					$rBlox[$t[0]][$t[1]]['id'] = $c['id'];
-				}
-
-				$blox 	= $q->Select('*','blox_quest',array(
+$blox 	= $q->Select('*','blox_quest',array(
 					'quest' => $quest.'*'
 				));
 
@@ -168,6 +160,17 @@
 					$rBlox[$t[0]][$t[1]]['id'] = $c['id'];
 				}
 
+$blox 	= $q->Select('*','blox_quest',array(
+					'quest' => $quest
+				));
+
+				foreach ($blox as $r => $c) {
+					$t = explode('-', $c['blox']);
+					$rBlox[$t[0]][$t[1]] = $qBlox[$t[0]][$t[1]];
+					$rBlox[$t[0]][$t[1]]['id'] = $c['id'];
+				}
+
+				
 
 // 				 var_dump($rBlox);
 // exit;
@@ -177,7 +180,7 @@
 				$this->set('blox', $rBlox );
 			}
 
-			if($_POST['bloxSwitch']){
+			if(isset($_POST['bloxSwitch'])){
 				return $this->bloxSwitch($_POST['bloxSwitch']);
 			}
 

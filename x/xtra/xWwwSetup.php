@@ -107,6 +107,8 @@ class xWwwSetup extends Xengine {
 
 	public function dump($var)
 	{
+		$this->set('set',$this->_SET);
+
 		$this->set('var',$var);
 	}
 

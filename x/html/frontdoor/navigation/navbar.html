@@ -273,13 +273,10 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
-            </button>
-            <a class="btn btn-success active action" href="/login/logout"  >
-                    <i class="fa fa-power-off"></i>
-                  </a>
+            </button> 
             <a class="navbar-brand" href="#">
               <i class="fa fa-user"></i>
-              {$site_name}: User Bar
+              {$site_name}: Login
             </a>
           </div>
           <div class="navbar-collapse collapse" style="padding-top: 7px;">
@@ -291,9 +288,14 @@
                       <span class="input-group-btn  {if $masterKey.is.user}
                     active
                   {/if}">
-                      <button class="btn btn-success active disabled" type="button"><i class="fa fa-user"></i></button>
+                      <button class="btn btn-primary active disabled" type="button"><i class="fa fa-user"></i></button>
                     </span>
                     <input type="text" class="form-control" name="login[username]">
+
+                    <span class="input-group-btn ">
+                      
+                     <button class="btn btn-info" type="button"><i class="fa fa-question-circle"></i></button>
+                    </span>
                     </div><!-- /input-group -->
                   </div><!-- /.col-lg-6 -->
                   <div class="col-sm-6">
@@ -308,7 +310,7 @@
                     <span class="input-group-btn   {if $masterKey.is.user}
                     active
                   {/if}">
-                      <button class="btn btn-info" type="submit"><i class="fa fa-unlock"></i></button>
+                      <button class="btn btn-success" type="submit"><i class="fa fa-unlock"></i></button>
                       
                     </span>
                     </div><!-- /input-group -->
@@ -317,7 +319,7 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
               <li class="btn-group">
-                <button class="btn btn-info" type="button"><i class="fa fa-question-circle"></i></button>
+               
                 <button class="btn btn-danger edit-submit" type="button"><i class="fa fa-ban"></i></button>
                 <!-- <button class="btn btn-info" type="button"><i class="fa fa-question-circle"></i></button> -->
               </li>
@@ -404,14 +406,15 @@
  -->
             <ul class="nav navbar-nav navbar-right" style="margin-top: 7px;">
               <li class="btn-group">
-                  <button class="btn btn-success action">
+               <!--    <button class="btn btn-success action">
                     <i class="fa fa-shield"></i>
                   </button>
                    <button class="btn btn-info action">
                     <i class="fa fa-recycle"></i>
                   </button>
                 <button class="btn btn-info" type="button"><i class="fa fa-question-circle"></i></button>
-                <button class="btn btn-danger edit-submit" type="button"><i class="fa fa-mail-forward"></i></button>
+                 -->
+                 <button class="btn btn-danger edit-submit" type="button"><i class="fa fa-mail-forward"></i></button>
                 <!-- <button class="btn btn-info" type="button"><i class="fa fa-question-circle"></i></button> -->
               </li>
             </ul>

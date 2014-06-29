@@ -285,6 +285,10 @@
 			$this->_SET['params']        = (isset($this->url['path'])) ? explode('/', $this->url['path']) : array('/');
 			
 			
+			if(!isset($this->_SET['params'][1])){
+				$this->_SET['params'] = array('','');
+			}
+
 			// BOOL
 			$this->atSideDoor  = ($this->_SET['params'][0] === $this->_CFG['dir']['sidedoor'] 
 				|| $this->_SET['params'][1] === $this->_CFG['dir']['sidedoor']);	
@@ -780,15 +784,15 @@
 
 			
 			//
-			if($this->_CFG['debug']['cache']  == false){
-				$this->smarty->clearAllCache();
-			}
+			// if($this->_CFG['debug']['cache']  == false){
+			// 	$this->smarty->clearAllCache();
+			// }
 
 
 			ob_clean();
 			$this->smarty->display('index.html');
 			//
-			if($this->_CFG['debug']['cache'] == false){
+			if($this->_CFG['debug']['cache']  == false){
 				$this->smarty->clearAllCache();
 			}
 

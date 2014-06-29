@@ -12,7 +12,7 @@
 		{$HTML.BODY.HTML = $PORTAL}
 	{/if}
 		<title>{$HTML.HEAD.TITLE}</title>
-		{assign var=quest value=$SVR['QUERY_STRING']|replace:'%20':'-'}
+		
 		<!-- <link href="/x/html/layout/watchtower/css/application.min.css" rel="stylesheet"> -->
         
 
@@ -134,30 +134,30 @@ background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZ
 		/*background                : #333;*/
 		border-radius               : 20px;
 		
-		-webkit-transform           : rotateY(-180deg);
-		-moz-transform              : rotateY(-179deg); /* setting to 180 causes an unnatural-looking half-flip */
-		transform                   : rotateY(-179deg);
+		-webkit-transform: rotateY(-180deg);
+						transform: rotateY(-179deg);
 
-		-webkit-transform-style     : preserve-3d;
-		-moz-transform-style        : preserve-3d;
-		transform-style             : preserve-3d;
+			 -moz-transform: rotateY(-179deg); /* setting to 180 causes an unnatural-looking half-flip */
+		-webkit-transform-style: preserve-3d;
+			 -moz-transform-style: preserve-3d;
+						transform-style: preserve-3d;
 
-		-webkit-backface-visibility : hidden;
-		-moz-backface-visibility    : hidden;
-		backface-visibility         : hidden;
+		-webkit-backface-visibility: hidden;
+			 -moz-backface-visibility: hidden;
+						backface-visibility: hidden;
 
 		/* -- transition is the magic sauce for animation -- */
 		-webkit-transition          : all .4s ease-in-out;
 		transition                  : all .4s ease-in-out;
 background: rgb(177,216,245);
-background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjYjFkOGY1IiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMjUlIiBzdG9wLWNvbG9yPSIjYmVlNGY4IiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNDYlIiBzdG9wLWNvbG9yPSIjYzhlZWZiIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNzAlIiBzdG9wLWNvbG9yPSIjZTZmOGZkIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iODYlIiBzdG9wLWNvbG9yPSIjZmRmZmZmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iODYlIiBzdG9wLWNvbG9yPSIjMjU4ZTMxIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iOTQlIiBzdG9wLWNvbG9yPSIjYzlmZmEzIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2M2ZmY5ZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+background: url('/bin/images/bgs/full/cloud-transparent.png'), url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjYjFkOGY1IiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMjUlIiBzdG9wLWNvbG9yPSIjYmVlNGY4IiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNDYlIiBzdG9wLWNvbG9yPSIjYzhlZWZiIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNzAlIiBzdG9wLWNvbG9yPSIjZTZmOGZkIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iODYlIiBzdG9wLWNvbG9yPSIjZmRmZmZmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iODYlIiBzdG9wLWNvbG9yPSIjMjU4ZTMxIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iOTQlIiBzdG9wLWNvbG9yPSIjYzlmZmEzIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2M2ZmY5ZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
 background: -moz-linear-gradient(-45deg,  rgba(177,216,245,1) 0%, rgba(190,228,248,1) 25%, rgba(200,238,251,1) 46%, rgba(230,248,253,1) 70%, rgba(253,255,255,1) 86%, rgba(37,142,49,1) 86%, rgba(201,255,163,1) 94%, rgba(198,255,158,1) 100%);
 background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(177,216,245,1)), color-stop(25%,rgba(190,228,248,1)), color-stop(46%,rgba(200,238,251,1)), color-stop(70%,rgba(230,248,253,1)), color-stop(86%,rgba(253,255,255,1)), color-stop(86%,rgba(37,142,49,1)), color-stop(94%,rgba(201,255,163,1)), color-stop(100%,rgba(198,255,158,1)));
 background: -webkit-linear-gradient(-45deg,  rgba(177,216,245,1) 0%,rgba(190,228,248,1) 25%,rgba(200,238,251,1) 46%,rgba(230,248,253,1) 70%,rgba(253,255,255,1) 86%,rgba(37,142,49,1) 86%,rgba(201,255,163,1) 94%,rgba(198,255,158,1) 100%);
 background: -o-linear-gradient(-45deg,  rgba(177,216,245,1) 0%,rgba(190,228,248,1) 25%,rgba(200,238,251,1) 46%,rgba(230,248,253,1) 70%,rgba(253,255,255,1) 86%,rgba(37,142,49,1) 86%,rgba(201,255,163,1) 94%,rgba(198,255,158,1) 100%);
 background: -ms-linear-gradient(-45deg,  rgba(177,216,245,1) 0%,rgba(190,228,248,1) 25%,rgba(200,238,251,1) 46%,rgba(230,248,253,1) 70%,rgba(253,255,255,1) 86%,rgba(37,142,49,1) 86%,rgba(201,255,163,1) 94%,rgba(198,255,158,1) 100%);
 background: linear-gradient(135deg,  rgba(177,216,245,1) 0%,rgba(190,228,248,1) 25%,rgba(200,238,251,1) 46%,rgba(230,248,253,1) 70%,rgba(253,255,255,1) 86%,rgba(37,142,49,1) 86%,rgba(201,255,163,1) 94%,rgba(198,255,158,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b1d8f5', endColorstr='#c6ff9e',GradientType=1 );
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b1d8f5', endColorstr='#c6ff9e',GradientType=1 ), url('/bin/images/bgs/full/cloud.png');
 
   	}
 
@@ -173,6 +173,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b1d8f5', end
 		
 		box-shadow        : 0 15px 50px rgba(0,0,0,0.2);
 		
+
+ 
 		/* IE9 SVG, needs conditional override of 'filter' to 'none' */
  
 
@@ -376,9 +378,11 @@ top: 5px;">
 						 				$(t).toggleClass('text-primary'); 
 										if(!$(t).hasClass('text-primary')){ 
 											$(t).toggleClass('btn-danger');
+											$(t).toggleClass('active');
 											$(t).html('<strong><i class="fa fa-eye-slash"></i> OFFLINE <i class="fa fa-eye-slash"></i></strong>');
 										}else{
 											$(t).toggleClass('btn-danger');
+											$(t).toggleClass('active');
 											$(t).html('<strong><i class="fa fa-eye"></i> Online <i class="fa fa-eye"></i></strong>');
 										}; 
 						 			}
@@ -437,6 +441,44 @@ top: 5px;">
 						</ul>
 						
 						 <div class="btn-group" style="margin-top: 10px;">
+						 <button class="btn admin_menu"  >
+					          	<span  data-toggle="dropdown" style="position: absolute; top : 0; left: 0; block; width: 100%; height: 100%;"></span><img src="{$thumb}src=/bin/images/logos/sdx.png&h=17">
+								<!-- <strong class=" text text-success">Super</strong><span class="text-primary">Dom</span>  -->
+								<i class="fa fa-caret-down text-info"></i> 
+								<ul class="dropdown-menu" id="toy-blox-menu">
+									{foreach $admin_menu as $key => $item}
+										 
+
+										{if $key  }  
+											<li class="dropdown-rightsubmenu">
+												<a data-filter="{$key}" href="/blox/qBlox/{$key}" class="dropdown-toggle" data-toggle="dropdown" title="{$item.desc|ucfirst}"><i class="fa fa-{$key} pull-left"></i> {$item.area|ucfirst}  </a>
+												<ul class="dropdown-menu">
+												{foreach $xtras as $x => $xtra} 
+												{if $xtra.icon && $key == $xtra.see}
+													<li class="{if $xtra.alpha}text-danger{elseif $xtra.beta}text-warning{elseif $xtra.delta}text-success{elseif $xtra.omega}text-primary{else}text-default{/if}"><a data-filter="{$xtra.class}" href="/{$toBackDoor}/{$xtra.link}" title="{$xtra.desc}"  data-placement="top" data-original-title="{$xtra.desc}" class="  " > 
+
+
+
+															<i class="fa fa-{$xtra.mini}  pull-left"></i> {$xtra.name} 
+															</a> 
+														</li>  
+												{/if}
+											{/foreach} 
+											</ul>
+											</li> 
+										{/if}
+									{/foreach} 
+								</ul>	 	
+					          </button>
+
+						 <!-- 	<li class="dropdown" ><a href="/x/" class="text text-danger dropdown-toggle" data-toggle="dropdown">
+								<img src="{$thumb}src=/bin/images/logos/sdx.png&w=123">
+								<strong class=" text text-success">Super</strong><span class="text-primary">Dom</span> 
+								<i class="fa fa-caret-down text-info"></i> 
+								</a>
+								
+							</li> -->
+
 					          <button class="btn btn-success   active"  >
 					          	<span  data-toggle="dropdown" style="position: absolute; top : 0; left: 0; block; width: 100%; height: 100%;"></span><i class="fa fa-cubes fa-spin-slow "></i>  <strong>Blox</strong>
 									 
@@ -735,10 +777,10 @@ function bloxSwitch(active,t,c) {
 
 		if($(t).hasClass('active')){
 			$(t).removeClass('active');
-			i.attr('class','fa fa-star-o');
+			i.attr('class','fa fa-recycle');
 		}else{
 			$(t).addClass('active');
-			i.attr('class','fa fa-star');
+			i.attr('class','fa fa-recycle fa-spin-slow');
 		} 
 	}else{
 		$('#windowTitleDialog').modal('hide'); 
@@ -761,7 +803,8 @@ function bloxSwitch(active,t,c) {
 		$('#'+i).addClass('activeBlox');
 	}
 
-	var quest = "{$SVR['QUERY_STRING']}".replace(/%20/g,'-').toLowerCase();
+	var quest = '';
+	
 
 
 	 $.ajax({
@@ -869,26 +912,33 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', end
 
           	
 
-          	<a class="btn btn-info active btn-lg"><i class="blox-icon"></i></a>
+        
+          
 
-          	
+          <a class="btn btn-info active btn-lg" onclick="closeDialog()"><i class="fa fa-gear fa-spin-reverse  "></i><i class="fa fa-gear fa-spin  "></i>
+
+          </a>
           	
           	<a class="btn btn-default active btn-lg">
-          		<i class="fa fa-gear fa-spin-reverse text-success"></i>
-          	
-          		<span class="blox-blox"></span>
-          			<i class="fa fa-gear fa-spin text-info"></i>
+
+          		<i class="blox-icon"></i>
+          		
+          		<span class="blox-blox"></span> 
           	</a>
           	
-          	<a class="btn btn-danger btn-lg"  onclick="bloxSwitch(false);"><i class="fa fa-eye-slash"></i></a>
-          	<a class="btn btn-success btn-lg" onclick="bloxSwitch(true);"><i class="fa fa-eye"></i></a>
+          	  <a class="btn btn-default btn-lg blox-delete" onclick="bloxDelete(this,event);"><i class="fa fa-trash-o"></i></a>         
+          	
           	
           </div>
           <div class="nav navbar-nav navbar-right btn-group blox-bar-btns" style="margin-top: 5px;">
-            
-          
-          <a class="btn btn-default btn-lg blox-delete" onclick="bloxDelete(this,event);"><i class="fa fa-trash-o"></i></a>
-        	  <a class="btn btn-warning btn-lg" onclick="bloxSwitch('star',this);"><i class="fa fa-star-o"></i></a>
+             
+
+        	 	
+				<a class="btn btn-danger btn-lg"  onclick="bloxSwitch(false);"><i class="fa fa-eye-slash"></i></a>
+				<a class="btn btn-warning btn-lg" onclick="bloxSwitch('star',this);"><i class="fa fa-recycle"></i></a>
+
+				<a class="btn btn-success btn-lg" onclick="bloxSwitch(true);"><i class="fa fa-eye"></i></a>
+          	
           	
           </div>
         </div><!--/.nav-collapse -->
