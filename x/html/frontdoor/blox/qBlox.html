@@ -227,6 +227,9 @@ color: white;
 				blox : $(this).attr('id').replace('toy-','')
 			});
 
+			 
+
+
 			var txt = $('#windowTitleDialog .blox-blox');
 			txt.html(' '+$(this).attr('title'));
 
@@ -236,6 +239,8 @@ color: white;
 
 			// s.append(' '+);
 
+			var p = ( i.parent().hasClass('label') == true ) ? i.parent() : false;
+
 			if( $(this).hasClass('activeBlox') ){
     			$('#windowTitleDialog .btn-success').addClass('active disabled'); 
     			$('#windowTitleDialog .btn-danger').removeClass('active disabled');
@@ -243,12 +248,19 @@ color: white;
     			// desc.removeClass('text-danger');
     			// txt.addClass('text-success');
     			// txt.removeClass('text-danger');
+    			if(false != p){
+    				p.attr('class','label label-success');
+    			}	
 
     		}else{
     			// desc.removeClass('text-success');
     			// desc.addClass('text-danger');
     			// txt.removeClass('text-success');
     			// txt.addClass('text-danger');
+    			if(false != p){
+    				p.attr('class','label label-danger');
+    			}	
+
     			$('#windowTitleDialog .btn-success').removeClass('active disabled'); 
     			$('#windowTitleDialog .btn-danger').addClass('active disabled');
     		};

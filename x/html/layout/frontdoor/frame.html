@@ -286,18 +286,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b1d8f5', end
 	           
 	            <li >
 	            	<a class="action" style="cursor: pointer" >
-	            		<span class="label label-success"> <i class="fa fa-cloud fa-3x"></i> <!-- God Mode --></span>
+	            		<span class="label label-info"> <i class="fa fa-cloud fa-3x"></i> <!-- God Mode --></span>
 	            	</a>
 	            </li>
 	            <li class="active">
 	            	<a href="{$SERVER.REQUEST_URI}">
-	            		<span class="label label-info"> 
+	            		<span class="label label-success"> 
 	            			<i class="fa fa-3x fa-globe fa-spin-slow"></i> 
 	            		<!--  Public Mode --></span>
-	            		<div class="  label label-success" style="position: absolute;
+	            		<div class="  label label-primary badge" style="position: absolute;
 left: 55%;
-top: 5px;">
-	            				<strong><i class="fa fa-crosshairs"></i> Hits</strong>
+top: 35px;">
+	            				<strong class="count "><i class="fa fa-crosshairs"></i>  {$page_landing.unique_hits}  </strong>
 	            			</div>
 	            	</a>
 	            </li>
@@ -307,13 +307,18 @@ top: 5px;">
 	            <!-- <li class="span2 dropdown {if $quest == ''}active{/if}"><a href="/"><i class="fa fa-home text-success"></i> Home</a></li> -->
 	            <!-- TODO: Add Navigation Here -->
 	            
-
-				<li class="span2 dropdown {if $quest == ''}active{/if}"><a class="dropdown-toggle"  data-toggle="dropdown" ><span class="btn btn-info btn-sm"><i class="fa fa-globe {if $quest == ''}fa-1x fa-spin{/if}"></i><span class="label label-success">{$site_stats.hits}</span></span>
-					<div class="  label label-info" style="position: absolute;
+	              
+				<li class="span2 dropdown {if $quest == ''}active{/if}">
+					<a class="dropdown-toggle"  data-toggle="dropdown" >
+					<span class="label label-danger"> 
+	            			<i class="fa fa-3x fa-hand-o-up  "></i>
+	            		<!--  Public Mode --></span>
+					<div class="  label label-danger badge" style="position: absolute;
 left: 55%;
-top: 5px;">
-	            				<i class="fa fa-hand-o-up fa-1x"></i> Clicks
+top: 35px;">
+	            				 <strong>{$page_landing.page_views} </strong>
 	            			</div>
+
 				</a>
 					<ul class="dropdown-menu">
 			            
@@ -332,7 +337,7 @@ top: 5px;">
 	          <div class="btn-group" style="padding-top: 10px;">
 						<!-- <img src="{$thumb}src=/bin/images/logos/sdx.png&h=10" class=""> -->
 							<!-- <button class="btn btn-warning action btn-sm"><i class="fa fa-key"></i></button> -->
-							<button class="btn btn-primary   "> 
+							<button class="btn btn-success active  "> 
 							<strong><i class="fa fa-key  " onclick="location.href = '/login/logout'"></i> </strong>
 							</button>	
 							<button class="btn btn-info   {if $quest == ''}active{/if}  " onclick="location.href='/' "> 
@@ -379,11 +384,11 @@ top: 5px;">
 										if(!$(t).hasClass('text-primary')){ 
 											$(t).toggleClass('btn-danger');
 											$(t).toggleClass('active');
-											$(t).html('<strong><i class="fa fa-eye-slash"></i> OFFLINE <i class="fa fa-eye-slash"></i></strong>');
+											$(t).html('<strong>OFFLINE <i class="fa fa-eye-slash"></i><i class="fa fa-eye-slash"></i></strong>');
 										}else{
 											$(t).toggleClass('btn-danger');
 											$(t).toggleClass('active');
-											$(t).html('<strong><i class="fa fa-eye"></i> Online <i class="fa fa-eye"></i></strong>');
+											$(t).html('<strong>Online <i class="fa fa-eye"></i><i class="fa fa-eye"></i></strong>');
 										}; 
 						 			}
 
@@ -430,23 +435,36 @@ top: 5px;">
 							
 							<li class="active">
 								<a class="text-success text-center">
-								<span class="label label-success"> 	<i class="fa fa-3x fa-cloud fa-spin"></i> <!--  God Mode  --> </span>
+								<span class="label label-info"> 	<i class="fa fa-3x fa-cloud fa-spin"></i> <!--  God Mode  --> </span>
 								</a>
 							</li>
 							<li>
 								<a class="edit-submit " style="cursor: pointer">
-								<span class="label label-info"> <i class="fa fa-globe fa-3x "></i> <!-- Public Mode --> </span>
+								<span class="label label-success"> <i class="fa fa-globe fa-3x "></i> <!-- Public Mode --> </span>
 								</a>
 							</li>
 						</ul>
 						
 						 <div class="btn-group" style="margin-top: 10px;">
-						 <button class="btn admin_menu"  >
-					          	<span  data-toggle="dropdown" style="position: absolute; top : 0; left: 0; block; width: 100%; height: 100%;"></span><img src="{$thumb}src=/bin/images/logos/sdx.png&h=17">
-								<!-- <strong class=" text text-success">Super</strong><span class="text-primary">Dom</span>  -->
+						 
+
+						 <!-- 	<li class="dropdown" ><a href="/x/" class="text text-danger dropdown-toggle" data-toggle="dropdown">
+								<img src="{$thumb}src=/bin/images/logos/sdx.png&w=123">
+								<strong class=" text text-success">Super</strong><span class="text-primary">Dom</span> 
 								<i class="fa fa-caret-down text-info"></i> 
-								<ul class="dropdown-menu" id="toy-blox-menu">
-									{foreach $admin_menu as $key => $item}
+								</a>
+								
+							</li> -->
+							<button class="btn btn-success active  " onclick="location.href = '/login/logout'"><i class="fa fa-key fa-flip-horizontal "></i></button>
+							{include file="~blox/godbar/sdx.btn.html"}
+
+							<div class="btn-group admin_menu">
+								<button class="btn btn-info " data-toggle="dropdown"   > 
+									<i class="fa fa-cubes "></i>  
+									<i class="fa fa-caret-down"></i>  
+	          					</button> 
+								<ul class="dropdown-menu " id="toy-blox-menu">
+									<!-- {foreach $admin_menu as $key => $item}
 										 
 
 										{if $key  }  
@@ -467,22 +485,75 @@ top: 5px;">
 											</ul>
 											</li> 
 										{/if}
-									{/foreach} 
-								</ul>	 	
-					          </button>
+									{/foreach}  -->
 
-						 <!-- 	<li class="dropdown" ><a href="/x/" class="text text-danger dropdown-toggle" data-toggle="dropdown">
-								<img src="{$thumb}src=/bin/images/logos/sdx.png&w=123">
-								<strong class=" text text-success">Super</strong><span class="text-primary">Dom</span> 
-								<i class="fa fa-caret-down text-info"></i> 
-								</a>
-								
-							</li> -->
+									{foreach $admin_menu as $key => $item}
+										{assign var="hasBlox" value=false}
+										{foreach $xtras as $x => $xtra} 
+											{if $xtra.icon && $key == $xtra.see}
+												{if $qBlox[$xtra.class]}
+													{assign var="hasBlox" value=true}
+												{/if}
+											{/if}
+										{/foreach} 
+										
+										{if $key && $hasBlox == true}  
+											<li class=" dropdown-rightsubmenu "   > 
+												<a data-filter="{$key}" href="/blox/qBlox/{$key}"   title="{$item.desc|ucfirst}"  ><i class="fa fa-{$key} pull-left"></i> 
+												{$LANG.ADMIN.AREAS.{$key}|ucfirst}  </a>
+												<!-- <span class="dropdown-toggle" data-toggle="dropdown"  title="{$item.desc|ucfirst}"></span><i class="fa fa-{$key}"></i> --> 
+												<!-- <a data-filter="{$key}" href="/blox/qBlox/{$key}" class="dropdown-toggle" data-toggle="dropdown" title="{$item.desc|ucfirst}" class="btn btn-success"><i class="fa fa-{$key}"></i>  <i class="fa fa-caret-right"></i></a> -->
+													<ul class="dropdown-menu">
+														{foreach $xtras as $x => $xtra} 
+															{if $xtra.icon && $key == $xtra.see}
+																{if $qBlox[$xtra.class]}
+																	<li class="dropdown-submenu"><a data-filter="{$xtra.class}" href="/blox/qBlox/{$key}/{$xtra.class}" title="{$xtra.desc}"  data-placement="top" data-original-title="{$xtra.desc}" class="{if $xtra.alpha}panel-danger{elseif $xtra.beta}panel-warning{elseif $xtra.delta}panel-success{elseif $xtra.omega}panel-primary{else}panel-default" disabled="disabled{/if}" > 
 
-					          <button class="btn btn-success   active"  >
-					          	<span  data-toggle="dropdown" style="position: absolute; top : 0; left: 0; block; width: 100%; height: 100%;"></span><i class="fa fa-cubes fa-spin-slow "></i>  <strong>Blox</strong>
-									 
-					          </button>
+
+
+																		<i class="fa fa-{$xtra.mini}  pull-left"></i> {$xtra.name} 
+																		</a>
+																		<ul class="dropdown-menu">
+																			{foreach $qBlox[$xtra.class] as $b => $y}
+																				<li ><a data-filter="{$y.name}" href="/blox/qBlox/{$key}/{$xtra.class}/{$y.name}" title=" "  data-placement="top" data-original-title=" " class=" " disabled=" " >
+																				<i class="fa fa-{$y.icon}  pull-left"></i> {$y.blox} 
+																				</a></li>
+																			{/foreach}
+																		</ul>
+																	</li>  
+																{/if}
+															{/if}
+														{/foreach} 
+													</ul>
+											</li>
+										{/if}
+									{/foreach} 	 
+								</ul>
+          					</div> 
+							<a   class="btn btn-default active disabled " >
+					          	{include file="~blox/clock.html"}
+					        </a>
+					        <div   class="btn-group" >
+					           
+					           <button  class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					           		<i class="fa fa-coffee"></i>
+
+					           </button>
+					           <ul class="dropdown-menu">
+					           	<li class="dropdown-header">Upcoming Events</li>
+					           	<li role="presentation">
+				           	<a>
+				           			<i class="fa fa-envelope-o fa-2x"></i> Newsletter Scheduled for Delivery This Thursday @ 5:45am
+				           	</a>
+					           	
+					           	</li>
+					           </ul>
+					        </div>
+							
+							
+							
+
+				          	
 					          
 					         <!--  {foreach $admin_menu as $key => $item} 
 							  	{if $key}  
@@ -505,55 +576,99 @@ top: 5px;">
 								{/if} 
 							{/foreach} -->
 							 
-							{foreach $admin_menu as $key => $item}
-								{assign var="hasBlox" value=false}
-								{foreach $xtras as $x => $xtra} 
-									{if $xtra.icon && $key == $xtra.see}
-										{if $qBlox[$xtra.class]}
-											{assign var="hasBlox" value=true}
-										{/if}
-									{/if}
-								{/foreach} 
-								
-								{if $key && $hasBlox == true}  
-									<button class="btn   btn-success admin_menu"   > 
-										<span class="dropdown-toggle" data-toggle="dropdown" style="position: absolute; top : 0; left: 0; block; width: 100%; height: 100%;" title="{$item.desc|ucfirst}"></span><i class="fa fa-{$key}"></i>
-										<!-- <a data-filter="{$key}" href="/blox/qBlox/{$key}" class="dropdown-toggle" data-toggle="dropdown" title="{$item.desc|ucfirst}" class="btn btn-success"><i class="fa fa-{$key}"></i>  <i class="fa fa-caret-right"></i></a> -->
-											<ul class="dropdown-menu">
-												{foreach $xtras as $x => $xtra} 
-													{if $xtra.icon && $key == $xtra.see}
-														{if $qBlox[$xtra.class]}
-															<li class="dropdown-submenu"><a data-filter="{$xtra.class}" href="/blox/qBlox/{$key}/{$xtra.class}" title="{$xtra.desc}"  data-placement="top" data-original-title="{$xtra.desc}" class="{if $xtra.alpha}panel-danger{elseif $xtra.beta}panel-warning{elseif $xtra.delta}panel-success{elseif $xtra.omega}panel-primary{else}panel-default" disabled="disabled{/if}" > 
 
-
-
-																<i class="fa fa-{$xtra.mini}  pull-left"></i> {$xtra.name} 
-																</a>
-																<ul class="dropdown-menu">
-																	{foreach $qBlox[$xtra.class] as $b => $y}
-																		<li ><a data-filter="{$y.name}" href="/blox/qBlox/{$key}/{$xtra.class}/{$y.name}" title=" "  data-placement="top" data-original-title=" " class=" " disabled=" " >
-																		<i class="fa fa-{$y.icon}  pull-left"></i> {$y.blox} 
-																		</a></li>
-																	{/foreach}
-																</ul>
-															</li>  
-														{/if}
-													{/if}
-												{/foreach} 
-											</ul>
-									</button>
-								{/if}
-							{/foreach} 	
-							<a href="/x/calendar" class="btn btn-info  " >
-					          	 {include file="~blox/clock.html"}
-					          </a> 
-							<button class="btn btn-primary  " onclick="location.href = '/login/logout'"><i class="fa fa-key fa-flip-horizontal "></i></button>
+					       	
+							
 				          </div>
-				          <ul class="nav   navbar-nav navbar-right admin_menu text-left "   >
+				          <ul class="nav   navbar-nav navbar-right btn-group  "  style="padding-top: 10px;"  > 
+						        
 
-							<li class="dropdown" ><a href="/x/" class="text text-danger dropdown-toggle" data-toggle="dropdown">
+						        
+
+						        <a href="/x/calendar" class="btn btn-success  " >
+						           <i class="fa fa-tasks "></i>
+						        </a>
+						       <!-- <a href=" " class="btn btn-success  " >
+						          	<i class="fa fa-crosshairs"></i> <span class="count badge">{$page_landing.unique_hits}</span>
+						        </a> 
+						        <a href=" " class="btn btn-info  " >
+						          	<i class="fa fa-hand-o-up"></i> <span class="count badge">{$page_landing.page_views}</span>
+						        </a>  -->
+						        
+
+						        <div class="btn-group">
+			                        <a href="#" title="Messages" id="messages" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+			                            <i class="fa fa-user-md "></i> <span class="count badge">80%</span>
+			                        </a>
+			                        <ul id="messages-menu" class="dropdown-menu messages" role="menu">
+			                        	<li class="dropdown-header"> <i class="fa fa-globe"></i> {$SVR['SERVER_NAME']} Vitals <i class="fa fa-stethoscope"></i></li>
+			                        	<li class="divider"></li>
+			                            <li role="presentation">
+			                                <a href="#" class="message">
+			                                    
+			                                    <div  >
+			                                        <div class="progress"> 
+								                       <div class="progress-bar progress-bar-striped active progress-bar-danger" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;">
+								                            HP  <i class="fa   fa-heart"></i> 90%
+								                       </div>  
+								                    </div>
+			                                    </div>
+			                                </a>
+			                            </li>
+			                            <li role="presentation">
+			                                <a href="#" class="message">
+			                                   
+			                                    <div  >
+			                                        <div class="progress"> 
+								                       <div class="progress-bar progress-bar-striped progress-bar-info active " role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+								                            EP <i class="fa   fa-envelope"></i> 60%
+								                       </div>  
+								                    </div>
+			                                    </div>
+			                                </a>
+			                            </li>
+			                            <li role="presentation">
+			                                <a href="#" class="message">
+			                                     
+			                                    <div  >
+			                                        <div class="progress"> 
+								                       <div class="progress-bar progress-bar-striped active progress-bar-success" role="progressbar" aria-valuenow="97" aria-valuemin="0" aria-valuemax="100" style="width: 97%;">
+								                             MP  <i class="fa   fa-magic  "></i> 97%
+								                       </div>  
+								                    </div>
+			                                    </div>
+			                                </a>
+			                            </li>
+			                            <li role="presentation">
+			                                <a href="#" class="message">
+			                                     
+			                                    <div  >
+			                                        <div class="progress"> 
+								                       <div class="progress-bar progress-bar-striped active progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+								                            SP <i class="fa   fa-star"></i> 60%
+								                       </div>  
+								                    </div>
+			                                    </div>
+			                                </a>
+			                            </li>
+			                            <li role="presentation">
+			                                <a href="/x/analytics" class="text-align-center see-all">
+			                                     <i class="fa fa-stethoscope"></i> See all Vitals <i class="fa fa-arrow-right"></i>
+			                                </a>
+			                            </li>
+			                        </ul>
+			                    </div>
+								<!-- <li class="active">
+									<a>
+										
+									<i class="fa fa-globe"></i>
+
+									</a>
+								</li> -->
+							<!--SDX img drop down
+							 <li class="dropdown" ><a href="/x/" class="text text-danger dropdown-toggle" data-toggle="dropdown">
 								<img src="{$thumb}src=/bin/images/logos/sdx.png&w=123">
-								<!-- <strong class=" text text-success">Super</strong><span class="text-primary">Dom</span>  -->
+								<strong class=" text text-success">Super</strong><span class="text-primary">Dom</span> 
 								<i class="fa fa-caret-down text-info"></i> 
 								</a>
 								<ul class="dropdown-menu" id="toy-blox-menu">
@@ -580,7 +695,7 @@ top: 5px;">
 										{/if}
 									{/foreach} 
 								</ul>
-							</li>
+							</li> -->
 
 							<!-- <li class="dropdown active" ><a   class="dropdown-toggle "  data-toggle="dropdown">
 								<i class="fa  fa-spin-reverse fa-cubes"></i> Toy Blox <b class="caret"></b>
@@ -729,13 +844,11 @@ top: 5px;">
 
     	});
 
-    	$('.admin_menu ul a').click(function (e) {
-    		$.pjax({ 
-				container : '#paper-back',
-				fragment  : '.content',
-				timeout   : 9000,
-				url       : $(this).attr('href')
-			});
+    	$('.admin_menu ul a').click(function (e) { 
+    		$('#paper-back').hide().load('/html'+$(this).attr('href'), function  () {
+    			$('#paper-back').show();
+    			// body...
+    		});
 
 			e.preventDefault();
     		// body...
@@ -897,12 +1010,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', end
           <ul class="nav navbar-nav">
              <li class="">
             	<a class="" style="cursor: pointer" onclick="closeDialog();">
-	            	<span class="label label-success"> <i class="fa fa-cloud fa-2x"></i> <!-- God Mode --></span>
+	            	<span class="label label-info"> <i class="fa fa-cloud fa-2x"></i> <!-- God Mode --></span>
 	            </a>
 	        </li>
             <li class="active">
             	<a class="action" style="cursor: pointer" >
-	            	<span class="label label-info"> <i class="blox-icon"></i> <!-- God Mode --></span>
+	            	<span class="label label-success"> <i class="blox-icon"></i> <!-- God Mode --></span>
 	            </a>
 	        </li>
              
@@ -913,21 +1026,22 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', end
           	
 
         
-          
+          <a class="btn btn-default btn-lg blox-delete" onclick="bloxDelete(this,event);"><i class="fa fa-trash-o"></i></a>  
 
-          <a class="btn btn-info active btn-lg" onclick="closeDialog()"><i class="fa fa-gear fa-spin-reverse  "></i><i class="fa fa-gear fa-spin  "></i>
+
+          <a class="btn btn-default active disabled btn-lg" onclick="closeDialog()"><i class="fa fa-gear fa-spin-reverse  "></i><i class="fa fa-gear fa-spin  "></i>
 
           </a>
           	
-          	<a class="btn btn-default active btn-lg">
+          	<!-- <a class="btn btn-default active btn-lg">
 
           		<i class="blox-icon"></i>
           		
           		<span class="blox-blox"></span> 
           	</a>
-          	
-          	  <a class="btn btn-default btn-lg blox-delete" onclick="bloxDelete(this,event);"><i class="fa fa-trash-o"></i></a>         
-          	
+          	 -->
+          	         
+          	<a class="btn btn-info btn-lg" onclick="bloxSwitch('star',this);"><i class="fa fa-recycle"></i></a>
           	
           </div>
           <div class="nav navbar-nav navbar-right btn-group blox-bar-btns" style="margin-top: 5px;">
@@ -935,8 +1049,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', end
 
         	 	
 				<a class="btn btn-danger btn-lg"  onclick="bloxSwitch(false);"><i class="fa fa-eye-slash"></i></a>
-				<a class="btn btn-warning btn-lg" onclick="bloxSwitch('star',this);"><i class="fa fa-recycle"></i></a>
-
+				
 				<a class="btn btn-success btn-lg" onclick="bloxSwitch(true);"><i class="fa fa-eye"></i></a>
           	
           	
