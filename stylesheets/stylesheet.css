@@ -68,7 +68,7 @@ header {
   padding-bottom: 40px;
   font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif; 
   background: #2e7bcf  url(../images/future.jpg) center -290px no-repeat;
-  
+
   border-bottom: solid 1px #275da1;
 }
 
@@ -94,11 +94,14 @@ header h2 {
   position: relative;
   width: 940px;
   margin: 0 auto;
+  background: #fff;
+padding: 20px 25px 0 60px
 }
 
 #content-wrapper {
   border-top: solid 1px #fff;
-  padding-top: 30px;
+  /*padding-top: 30px;*/
+  background: url(../images/header-bg.jpg);
 }
 
 #main-content {
