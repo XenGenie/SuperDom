@@ -11,7 +11,7 @@
  * @todo
  */
 
-class xInbox extends Xengine {
+class xIndex extends Xengine {
 	var $id = 'inbox-';
 	var $sender;
 	var $recipient;
