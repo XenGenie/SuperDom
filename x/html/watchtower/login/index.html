@@ -81,14 +81,14 @@
 					      // Handle the server response (display errors if necessary)
 
 					      $.pjax({ 
-							container : '.content',
-							fragment  : '.content',
-							timeout   : 5000,
-                            {if $masterKey.is.atBackDoor}
-                            url       : window.location.pathname+window.location.search+window.location.hash
+                            container : '.content',
+                            fragment  : '.content',
+                            timeout   : 5000,
+                            {if $Xtra == 'login'}
+                                url       : '../'+window.location.search+window.location.hash
                             {else}
-                            url       : '/'
-                            {/if} 
+                                url       : window.location.pathname+window.location.search+window.location.hash
+                            {/if}
 					      });
 
 					    }

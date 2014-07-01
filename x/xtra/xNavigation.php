@@ -179,25 +179,27 @@
 				);
 			} else {
 
-				$quest = strtolower(str_replace('%20', '-', $_SERVER['REQUEST_URI']));
 
-				$path = str_replace('%20', ' ', $_SERVER['REQUEST_URI']);
+				// $uri   = str_replace($_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI']); 
+				// $path  = str_replace($uri , '', $_SERVER['REQUEST_URI']);
+				// $path  = str_replace('%20', ' ', $path);
+
+				$quest = parse_url($_SERVER['REQUEST_URI']);
+				$quest['paths'] = explode('/', str_replace('%20', ' ', $quest['path']) );
+				$this->set('quest', $quest) ;
 
 
+				// var_dump($quest);
+				// exit();
+
+				$quest = strtolower(str_replace('%20', '-', $quest['path']));
 
 				$link = $X->q()->Select("*","navi_heylisten", array(
 					'quest' => $quest
 				));
 
-				// var_dump($link);
-				// exit;
-
-				$this->set('path',explode('/',$path));
-
-
 				if(!empty($link)){
 					$this->Key['heylisten'] = $link[0];
-
 
 					switch ($link[0]['linktothe']) {
 						case 'blox':
@@ -214,9 +216,6 @@
 						break;	
 					} 
 				}
-
-
-
 
 				return $this->manaTree();
 			}
