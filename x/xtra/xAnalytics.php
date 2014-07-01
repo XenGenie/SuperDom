@@ -2,7 +2,7 @@
 /**
  * @name Analytics
  * @desc Truely indepth information about your website; Statistically.
- * @version v1.0.11.30.03.32
+ * @version v1.1.0
  * @author cdpollard@gmail.com
  * @icon bar-chart-o
  * @mini bar-chart-o
@@ -33,13 +33,12 @@
 			//$this->doSessionTime();			# SessionTime for Everyone...
 			$this->hitCount();				# How many times the website has loaded for other users.
 			
-			if($X->Key['is']['user'])
-				$this->doUniqueHit();		### Do Unique Hit
-
-			
-			if(!$this->atBackDoor){ 			# Dont track the admin panel or admins - at least not here.
+			if(!$this->atBackDoor && !$this->atSideDoor){ 			# Dont track the admin panel or admins - at least not here.
 				$this->incPageLanding();	### Track the page landing.	
-			
+				if($X->Xtra == 'index'){
+					var_dump($this->_SET['action']);
+					exit;
+				}
 			}else{
 				//$this->leaveBreadCrumb();	 
 			}
@@ -62,7 +61,8 @@
 			}			
 
 
-
+			if($X->Key['is']['user'])
+				$this->doUniqueHit();		### Do Unique Hit
 		}
 
 		function statistics($function='')
@@ -173,18 +173,20 @@
 				'client_ip'			=> $_SERVER["REMOTE_ADDR"],
 				'client_browser'	=> $_SERVER["HTTP_USER_AGENT"],
 				'request_call'		=> $this->_SET['action'],
-				'request_action'	=> $this->_SET['method']
+				'request_action'	=> $this->_SET['method'],
+				'request_uri'		=> $_SERVER['REQUEST_URI']
 			));
 			
-			$counts = count($tracks);
-			if($counts == 1){	# First TIME! - Unique hit.
+			if(1 == count($tracks)){	# First TIME! - Unique hit.
 				### Count the Hit
 				$q->Inc('page_landings','unique_hits',1,array(
 					'request_call'		=> $this->_SET['action'],
-					'request_action' 	=> $this->_SET['method'],
+					'request_action'	=> $this->_SET['method'],
 					'request_uri'		=> $_SERVER['REQUEST_URI']
 				));
-			}
+ 
+				
+			} 
 		}
 		
 		/*
@@ -207,20 +209,20 @@
 		 * Stores the page request and 
 		 */
 		function incPageLanding(){
-			$q = $this->q();
-			$call = $this->_SET['action'];
+			$q      = $this->q();
+			$call   = $this->_SET['action'];
 			$action = $this->_SET['method'];
 			# We can get the Call and Action of each page and store the hit in the db.
-			$page = $q->Select('*','page_landings',array(
-				'request_call' => $call,
+			$page   = $q->Select('*','page_landings',array(
+				'request_call'   => $call,
 				'request_action' => $action,
-				'request_uri'	=> $_SERVER['REQUEST_URI']
+				'request_uri'    => $_SERVER['REQUEST_URI']
 			));
 			
 			#################################################
 			### Page is empty, we've never hit this before! Start Tracking
 			if(empty($page)){		
-				$q->Insert('page_landings',array(
+				$id = $q->Insert('page_landings',array(
 					'request_call'		=> $call,
 					'request_action' 	=> $action,
 					'request_uri'		=> $_SERVER['REQUEST_URI'],
@@ -228,14 +230,17 @@
 					'unique_hits'		=> 0,
 					'last_accessed'		=> time()
 				));
+			}else{
+				$id = $page[0]['id'];
 			}
 			################################################
 			
+			// var_dump($this->_SET);
+			// exit;
+
 			### Count the Hit
 			$q->Inc('page_landings','page_views',1,array(
-				'request_call'		=> $call,
-				'request_action' 	=> $action,
-				'request_uri'		=> $_SERVER['REQUEST_URI']
+				'id' => $id
 			));
 		}
 		
