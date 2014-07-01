@@ -2,7 +2,7 @@
 /**
  * @name Analytics
  * @desc Truely indepth information about your website; Statistically.
- * @version v1.0.11
+ * @version v1.1.0
  * @author cdpollard@gmail.com
  * @icon bar-chart-o
  * @mini bar-chart-o

@@ -2,7 +2,7 @@
 /**
  * @name SiteMap
  * @desc Control the Quick Nav, Main Menu, and Site Map of your website.
- * @version v1.0(11.10.15|03:44)
+ * @version v1.0.1
  * @author i@xtiv.net
  * @icon Sign direction.png
  * @mini sitemap
