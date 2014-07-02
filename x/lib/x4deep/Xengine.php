@@ -2,7 +2,7 @@
 	/**
 	 * Xengine
 	 * @author XopherDeeP <heylisten@xtiv.net>
-	 * @version 1.0 
+	 * @version 1.0.0-rc1.0
 	**/
 	# Xengine is Small and PowerFull; Hook into it using Xtras. The Xengine Idea is: Drop and Build!
 	# It setups an easy to use connection between Clean URLs and PHP Classes
@@ -295,6 +295,7 @@
 
 			// Back Door - Admin Panel of Pages. 
 			$this->atBackDoor  = ($this->_SET['params'][0] === $this->_CFG['dir']['backdoor']);	// BOOL
+
 
 			$this->atMailBox   = ($this->_SET['params'][0] === $this->_CFG['dir']['bin']);		// BOOL
 			
